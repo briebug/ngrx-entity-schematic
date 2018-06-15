@@ -80,7 +80,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loading: false,
-        error: 'Entity search failed'
+        error: 'Entity load failed'
       };
 
     case EntityActionTypes.EntityUpdate:
@@ -92,7 +92,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.EntityUpdateSuccess:
       return {
         ...adapter.updateOne(action.payload.result, state),
-        loading: true,
+        loading: false,
         error: ''
       };
     case EntityActionTypes.EntityUpdateFail:
