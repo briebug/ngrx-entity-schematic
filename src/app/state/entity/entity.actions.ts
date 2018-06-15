@@ -10,6 +10,7 @@ export enum EntityActionTypes {
   EntitySearch = '[Entity] Search',
   EntitySearchSuccess = '[Entity] Search Success',
   EntitySearchFail = '[Entity] Search Fail',
+
   EntityLoadById = '[Entity] Load',
   EntityLoadByIdSuccess = '[Entity] Load Success',
   EntityLoadByIdFail = '[Entity] Load Fail',
@@ -18,7 +19,7 @@ export enum EntityActionTypes {
   EntityUpdateSuccess = '[Entity] Update Success',
   EntityUpdateFail = '[Entity] Update Fail',
 
-  EntityDelete = '[Entity] Delete',
+  EntityDeleteById = '[Entity] Delete',
   EntityDeleteSuccess = '[Entity] Delete Success',
   EntityDeleteFail = '[Entity] Delete Fail',
 
@@ -59,7 +60,7 @@ export class EntitySearchFail implements Action {
 
 export class EntityLoadById implements Action {
   readonly type = EntityActionTypes.EntityLoadById;
-  constructor(public payload: {}) {}
+  constructor(public payload: { id: Number }) {}
 }
 
 export class EntityLoadByIdSuccess implements Action {
@@ -89,9 +90,9 @@ export class EntityUpdateFail implements Action {
 
 // Delete
 
-export class EntityDelete implements Action {
-  readonly type = EntityActionTypes.EntityDelete;
-  constructor(public payload: {}) {}
+export class EntityDeleteById implements Action {
+  readonly type = EntityActionTypes.EntityDeleteById;
+  constructor(public payload: { id: Number }) {}
 }
 
 export class EntityDeleteSuccess implements Action {
@@ -129,7 +130,7 @@ export type EntityActions =
   | EntityUpdate
   | EntityUpdateSuccess
   | EntityUpdateFail
-  | EntityDelete
+  | EntityDeleteById
   | EntityDeleteSuccess
   | EntityDeleteFail
   | EntitySetPaging

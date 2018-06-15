@@ -23,10 +23,8 @@
     "@angular/router": "^5.2.0",
     "@ngrx/entity": "^6.0.1",
     "@ngrx/store": "^6.0.1",
-    "add": "^2.0.6",
     "core-js": "^2.4.1",
     "rxjs": "^5.5.6",
-    "yarn": "^1.7.0",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
