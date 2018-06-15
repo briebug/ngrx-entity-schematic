@@ -159,6 +159,14 @@
   dependencies:
     tslib "^1.7.1"
 
+"@ngrx/entity@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-6.0.1.tgz#a07fe95d39671f3be10143fe999f5a9ee00f4edc"
+
+"@ngrx/store@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-6.0.1.tgz#02c806ce20c698b997e81f5671e0edc07d32cf86"
+
 "@ngtools/json-schema@1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@ngtools/json-schema/-/json-schema-1.2.0.tgz#06e5ecd29e9a37d260a447dd873ea2becd228c4f"
@@ -248,6 +256,10 @@ acorn@^4.0.3:
 acorn@^5.0.0:
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.1.tgz#f095829297706a7c9776958c0afc8930a9b9d9d8"
+
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
 
 addressparser@1.0.1:
   version "1.0.1"
@@ -6843,6 +6855,10 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+yarn@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.7.0.tgz#0076b9fde6010e01950526a609bc53bc175ef925"
 
 yeast@0.1.2:
   version "0.1.2"
