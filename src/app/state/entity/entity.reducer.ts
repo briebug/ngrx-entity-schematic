@@ -2,6 +2,9 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Entity } from './entity.model';
 import { EntityActions, EntityActionTypes } from './entity.actions';
 
+// TODO: We should consider moving the State and initialState objects to
+// somewhere else
+
 export interface State extends EntityState<Entity> {
   // additional entities state properties
   selectedId: number;
