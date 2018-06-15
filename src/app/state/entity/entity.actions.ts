@@ -1,6 +1,6 @@
-import { Action } from '@ngrx/store'; // TODO
-import { Update as UpdateEntity } from '@ngrx/entity'; // TODO
-import { Entity } from './entity.model'; // TODO
+import { Action } from '@ngrx/store';
+import { Update } from '@ngrx/entity';
+import { Entity } from './entity.model';
 
 export enum EntityActionTypes {
   EntityInsert = '[Entity] Insert',
@@ -76,7 +76,7 @@ export class EntityLoadByIdFail implements Action {
 
 export class EntityUpdate implements Action {
   readonly type = EntityActionTypes.EntityUpdate;
-  constructor(public payload: { entity: UpdateEntity<Entity> }) {}
+  constructor(public payload: { entity: Update<Entity> }) {}
 }
 
 export class EntityUpdateSuccess implements Action {
