@@ -30,7 +30,7 @@ export enum EntityActionTypes {
   EntitySelectById = '[Entity] Select By ID'
 }
 
-// Create
+// ========================================= INSERT
 
 export class EntityInsert implements Action {
   readonly type = EntityActionTypes.EntityInsert;
@@ -47,7 +47,7 @@ export class EntityInsertFail implements Action {
   constructor(public payload: { error: string }) {}
 }
 
-// Retrieve
+// ========================================= SEARCH
 
 export class EntitySearch implements Action {
   readonly type = EntityActionTypes.EntitySearch;
@@ -62,6 +62,8 @@ export class EntitySearchFail implements Action {
   readonly type = EntityActionTypes.EntitySearchFail;
   constructor(public payload: { error: string }) {}
 }
+
+// ========================================= LOAD BY ID
 
 export class EntityLoadById implements Action {
   readonly type = EntityActionTypes.EntityLoadById;
@@ -78,7 +80,7 @@ export class EntityLoadByIdFail implements Action {
   constructor(public payload: { error: string }) {}
 }
 
-// Update
+// ========================================= UPDATE
 
 export class EntityUpdate implements Action {
   readonly type = EntityActionTypes.EntityUpdate;
@@ -95,7 +97,7 @@ export class EntityUpdateFail implements Action {
   constructor(public payload: { error: string }) {}
 }
 
-// Delete
+// ========================================= DELETE
 
 export class EntityDeleteById implements Action {
   readonly type = EntityActionTypes.EntityDeleteById;
@@ -112,7 +114,7 @@ export class EntityDeleteFail implements Action {
   constructor(public payload: { error: string }) {}
 }
 
-// Paging
+// ========================================= PAGING
 
 export class EntitySetPaging implements Action {
   readonly type = EntityActionTypes.EntitySetPaging;
@@ -129,7 +131,7 @@ export class EntitySetSorting implements Action {
   constructor(public payload: { sorting: string }) {}
 }
 
-// Selected ID
+// ========================================= SELECTED ID
 
 export class EntitySelectById implements Action {
   readonly type = EntityActionTypes.EntitySelectById;

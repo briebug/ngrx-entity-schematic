@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@state/*": ["src/app/state/*"]
+      "@state/*": ["src/app/state/*"],
+      "@core/*": ["src/app/core/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

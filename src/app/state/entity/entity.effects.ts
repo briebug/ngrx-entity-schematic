@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
 import { Action, Store, select } from '@ngrx/store';
 import {
@@ -25,9 +24,9 @@ import {
   EntitySelectById
 } from './entity.actions';
 import { Observable, of, } from 'rxjs';
-import { exhaustMap, map, catchError, tap, switchMap, exhaust } from 'rxjs/operators';
+import { exhaustMap, map, catchError, tap, switchMap } from 'rxjs/operators';
 import { Entity } from './entity.model';
-import { EntityService } from '../../services/entity.service';
+import { EntityService } from '@core/services/entity.service';
 import { Update } from '@ngrx/entity';
 
 @Injectable()
@@ -39,7 +38,7 @@ export class EntityEffects {
   insert: Observable<Action> = this.actions$
     .ofType<EntityInsert>(EntityActionTypes.EntityInsert)
     .pipe(
-      exhaustMap(action => this.service.save(action.payload.data)),
+      exhaustMap(action => this.service.create(action.payload.data)),
       map((entity: Entity) => new EntityInsertSuccess({ result: entity })),
       catchError(err => of(new EntityInsertFail(err)))
     );
@@ -68,7 +67,7 @@ export class EntityEffects {
 
   @Effect()
   search: Observable<Action> = this.actions$
-    .ofType<EntityInsert>(EntityActionTypes.EntitySearch)
+    .ofType<EntitySearch>(EntityActionTypes.EntitySearch)
     .pipe(
       exhaustMap(action => this.service.search()),
       map((entities: Entity[]) => new EntitySearchSuccess({ result: entities })),
@@ -101,7 +100,7 @@ export class EntityEffects {
   loadById: Observable<Action> = this.actions$
     .ofType<EntityLoadById>(EntityActionTypes.EntityLoadById)
     .pipe(
-      switchMap(action => this.service.loadById(action.payload.id)),
+      switchMap(action => this.service.getById(action.payload.id)),
       map((entity: Entity) => new EntityLoadByIdSuccess({ result: entity })),
       catchError(err => of(new EntityLoadByIdFail(err)))
     );
@@ -197,16 +196,12 @@ export class EntityEffects {
       // do stuff with: action.payload.limit & action.payload.page
     }));
 
-  // ========================================= FILTER
-
   @Effect()
   filter: Observable<Action> = this.actions$
     .ofType<EntitySetFilter>(EntityActionTypes.EntitySetFilter)
     .pipe(tap(action => {
       // do stuff with: action.payload.filter
     }));
-
-  // ========================================= SORTING
 
   @Effect()
   sorting: Observable<Action> = this.actions$
