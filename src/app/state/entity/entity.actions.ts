@@ -11,7 +11,7 @@ export enum EntityActionTypes {
   EntitySearchSuccess = '[Entity] Search Success',
   EntitySearchFail = '[Entity] Search Fail',
 
-  EntityLoadById = '[Entity] Load',
+  EntityLoadById = '[Entity] Load By ID',
   EntityLoadByIdSuccess = '[Entity] Load Success',
   EntityLoadByIdFail = '[Entity] Load Fail',
 
@@ -19,7 +19,7 @@ export enum EntityActionTypes {
   EntityUpdateSuccess = '[Entity] Update Success',
   EntityUpdateFail = '[Entity] Update Fail',
 
-  EntityDeleteById = '[Entity] Delete',
+  EntityDeleteById = '[Entity] Delete By ID',
   EntityDeleteSuccess = '[Entity] Delete Success',
   EntityDeleteFail = '[Entity] Delete Fail',
 
@@ -27,7 +27,7 @@ export enum EntityActionTypes {
   EntitySetFilter = '[Entity] Set Filter',
   EntitySetSorting = '[Entity] Set Sorting',
 
-  EntitySelect = '[Entity] Select'
+  EntitySelectById = '[Entity] Select By ID'
 }
 
 // Create
@@ -44,6 +44,7 @@ export class EntityInsertSuccess implements Action {
 
 export class EntityInsertFail implements Action {
   readonly type = EntityActionTypes.EntityInsertFail;
+  constructor(public payload: { error: string }) {}
 }
 
 // Retrieve
@@ -59,11 +60,12 @@ export class EntitySearchSuccess implements Action {
 
 export class EntitySearchFail implements Action {
   readonly type = EntityActionTypes.EntitySearchFail;
+  constructor(public payload: { error: string }) {}
 }
 
 export class EntityLoadById implements Action {
   readonly type = EntityActionTypes.EntityLoadById;
-  constructor(public payload: { id: Number }) {}
+  constructor(public payload: { id: number }) {}
 }
 
 export class EntityLoadByIdSuccess implements Action {
@@ -73,6 +75,7 @@ export class EntityLoadByIdSuccess implements Action {
 
 export class EntityLoadByIdFail implements Action {
   readonly type = EntityActionTypes.EntityLoadByIdFail;
+  constructor(public payload: { error: string }) {}
 }
 
 // Update
@@ -89,13 +92,14 @@ export class EntityUpdateSuccess implements Action {
 
 export class EntityUpdateFail implements Action {
   readonly type = EntityActionTypes.EntityUpdateFail;
+  constructor(public payload: { error: string }) {}
 }
 
 // Delete
 
 export class EntityDeleteById implements Action {
   readonly type = EntityActionTypes.EntityDeleteById;
-  constructor(public payload: { id: Number }) {}
+  constructor(public payload: { id: number }) {}
 }
 
 export class EntityDeleteSuccess implements Action {
@@ -105,6 +109,7 @@ export class EntityDeleteSuccess implements Action {
 
 export class EntityDeleteFail implements Action {
   readonly type = EntityActionTypes.EntityDeleteFail;
+  constructor(public payload: { error: string }) {}
 }
 
 // Paging
@@ -126,8 +131,8 @@ export class EntitySetSorting implements Action {
 
 // Selected ID
 
-export class EntitySelect implements Action {
-  readonly type = EntityActionTypes.EntitySelect;
+export class EntitySelectById implements Action {
+  readonly type = EntityActionTypes.EntitySelectById;
   constructor(public payload: { id: number }) {}
 }
 
@@ -150,4 +155,4 @@ export type EntityActions =
   | EntitySetPaging
   | EntitySetFilter
   | EntitySetSorting
-  | EntitySelect;
+  | EntitySelectById;
