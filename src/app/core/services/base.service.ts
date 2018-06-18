@@ -1,4 +1,4 @@
 export class BaseService {
-  readonly BASE_URL = '';
+  readonly BASE_URL = 'api/';
   constructor() {}
 }

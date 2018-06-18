@@ -13,15 +13,13 @@ import { Entity } from '@state/entity/entity.model';
 })
 export class EntityListComponent implements OnInit {
   entities: Observable<Entity[]>;
+  isLoading: Observable<Boolean>;
 
-  // TODO: Implement:
-  // constructor(private store: Store<State>) {}
-
-  constructor() {}
+  constructor(private store: Store<State>) {}
 
   ngOnInit() {
-    // TODO: Implement:
-    // this.store.dispatch(new EntitySearch());
-    // this.entities = this.store.pipe(select(fromStore.getAllEntity));
+    this.store.dispatch(new EntitySearch());
+    this.entities = this.store.pipe(select(fromStore.getAllEntity));
+    this.isLoading = this.store.pipe(select(fromStore.getLoading));
   }
 }
