@@ -19,7 +19,6 @@ export class EntityService {
   }
 
   search(): Observable<Array<Entity>> {
-    console.log('search');
     // TODO: get based on state.paging (filter, sorting, page, limit)
     return this.httpClient.get<Array<Entity>>(`${this.BASE_URL}entities`);
   }

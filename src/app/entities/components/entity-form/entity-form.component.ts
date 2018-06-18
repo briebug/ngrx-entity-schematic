@@ -11,7 +11,9 @@ export class EntityFormComponent implements OnInit {
   @Input() entity: Entity;
   @Output() submit = new EventEmitter<Entity>();
 
-  constructor() {}
+  constructor() {
+    console.log('entity', this.entity);
+  }
 
   ngOnInit() {}
 }

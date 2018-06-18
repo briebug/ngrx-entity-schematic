@@ -21,8 +21,7 @@ export class EntityListComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new EntitySearch());
-    // this.entities = this.store.pipe(select(fromStore.getAllEntity));
-    this.entities = this.httpClient.get<Entity[]>('api/entities');
+    this.entities = this.store.pipe(select(fromStore.getAllEntity));
     this.isLoading = this.store.pipe(select(fromStore.getLoading));
   }
 }

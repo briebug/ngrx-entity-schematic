@@ -216,6 +216,7 @@ export class EntityEffects {
   selectedId: Observable<Action> = this.actions$
     .ofType<EntitySelectById>(EntityActionTypes.EntitySelectById)
     .pipe(tap(action => {
+      // TODO: Is this getting called recursively?
       // do stuff with: action.payload.id
     }));
 
