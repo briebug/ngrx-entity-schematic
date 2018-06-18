@@ -6,6 +6,8 @@
   <li *ngFor="let entity of entities | async">
     <b>Name</b>: {{entity.name}}<br>
     <b>Description</b>: {{entity.description}}<br>
-    <a href="https://youtu.be/dQw4w9WgXcQ">(Edit)</a>
+    <a [routerLink]="['/entities', entity.id]">(Edit)</a>
   </li>
 </ul>
+
+<a routerLink="/entities/add">(Add new entity)</a>

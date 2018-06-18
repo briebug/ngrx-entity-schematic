@@ -1,16 +1,10 @@
-<h1>Edit Test Entity</h1>
-
-<p *ngIf="isLoading">Loading...</p>
-
-<app-entity-form entity="entity"></app-entity-form>
-
-<form (ngSubmit)="onSubmit()" #entityForm="ngForm" *ngIf="model">
+<form (ngSubmit)="submit()" #entityForm="ngForm" *ngIf="entity">
   <label for="name">Name:</label>
   <input
     type="text"
     id="name"
     required
-    [(ngModel)]="model.name"
+    [(ngModel)]="entity.name"
     name="name"
     #name="ngModel"
   >
@@ -28,7 +22,7 @@
     type="text"
     id="description"
     required
-    [(ngModel)]="model.description"
+    [(ngModel)]="entity.description"
     name="description"
     #description="ngModel"
   >
@@ -49,5 +43,3 @@
     Submit
   </button>
 </form>
-
-<a routerLink="/entities">Back to list</a>
