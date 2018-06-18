@@ -11,7 +11,7 @@ export enum EntityActionTypes {
   EntitySearchSuccess = '[Entity] Search Success',
   EntitySearchFail = '[Entity] Search Fail',
 
-  EntityLoadById = '[Entity] Load',
+  EntityLoadById = '[Entity] Load By ID',
   EntityLoadByIdSuccess = '[Entity] Load Success',
   EntityLoadByIdFail = '[Entity] Load Fail',
 
@@ -19,7 +19,7 @@ export enum EntityActionTypes {
   EntityUpdateSuccess = '[Entity] Update Success',
   EntityUpdateFail = '[Entity] Update Fail',
 
-  EntityDeleteById = '[Entity] Delete',
+  EntityDeleteById = '[Entity] Delete By ID',
   EntityDeleteSuccess = '[Entity] Delete Success',
   EntityDeleteFail = '[Entity] Delete Fail',
 
@@ -27,10 +27,10 @@ export enum EntityActionTypes {
   EntitySetFilter = '[Entity] Set Filter',
   EntitySetSorting = '[Entity] Set Sorting',
 
-  EntitySelect = '[Entity] Select'
+  EntitySelectById = '[Entity] Select By ID'
 }
 
-// Create
+// ========================================= INSERT
 
 export class EntityInsert implements Action {
   readonly type = EntityActionTypes.EntityInsert;
@@ -44,9 +44,10 @@ export class EntityInsertSuccess implements Action {
 
 export class EntityInsertFail implements Action {
   readonly type = EntityActionTypes.EntityInsertFail;
+  constructor(public payload: { error: string }) {}
 }
 
-// Retrieve
+// ========================================= SEARCH
 
 export class EntitySearch implements Action {
   readonly type = EntityActionTypes.EntitySearch;
@@ -59,11 +60,14 @@ export class EntitySearchSuccess implements Action {
 
 export class EntitySearchFail implements Action {
   readonly type = EntityActionTypes.EntitySearchFail;
+  constructor(public payload: { error: string }) {}
 }
+
+// ========================================= LOAD BY ID
 
 export class EntityLoadById implements Action {
   readonly type = EntityActionTypes.EntityLoadById;
-  constructor(public payload: { id: Number }) {}
+  constructor(public payload: { id: number }) {}
 }
 
 export class EntityLoadByIdSuccess implements Action {
@@ -73,9 +77,10 @@ export class EntityLoadByIdSuccess implements Action {
 
 export class EntityLoadByIdFail implements Action {
   readonly type = EntityActionTypes.EntityLoadByIdFail;
+  constructor(public payload: { error: string }) {}
 }
 
-// Update
+// ========================================= UPDATE
 
 export class EntityUpdate implements Action {
   readonly type = EntityActionTypes.EntityUpdate;
@@ -89,13 +94,14 @@ export class EntityUpdateSuccess implements Action {
 
 export class EntityUpdateFail implements Action {
   readonly type = EntityActionTypes.EntityUpdateFail;
+  constructor(public payload: { error: string }) {}
 }
 
-// Delete
+// ========================================= DELETE
 
 export class EntityDeleteById implements Action {
   readonly type = EntityActionTypes.EntityDeleteById;
-  constructor(public payload: { id: Number }) {}
+  constructor(public payload: { id: number }) {}
 }
 
 export class EntityDeleteSuccess implements Action {
@@ -105,9 +111,10 @@ export class EntityDeleteSuccess implements Action {
 
 export class EntityDeleteFail implements Action {
   readonly type = EntityActionTypes.EntityDeleteFail;
+  constructor(public payload: { error: string }) {}
 }
 
-// Paging
+// ========================================= PAGING
 
 export class EntitySetPaging implements Action {
   readonly type = EntityActionTypes.EntitySetPaging;
@@ -124,10 +131,10 @@ export class EntitySetSorting implements Action {
   constructor(public payload: { sorting: string }) {}
 }
 
-// Selected ID
+// ========================================= SELECTED ID
 
-export class EntitySelect implements Action {
-  readonly type = EntityActionTypes.EntitySelect;
+export class EntitySelectById implements Action {
+  readonly type = EntityActionTypes.EntitySelectById;
   constructor(public payload: { id: number }) {}
 }
 
@@ -150,4 +157,4 @@ export type EntityActions =
   | EntitySetPaging
   | EntitySetFilter
   | EntitySetSorting
-  | EntitySelect;
+  | EntitySelectById;

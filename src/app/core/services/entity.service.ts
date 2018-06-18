@@ -3,31 +3,36 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { Entity } from '@state/entity/entity.model';
-import { BaseService } from './base.service';
+import { Update } from '@ngrx/entity';
 
-@Injectable()
-export class EntityService extends BaseService {
-  constructor(private httpClient: HttpClient) {
-    super();
+@Injectable({
+  providedIn: 'root'
+})
+export class EntityService {
+
+  BASE_URL = 'api/';
+
+  constructor(private httpClient: HttpClient) {}
+
+  create(entity: Entity): Observable<Entity> {
+    return this.httpClient.post<Entity>(`${this.BASE_URL}entities`, entity);
   }
 
-  createHero(hero: Entity): Observable<Entity> {
-    return this.httpClient.post<Entity>(`${this.BASE_URL}heroes`, hero);
+  search(): Observable<Array<Entity>> {
+    console.log('search');
+    // TODO: get based on state.paging (filter, sorting, page, limit)
+    return this.httpClient.get<Array<Entity>>(`${this.BASE_URL}entities`);
   }
 
-  deleteHero(hero: Entity): Observable<void> {
-    return this.httpClient.delete<void>(`${this.BASE_URL}heroes/${hero.id}`);
+  getById(id: number): Observable<Entity> {
+    return this.httpClient.get<Entity>(`${this.BASE_URL}entities/${id}`);
   }
 
-  getHero(id: string): Observable<Entity> {
-    return this.httpClient.get<Entity>(`${this.BASE_URL}heroes/${id}`);
+  update(entity: Update<Entity>): Observable<Entity> {
+    return this.httpClient.put<Entity>(`${this.BASE_URL}entities/${entity.id}`, entity);
   }
 
-  getHeroes(): Observable<Array<Entity>> {
-    return this.httpClient.get<Array<Entity>>(`${this.BASE_URL}heroes`);
-  }
-
-  updateHero(hero: Entity): Observable<Entity> {
-    return this.httpClient.put<Entity>(`${this.BASE_URL}heroes/${hero.id}`, hero);
+  deleteById(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.BASE_URL}entities/${id}`);
   }
 }

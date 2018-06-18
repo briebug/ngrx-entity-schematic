@@ -50,7 +50,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loading: false,
-        error: 'Entity insert failed'
+        error: 'Entity insert failed: ' + action.payload.error
       };
 
     case EntityActionTypes.EntitySearch:
@@ -70,7 +70,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loading: false,
-        error: 'Entity search failed'
+        error: 'Entity search failed: ' + action.payload.error
       };
 
     case EntityActionTypes.EntityLoadByIdSuccess:
@@ -83,7 +83,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loading: false,
-        error: 'Entity load failed'
+        error: 'Entity load failed: ' + action.payload.error
       };
 
     case EntityActionTypes.EntityUpdate:
@@ -102,7 +102,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loading: false,
-        error: 'Entity update failed'
+        error: 'Entity update failed: ' + action.payload.error
       };
 
     case EntityActionTypes.EntityDeleteById:
@@ -121,7 +121,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loading: false,
-        error: 'Entity delete failed'
+        error: 'Entity delete failed: ' + action.payload.error
       };
 
     case EntityActionTypes.EntitySetPaging:
@@ -135,7 +135,7 @@ export function reducer(state = initialState, action: EntityActions): State {
         }
       };
 
-    case EntityActionTypes.EntitySelect:
+    case EntityActionTypes.EntitySelectById:
       return {
         ...state,
         selectedId: action.payload.id
