@@ -34,7 +34,7 @@ export enum EntityActionTypes {
 
 export class EntityInsert implements Action {
   readonly type = EntityActionTypes.EntityInsert;
-  constructor(public payload: { data: Entity }) {}
+  constructor(public payload: { entity: Entity }) {}
 }
 
 export class EntityInsertSuccess implements Action {
@@ -84,12 +84,12 @@ export class EntityLoadByIdFail implements Action {
 
 export class EntityUpdate implements Action {
   readonly type = EntityActionTypes.EntityUpdate;
-  constructor(public payload: { entity: Update<Entity> }) {}
+  constructor(public payload: { entity: Entity }) {}
 }
 
 export class EntityUpdateSuccess implements Action {
   readonly type = EntityActionTypes.EntityUpdateSuccess;
-  constructor(public payload: { result: Update<Entity> }) {}
+  constructor(public payload: { update: Update<Entity> }) {}
 }
 
 export class EntityUpdateFail implements Action {

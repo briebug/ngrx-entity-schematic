@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { tap, switchMap } from 'rxjs/operators';
 import { Entity } from '@state/entity/entity.model';
 import { Update } from '@ngrx/entity';
 
@@ -9,17 +10,16 @@ import { Update } from '@ngrx/entity';
   providedIn: 'root'
 })
 export class EntityService {
-
   BASE_URL = 'api/';
 
   constructor(private httpClient: HttpClient) {}
 
   create(entity: Entity): Observable<Entity> {
-    return this.httpClient.post<Entity>(`${this.BASE_URL}entities`, entity);
+    // We clear out ID to indicate that this should be a new entry:
+    return this.httpClient.post<Entity>(`${this.BASE_URL}entities`, { id: null, ...entity } as Entity);
   }
 
   search(): Observable<Array<Entity>> {
-    console.log('search');
     // TODO: get based on state.paging (filter, sorting, page, limit)
     return this.httpClient.get<Array<Entity>>(`${this.BASE_URL}entities`);
   }
@@ -28,8 +28,10 @@ export class EntityService {
     return this.httpClient.get<Entity>(`${this.BASE_URL}entities/${id}`);
   }
 
-  update(entity: Update<Entity>): Observable<Entity> {
-    return this.httpClient.put<Entity>(`${this.BASE_URL}entities/${entity.id}`, entity);
+  update(entity: Entity): Observable<Entity> {
+    return this.httpClient
+      .put<Entity>(`${this.BASE_URL}entities/${entity.id}`, entity)
+      .pipe(switchMap(() => of(entity)));
   }
 
   deleteById(id: number): Observable<void> {

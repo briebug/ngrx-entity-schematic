@@ -2,9 +2,6 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Entity } from './entity.model';
 import { EntityActions, EntityActionTypes } from './entity.actions';
 
-// TODO: We should consider moving the State and initialState objects to
-// somewhere else
-
 export interface State extends EntityState<Entity> {
   // additional entities state properties
   selectedId: number;
@@ -41,11 +38,13 @@ export function reducer(state = initialState, action: EntityActions): State {
         loading: true,
         error: ''
       };
+
     case EntityActionTypes.EntityInsertSuccess:
       return {
         ...adapter.addOne(action.payload.result, state),
         loading: false
       };
+
     case EntityActionTypes.EntityInsertFail:
       return {
         ...state,
@@ -54,18 +53,27 @@ export function reducer(state = initialState, action: EntityActions): State {
       };
 
     case EntityActionTypes.EntitySearch:
-    case EntityActionTypes.EntityLoadById:
       return {
         ...adapter.removeAll(state),
         loading: true,
         error: ''
       };
+
+    case EntityActionTypes.EntityLoadById:
+      return {
+        ...adapter.removeAll(state),
+        selectedId: action.payload.id,
+        loading: true,
+        error: ''
+      };
+
     case EntityActionTypes.EntitySearchSuccess:
       return {
         ...adapter.addAll(action.payload.result, state),
         loading: false,
         error: ''
       };
+
     case EntityActionTypes.EntitySearchFail:
       return {
         ...state,
@@ -79,6 +87,7 @@ export function reducer(state = initialState, action: EntityActions): State {
         loading: false,
         error: ''
       };
+
     case EntityActionTypes.EntityLoadByIdFail:
       return {
         ...state,
@@ -88,16 +97,18 @@ export function reducer(state = initialState, action: EntityActions): State {
 
     case EntityActionTypes.EntityUpdate:
       return {
-        ...adapter.updateOne(action.payload.entity, state),
+        ...state,
         loading: true,
         error: ''
       };
+
     case EntityActionTypes.EntityUpdateSuccess:
       return {
-        ...adapter.updateOne(action.payload.result, state),
+        ...adapter.updateOne(action.payload.update, state),
         loading: false,
         error: ''
       };
+
     case EntityActionTypes.EntityUpdateFail:
       return {
         ...state,
@@ -108,15 +119,18 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.EntityDeleteById:
       return {
         ...state,
+        selectedId: action.payload.id,
         loading: true,
         error: ''
       };
+
     case EntityActionTypes.EntityDeleteSuccess:
       return {
         ...adapter.removeOne(action.payload.result.id, state),
         loading: false,
         error: ''
       };
+
     case EntityActionTypes.EntityDeleteFail:
       return {
         ...state,
