@@ -2,7 +2,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import * as cloneDeep from 'lodash.clonedeep';
 import { Observable, of } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
@@ -37,7 +36,7 @@ export class EntityComponent implements OnInit {
       map((params) => params.get('id')),
       tap((id) => this.store.dispatch(new EntityLoadById({ id: +id }))),
       switchMap(() => this.store.pipe(select(getSelectedEntity))),
-      map((entity) => cloneDeep(entity))
+      map((entity) => ({...entity}))
     );
 
     // TODO: Fix the ExpressionChangedAfterItHasBeenCheckedError related to isLoading

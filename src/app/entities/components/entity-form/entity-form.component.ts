@@ -37,6 +37,7 @@ export class EntityFormComponent implements OnChanges, OnDestroy {
   }
 
   private buildForm() {
+    // FIXME: Fields are not disabling as expected.
     this.formGroup = this.formBuilder.group({
       id: null,
       name: [{ value: '', disabled: this.disableFields }, Validators.required],
