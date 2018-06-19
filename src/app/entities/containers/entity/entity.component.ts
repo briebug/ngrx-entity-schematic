@@ -39,7 +39,7 @@ export class EntityComponent implements OnInit {
       map((entity) => ({...entity}))
     );
 
-    // TODO: Fix the ExpressionChangedAfterItHasBeenCheckedError related to isLoading
+    // FIXME: ExpressionChangedAfterItHasBeenCheckedError related to isLoading
     this.isLoading = this.store.pipe(select(getLoading));
     this.showErrors = false;
   }
