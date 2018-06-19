@@ -1,15 +1,11 @@
-<form (ngSubmit)="submit()" #entityForm="ngForm" *ngIf="entity">
+<form [formGroup]="formGroup">
   <label for="name">Name:</label>
   <input
     type="text"
-    id="name"
-    required
-    [(ngModel)]="entity.name"
-    name="name"
-    #name="ngModel"
+    formControlName="name"
   >
   <div
-    [hidden]="name.valid || name.pristine"
+    *ngIf="showErrors && formGroup.get('name').hasError('required')"
     class="invalid"
   >
     Name is required
@@ -17,17 +13,13 @@
 
   <br>
 
-  <label for="name">Description:</label>
+  <label for="description">Description:</label>
   <input
     type="text"
-    id="description"
-    required
-    [(ngModel)]="entity.description"
-    name="description"
-    #description="ngModel"
+    formControlName="description"
   >
   <div
-    [hidden]="description.valid || description.pristine"
+    *ngIf="showErrors && formGroup.get('description').hasError('required')"
     class="invalid"
   >
     Description is required
@@ -38,7 +30,7 @@
   <button
     type="submit"
     class="btn btn-success"
-    [disabled]="!entityForm.form.valid"
+    [disabled]="disableFields"
   >
     Submit
   </button>

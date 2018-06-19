@@ -1,6 +1,6 @@
 <h1>Test Entities</h1>
 
-<p *ngIf="isLoading">Loading...</p>
+<p *ngIf="isLoading | async">Loading...</p>
 
 <ul>
   <li *ngFor="let entity of entities | async">

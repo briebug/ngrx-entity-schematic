@@ -1,4 +1,12 @@
-<h1>Edit Test Entity</h1>
-<p *ngIf="isLoading">Loading...</p>
-<app-entity-form [entity]="entity | async"></app-entity-form>
+<h1>Test Entity</h1>
+<p *ngIf="isLoading | async">Loading...</p>
+
+<app-entity-form
+  [entity]="entity | async"
+  [disableFields]="isLoading | async"
+  [showErrors]="showErrors"
+  (entityChange)="onEntityChange($event)"
+  (submit)="onSubmit($event)"
+></app-entity-form>
+
 <a routerLink="/entities">Back to list</a>

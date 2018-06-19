@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { EntityListComponent } from './containers/entity-list/entity-list.compon
 import { EntityFormComponent } from './components/entity-form/entity-form.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   declarations: [EntityListComponent, EntityComponent, EntityFormComponent]
 })
 export class EntitiesModule {}
