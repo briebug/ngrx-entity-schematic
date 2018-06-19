@@ -82,9 +82,7 @@ export class EntityEffects {
     .ofType<EntitySearch>(EntityActionTypes.EntitySearch)
     .pipe(
       exhaustMap((action) => this.service.search()),
-      map(
-        (entities: Entity[]) => new EntitySearchSuccess({ result: entities })
-      ),
+      map((entities: Entity[]) => new EntitySearchSuccess({ result: entities })),
       catchError((err) => of(new EntitySearchFail(err)))
     );
 
@@ -154,15 +152,12 @@ export class EntityEffects {
     .ofType<EntityUpdate>(EntityActionTypes.EntityUpdate)
     .pipe(
       exhaustMap((action) => this.service.update(action.payload.entity)),
-      map(
-        (entity: Entity) =>
-          new EntityUpdateSuccess({
-            update: {
-              id: entity.id,
-              changes: entity
-            } as Update<Entity>
-          })
-      ),
+      map((entity: Entity) => new EntityUpdateSuccess({
+        update: {
+          id: entity.id,
+          changes: entity
+        } as Update<Entity>
+      })),
       catchError((err) => of(new EntityUpdateFail(err)))
     );
 
