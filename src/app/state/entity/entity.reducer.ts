@@ -32,34 +32,34 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(state = initialState, action: EntityActions): State {
   switch (action.type) {
-    case EntityActionTypes.EntityInsert:
+    case EntityActionTypes.InsertEntity:
       return {
         ...state,
         loading: true,
         error: ''
       };
 
-    case EntityActionTypes.EntityInsertSuccess:
+    case EntityActionTypes.InsertEntitySuccess:
       return {
         ...adapter.addOne(action.payload.result, state),
         loading: false
       };
 
-    case EntityActionTypes.EntityInsertFail:
+    case EntityActionTypes.InsertEntityFail:
       return {
         ...state,
         loading: false,
         error: 'Entity insert failed: ' + action.payload.error
       };
 
-    case EntityActionTypes.EntitySearch:
+    case EntityActionTypes.SearchAllEntityEntities:
       return {
         ...adapter.removeAll(state),
         loading: true,
         error: ''
       };
 
-    case EntityActionTypes.EntityLoadById:
+    case EntityActionTypes.LoadEntityById:
       return {
         ...adapter.removeAll(state),
         selectedId: action.payload.id,
@@ -67,56 +67,56 @@ export function reducer(state = initialState, action: EntityActions): State {
         error: ''
       };
 
-    case EntityActionTypes.EntitySearchSuccess:
+    case EntityActionTypes.SearchAllEntityEntitiesSuccess:
       return {
         ...adapter.addAll(action.payload.result, state),
         loading: false,
         error: ''
       };
 
-    case EntityActionTypes.EntitySearchFail:
+    case EntityActionTypes.SearchAllEntityEntitiesFail:
       return {
         ...state,
         loading: false,
         error: 'Entity search failed: ' + action.payload.error
       };
 
-    case EntityActionTypes.EntityLoadByIdSuccess:
+    case EntityActionTypes.LoadEntityByIdSuccess:
       return {
         ...adapter.addOne(action.payload.result, state),
         loading: false,
         error: ''
       };
 
-    case EntityActionTypes.EntityLoadByIdFail:
+    case EntityActionTypes.LoadEntityByIdFail:
       return {
         ...state,
         loading: false,
         error: 'Entity load failed: ' + action.payload.error
       };
 
-    case EntityActionTypes.EntityUpdate:
+    case EntityActionTypes.UpdateEntity:
       return {
         ...state,
         loading: true,
         error: ''
       };
 
-    case EntityActionTypes.EntityUpdateSuccess:
+    case EntityActionTypes.UpdateEntitySuccess:
       return {
         ...adapter.updateOne(action.payload.update, state),
         loading: false,
         error: ''
       };
 
-    case EntityActionTypes.EntityUpdateFail:
+    case EntityActionTypes.UpdateEntityFail:
       return {
         ...state,
         loading: false,
         error: 'Entity update failed: ' + action.payload.error
       };
 
-    case EntityActionTypes.EntityDeleteById:
+    case EntityActionTypes.DeleteEntityById:
       return {
         ...state,
         selectedId: action.payload.id,
@@ -124,23 +124,23 @@ export function reducer(state = initialState, action: EntityActions): State {
         error: ''
       };
 
-    case EntityActionTypes.EntityDeleteSuccess:
+    case EntityActionTypes.DeleteEntityByIdSuccess:
       return {
         ...adapter.removeOne(action.payload.result.id, state),
         loading: false,
         error: ''
       };
 
-    case EntityActionTypes.EntityDeleteFail:
+    case EntityActionTypes.DeleteEntityByIdFail:
       return {
         ...state,
         loading: false,
         error: 'Entity delete failed: ' + action.payload.error
       };
 
-    case EntityActionTypes.EntitySetPaging:
-    case EntityActionTypes.EntitySetFilter:
-    case EntityActionTypes.EntitySetSorting:
+    case EntityActionTypes.SetEntityPaging:
+    case EntityActionTypes.SetEntityFilter:
+    case EntityActionTypes.SetEntitySorting:
       return {
         ...state,
         paging: {
@@ -149,7 +149,7 @@ export function reducer(state = initialState, action: EntityActions): State {
         }
       };
 
-    case EntityActionTypes.EntitySelectById:
+    case EntityActionTypes.SelectEntityById:
       return {
         ...state,
         selectedId: action.payload.id,

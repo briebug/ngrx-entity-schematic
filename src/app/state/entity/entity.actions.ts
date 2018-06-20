@@ -3,158 +3,158 @@ import { Update } from '@ngrx/entity';
 import { Entity } from './entity.model';
 
 export enum EntityActionTypes {
-  EntityInsert = '[Entity] Insert',
-  EntityInsertSuccess = '[Entity] Insert Success',
-  EntityInsertFail = '[Entity] Insert Fail',
+  InsertEntity = '[Entity] Insert',
+  InsertEntitySuccess = '[Entity] Insert Success',
+  InsertEntityFail = '[Entity] Insert Fail',
 
-  EntitySearch = '[Entity] Search',
-  EntitySearchSuccess = '[Entity] Search Success',
-  EntitySearchFail = '[Entity] Search Fail',
+  SearchAllEntityEntities = '[Entity] Search',
+  SearchAllEntityEntitiesSuccess = '[Entity] Search Success',
+  SearchAllEntityEntitiesFail = '[Entity] Search Fail',
 
-  EntityLoadById = '[Entity] Load By ID',
-  EntityLoadByIdSuccess = '[Entity] Load Success',
-  EntityLoadByIdFail = '[Entity] Load Fail',
+  LoadEntityById = '[Entity] Load By ID',
+  LoadEntityByIdSuccess = '[Entity] Load Success',
+  LoadEntityByIdFail = '[Entity] Load Fail',
 
-  EntityUpdate = '[Entity] Update',
-  EntityUpdateSuccess = '[Entity] Update Success',
-  EntityUpdateFail = '[Entity] Update Fail',
+  UpdateEntity = '[Entity] Update',
+  UpdateEntitySuccess = '[Entity] Update Success',
+  UpdateEntityFail = '[Entity] Update Fail',
 
-  EntityDeleteById = '[Entity] Delete By ID',
-  EntityDeleteSuccess = '[Entity] Delete Success',
-  EntityDeleteFail = '[Entity] Delete Fail',
+  DeleteEntityById = '[Entity] Delete By ID',
+  DeleteEntityByIdSuccess = '[Entity] Delete Success',
+  DeleteEntityByIdFail = '[Entity] Delete Fail',
 
-  EntitySetPaging = '[Entity] Set Paging',
-  EntitySetFilter = '[Entity] Set Filter',
-  EntitySetSorting = '[Entity] Set Sorting',
+  SetEntityPaging = '[Entity] Set Paging',
+  SetEntityFilter = '[Entity] Set Filter',
+  SetEntitySorting = '[Entity] Set Sorting',
 
-  EntitySelectById = '[Entity] Select By ID'
+  SelectEntityById = '[Entity] Select By ID'
 }
 
 // ========================================= INSERT
 
-export class EntityInsert implements Action {
-  readonly type = EntityActionTypes.EntityInsert;
+export class InsertEntity implements Action {
+  readonly type = EntityActionTypes.InsertEntity;
   constructor(public payload: { entity: Entity }) {}
 }
 
-export class EntityInsertSuccess implements Action {
-  readonly type = EntityActionTypes.EntityInsertSuccess;
+export class InsertEntitySuccess implements Action {
+  readonly type = EntityActionTypes.InsertEntitySuccess;
   constructor(public payload: { result: Entity }) {}
 }
 
-export class EntityInsertFail implements Action {
-  readonly type = EntityActionTypes.EntityInsertFail;
+export class InsertEntityFail implements Action {
+  readonly type = EntityActionTypes.InsertEntityFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= SEARCH
 
-export class EntitySearch implements Action {
-  readonly type = EntityActionTypes.EntitySearch;
+export class SearchAllEntityEntities implements Action {
+  readonly type = EntityActionTypes.SearchAllEntityEntities;
 }
 
-export class EntitySearchSuccess implements Action {
-  readonly type = EntityActionTypes.EntitySearchSuccess;
+export class SearchAllEntityEntitiesSuccess implements Action {
+  readonly type = EntityActionTypes.SearchAllEntityEntitiesSuccess;
   constructor(public payload: { result: Entity[] }) {}
 }
 
-export class EntitySearchFail implements Action {
-  readonly type = EntityActionTypes.EntitySearchFail;
+export class SearchAllEntityEntitiesFail implements Action {
+  readonly type = EntityActionTypes.SearchAllEntityEntitiesFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= LOAD BY ID
 
-export class EntityLoadById implements Action {
-  readonly type = EntityActionTypes.EntityLoadById;
+export class LoadEntityById implements Action {
+  readonly type = EntityActionTypes.LoadEntityById;
   constructor(public payload: { id: number }) {}
 }
 
-export class EntityLoadByIdSuccess implements Action {
-  readonly type = EntityActionTypes.EntityLoadByIdSuccess;
+export class LoadEntityByIdSuccess implements Action {
+  readonly type = EntityActionTypes.LoadEntityByIdSuccess;
   constructor(public payload: { result: Entity }) {}
 }
 
-export class EntityLoadByIdFail implements Action {
-  readonly type = EntityActionTypes.EntityLoadByIdFail;
+export class LoadEntityByIdFail implements Action {
+  readonly type = EntityActionTypes.LoadEntityByIdFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= UPDATE
 
-export class EntityUpdate implements Action {
-  readonly type = EntityActionTypes.EntityUpdate;
+export class UpdateEntity implements Action {
+  readonly type = EntityActionTypes.UpdateEntity;
   constructor(public payload: { entity: Entity }) {}
 }
 
-export class EntityUpdateSuccess implements Action {
-  readonly type = EntityActionTypes.EntityUpdateSuccess;
+export class UpdateEntitySuccess implements Action {
+  readonly type = EntityActionTypes.UpdateEntitySuccess;
   constructor(public payload: { update: Update<Entity> }) {}
 }
 
-export class EntityUpdateFail implements Action {
-  readonly type = EntityActionTypes.EntityUpdateFail;
+export class UpdateEntityFail implements Action {
+  readonly type = EntityActionTypes.UpdateEntityFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= DELETE
 
-export class EntityDeleteById implements Action {
-  readonly type = EntityActionTypes.EntityDeleteById;
+export class DeleteEntityById implements Action {
+  readonly type = EntityActionTypes.DeleteEntityById;
   constructor(public payload: { id: number }) {}
 }
 
-export class EntityDeleteSuccess implements Action {
-  readonly type = EntityActionTypes.EntityDeleteSuccess;
+export class DeleteEntityByIdSuccess implements Action {
+  readonly type = EntityActionTypes.DeleteEntityByIdSuccess;
   constructor(public payload: { result: Entity }) {}
 }
 
-export class EntityDeleteFail implements Action {
-  readonly type = EntityActionTypes.EntityDeleteFail;
+export class DeleteEntityByIdFail implements Action {
+  readonly type = EntityActionTypes.DeleteEntityByIdFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= PAGING
 
-export class EntitySetPaging implements Action {
-  readonly type = EntityActionTypes.EntitySetPaging;
+export class SetEntityPaging implements Action {
+  readonly type = EntityActionTypes.SetEntityPaging;
   constructor(public payload: { limit: number; page: number }) {}
 }
 
-export class EntitySetFilter implements Action {
-  readonly type = EntityActionTypes.EntitySetFilter;
+export class SetEntityFilter implements Action {
+  readonly type = EntityActionTypes.SetEntityFilter;
   constructor(public payload: { filter: string; }) {}
 }
 
-export class EntitySetSorting implements Action {
-  readonly type = EntityActionTypes.EntitySetSorting;
+export class SetEntitySorting implements Action {
+  readonly type = EntityActionTypes.SetEntitySorting;
   constructor(public payload: { sorting: string }) {}
 }
 
 // ========================================= SELECTED ID
 
-export class EntitySelectById implements Action {
-  readonly type = EntityActionTypes.EntitySelectById;
+export class SelectEntityById implements Action {
+  readonly type = EntityActionTypes.SelectEntityById;
   constructor(public payload: { id: number }) {}
 }
 
 export type EntityActions =
-  | EntityInsert
-  | EntityInsertSuccess
-  | EntityInsertFail
-  | EntitySearch
-  | EntitySearchSuccess
-  | EntitySearchFail
-  | EntityLoadById
-  | EntityLoadByIdSuccess
-  | EntityLoadByIdFail
-  | EntityUpdate
-  | EntityUpdateSuccess
-  | EntityUpdateFail
-  | EntityDeleteById
-  | EntityDeleteSuccess
-  | EntityDeleteFail
-  | EntitySetPaging
-  | EntitySetFilter
-  | EntitySetSorting
-  | EntitySelectById;
+  | InsertEntity
+  | InsertEntitySuccess
+  | InsertEntityFail
+  | SearchAllEntityEntities
+  | SearchAllEntityEntitiesSuccess
+  | SearchAllEntityEntitiesFail
+  | LoadEntityById
+  | LoadEntityByIdSuccess
+  | LoadEntityByIdFail
+  | UpdateEntity
+  | UpdateEntitySuccess
+  | UpdateEntityFail
+  | DeleteEntityById
+  | DeleteEntityByIdSuccess
+  | DeleteEntityByIdFail
+  | SetEntityPaging
+  | SetEntityFilter
+  | SetEntitySorting
+  | SelectEntityById;

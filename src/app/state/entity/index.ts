@@ -8,8 +8,8 @@ export const getEntityState = createFeatureSelector<EntityState>('entity');
 export const {
   selectIds: getEntityIds,
   selectEntities: getEntityEntities,
-  selectAll: getAllEntity,
-  selectTotal: getTotalEntity
+  selectAll: getAllEntityEntities,
+  selectTotal: getTotalEntityEntities
 } = fromEntity.adapter.getSelectors(getEntityState);
 
 export const getSelectedEntityId = createSelector(

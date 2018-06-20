@@ -14,10 +14,10 @@ import {
 import { getLoading, getSelectedEntity, getError } from '@state/entity';
 import { Entity } from '@state/entity/entity.model';
 import {
-  EntityLoadById,
-  EntityInsert,
-  EntityUpdate,
-  EntitySelectById
+  LoadEntityById,
+  InsertEntity,
+  UpdateEntity,
+  SelectEntityById
 } from '@state/entity/entity.actions';
 import { State } from '@state/entity/entity.reducer';
 
@@ -46,7 +46,7 @@ export class EntityComponent implements OnInit {
       ),
       map((params) => params.get('id')),
       tap((id) => {
-        const EntityAction = id ? EntityLoadById : EntitySelectById;
+        const EntityAction = id ? LoadEntityById : SelectEntityById;
         this.store.dispatch(new EntityAction({ id: +id || null }));
       }),
       switchMap(() => this.store.pipe(select(getSelectedEntity))),
@@ -81,7 +81,7 @@ export class EntityComponent implements OnInit {
       return;
     }
 
-    const EntityAction = this.entityEdits.id ? EntityUpdate : EntityInsert;
+    const EntityAction = this.entityEdits.id ? UpdateEntity : InsertEntity;
     this.store.dispatch(new EntityAction({ entity: this.entityEdits }));
   }
 }
