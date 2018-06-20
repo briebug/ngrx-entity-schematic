@@ -6,11 +6,10 @@ import {
   map,
   catchError,
   tap,
-  switchMap,
-  withLatestFrom
+  switchMap
 } from 'rxjs/operators';
 import { Actions, Effect } from '@ngrx/effects';
-import { Action, Store, select } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 
 import {
@@ -46,9 +45,14 @@ export class EntityEffects {
   insert: Observable<Action> = this.actions$
     .ofType<EntityInsert>(EntityActionTypes.EntityInsert)
     .pipe(
-      exhaustMap((action) => this.service.create(action.payload.entity)),
-      map((entity: Entity) => new EntityInsertSuccess({ result: entity })),
-      catchError((err) => of(new EntityInsertFail(err)))
+      exhaustMap((action) =>
+        this.service.create(action.payload.entity).pipe(
+          map((entity: Entity) => new EntityInsertSuccess({ result: entity })),
+          catchError(({ message }) =>
+            of(new EntityInsertFail({ error: message }))
+          )
+        )
+      )
     );
 
   // remove this if you don't need to do anything upon insert success
@@ -81,9 +85,18 @@ export class EntityEffects {
   search: Observable<Action> = this.actions$
     .ofType<EntitySearch>(EntityActionTypes.EntitySearch)
     .pipe(
-      exhaustMap((action) => this.service.search()),
-      map((entities: Entity[]) => new EntitySearchSuccess({ result: entities })),
-      catchError((err) => of(new EntitySearchFail(err)))
+      // Use the state's filtering and pagination values in this search call
+      // here if desired:
+      exhaustMap((action) =>
+        this.service.search().pipe(
+          map((entities: Entity[]) =>
+            new EntitySearchSuccess({ result: entities })
+          ),
+          catchError(({ message }) =>
+            of(new EntitySearchFail({ error: message }))
+          )
+        )
+      )
     );
 
   // remove this if you don't need to do anything upon search success
@@ -116,9 +129,15 @@ export class EntityEffects {
   loadById: Observable<Action> = this.actions$
     .ofType<EntityLoadById>(EntityActionTypes.EntityLoadById)
     .pipe(
-      switchMap((action) => this.service.getById(action.payload.id)),
-      map((entity: Entity) => new EntityLoadByIdSuccess({ result: entity })),
-      catchError((err) => of(new EntityLoadByIdFail(err)))
+      switchMap((action) =>
+        this.service.getById(action.payload.id).pipe(
+          map((entity: Entity) => new EntityLoadByIdSuccess({ result: entity })
+          ),
+          catchError(({ message }) =>
+            of(new EntityLoadByIdFail({ error: message }))
+          )
+        )
+      )
     );
 
   // remove this if you don't need to do anything upon load by id success
@@ -151,14 +170,21 @@ export class EntityEffects {
   update: Observable<Action> = this.actions$
     .ofType<EntityUpdate>(EntityActionTypes.EntityUpdate)
     .pipe(
-      exhaustMap((action) => this.service.update(action.payload.entity)),
-      map((entity: Entity) => new EntityUpdateSuccess({
-        update: {
-          id: entity.id,
-          changes: entity
-        } as Update<Entity>
-      })),
-      catchError((err) => of(new EntityUpdateFail(err)))
+      exhaustMap((action) =>
+        this.service.update(action.payload.entity).pipe(
+          map((entity: Entity) =>
+            new EntityUpdateSuccess({
+              update: {
+                id: entity.id,
+                changes: entity
+              } as Update<Entity>
+            })
+          ),
+          catchError(({ message }) =>
+            of(new EntityUpdateFail({ error: message }))
+          )
+        )
+      )
     );
 
   // remove this if you don't need to do anything upon update success
@@ -191,9 +217,14 @@ export class EntityEffects {
   delete: Observable<Action> = this.actions$
     .ofType<EntityDeleteById>(EntityActionTypes.EntityDeleteById)
     .pipe(
-      exhaustMap((action) => this.service.deleteById(action.payload.id)),
-      map((entity: Entity) => new EntityDeleteSuccess({ result: entity })),
-      catchError((err) => of(new EntityDeleteFail(err)))
+      exhaustMap((action) =>
+        this.service.deleteById(action.payload.id).pipe(
+          map((entity: Entity) => new EntityDeleteSuccess({ result: entity })),
+          catchError(({ message }) =>
+            of(new EntityDeleteFail({ error: message }))
+          )
+        )
+      )
     );
 
   // remove this if you don't need to do anything upon delete success

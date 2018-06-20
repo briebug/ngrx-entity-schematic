@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
-import { tap, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Entity } from '@state/entity/entity.model';
-import { Update } from '@ngrx/entity';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +14,11 @@ export class EntityService {
   constructor(private httpClient: HttpClient) {}
 
   create(entity: Entity): Observable<Entity> {
-    // We clear out ID to indicate that this should be a new entry:
-    return this.httpClient.post<Entity>(`${this.BASE_URL}entities`, { id: null, ...entity } as Entity);
+    return this.httpClient.post<Entity>(`${this.BASE_URL}entities`, {
+      ...entity,
+      // We clear out ID to indicate that this should be a new entry:
+      id: null
+    });
   }
 
   search(): Observable<Array<Entity>> {
@@ -31,6 +33,8 @@ export class EntityService {
   update(entity: Entity): Observable<Entity> {
     return this.httpClient
       .put<Entity>(`${this.BASE_URL}entities/${entity.id}`, entity)
+      // The following pipe can be removed if your backend service returns the
+      // edited value:
       .pipe(switchMap(() => of(entity)));
   }
 
