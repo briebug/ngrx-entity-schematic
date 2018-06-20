@@ -152,7 +152,8 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.EntitySelectById:
       return {
         ...state,
-        selectedId: action.payload.id
+        selectedId: action.payload.id,
+        error: ''
       };
 
     default:

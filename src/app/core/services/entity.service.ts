@@ -15,8 +15,11 @@ export class EntityService {
   constructor(private httpClient: HttpClient) {}
 
   create(entity: Entity): Observable<Entity> {
-    // We clear out ID to indicate that this should be a new entry:
-    return this.httpClient.post<Entity>(`${this.BASE_URL}entities`, { id: null, ...entity } as Entity);
+    return this.httpClient.post<Entity>(`${this.BASE_URL}entities`, {
+      ...entity,
+      // We clear out ID to indicate that this should be a new entry:
+      id: null
+    } as Entity);
   }
 
   search(): Observable<Array<Entity>> {
@@ -31,6 +34,8 @@ export class EntityService {
   update(entity: Entity): Observable<Entity> {
     return this.httpClient
       .put<Entity>(`${this.BASE_URL}entities/${entity.id}`, entity)
+      // The following pipe can be removed if your backend service returns the
+      // edited value:
       .pipe(switchMap(() => of(entity)));
   }
 
