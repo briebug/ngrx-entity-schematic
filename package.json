@@ -2,35 +2,11 @@
   "name": "ngrx-entity-generator",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "build:ts": "node_modules/typescript/bin/tsc -w -p tsconfig.file-build.json",
+    "build:run": "nodemon --inspect-brk --watch tmp tmp/index.js",
+    "build:files": "node_modules/typescript/bin/tsc -p tsconfig.file-build.json && node ./tmp/buildFiles.js"
   },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": "^6.0.0",
-    "@angular/common": "^6.0.0",
-    "@angular/compiler": "^6.0.0",
-    "@angular/core": "^6.0.0",
-    "@angular/forms": "^6.0.0",
-    "@angular/http": "^6.0.0",
-    "@angular/platform-browser": "^6.0.0",
-    "@angular/platform-browser-dynamic": "^6.0.0",
-    "@angular/router": "^6.0.0",
-    "@ngrx/effects": "^6.0.1",
-    "@ngrx/entity": "^6.0.1",
-    "@ngrx/router-store": "^6.0.1",
-    "@ngrx/store": "^6.0.1",
-    "@ngrx/store-devtools": "^6.0.1",
-    "angular-in-memory-web-api": "^0.6.0",
-    "core-js": "^2.5.4",
-    "ngrx-store-freeze": "^0.2.4",
-    "rxjs": "^6.0.0",
-    "zone.js": "^0.8.26"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.0",
     "@angular/cli": "~6.0.0",
@@ -38,7 +14,9 @@
     "@angular/language-service": "^6.0.0",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
+    "@types/fs-extra": "^5.0.3",
+    "@types/klaw-sync": "^2.0.0",
+    "@types/node": "^10.3.4",
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",
     "jasmine-marbles": "^0.3.1",
@@ -49,8 +27,11 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.3.0",
-    "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
+    "fs-extra": "^6.0.1",
+    "klaw-sync": "^4.0.0",
+    "nodemon": "^1.17.5",
+    "ts-node": "^6.1.2",
     "typescript": "~2.7.2"
   }
 }

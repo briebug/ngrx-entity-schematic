@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.root.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "./",
+    "outDir": "./tmp"
+  },
+  "include": [
+    "buildFiles.ts"
+  ]
+}
