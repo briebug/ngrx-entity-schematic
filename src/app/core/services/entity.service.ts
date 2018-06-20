@@ -18,7 +18,7 @@ export class EntityService {
       ...entity,
       // We clear out ID to indicate that this should be a new entry:
       id: null
-    } as Entity);
+    });
   }
 
   search(): Observable<Array<Entity>> {
