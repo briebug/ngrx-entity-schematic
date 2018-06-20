@@ -1,15 +1,13 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
 import {
   tap,
   filter,
   map,
   switchMap,
-  startWith,
   shareReplay
 } from 'rxjs/operators';
 
@@ -29,12 +27,12 @@ import { State } from '@state/entity/entity.reducer';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntityComponent implements OnInit {
-  entity: Observable<Entity>;
-  isLoading: Observable<Boolean>;
+  entity$: Observable<Entity>;
+  isLoading$: Observable<Boolean>;
   valid: Boolean;
   showFormErrors: Boolean;
   entityEdits: Entity;
-  errorMessage: Observable<String>;
+  errorMessage$: Observable<String>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -42,7 +40,7 @@ export class EntityComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.entity = this.activatedRoute.paramMap.pipe(
+    this.entity$ = this.activatedRoute.paramMap.pipe(
       filter((params) =>
         params.has('id') || this.activatedRoute.routeConfig.path === 'add'
       ),
@@ -55,12 +53,15 @@ export class EntityComponent implements OnInit {
       map((entity) => ({ ...entity }))
     );
 
-    this.isLoading = this.store.pipe(
+    // The following shareReplay calls allow us to use the async pipe multiple
+    // times without creating multiple subscriptions:
+
+    this.isLoading$ = this.store.pipe(
       select(getLoading),
       shareReplay()
     );
 
-    this.errorMessage = this.store.pipe(
+    this.errorMessage$ = this.store.pipe(
       select(getError),
       shareReplay()
     );

@@ -19,7 +19,7 @@ export class EntityFormComponent implements OnChanges, OnDestroy {
   @Output() submit = new EventEmitter<Entity>();
   @Output() entityChange = new EventEmitter<{ entity: Entity; valid: boolean }>();
 
-  private destroyed = new Subject<void>();
+  private destroyed$ = new Subject<void>();
 
   constructor(private formBuilder: FormBuilder) {
     this.buildForm();
@@ -32,8 +32,8 @@ export class EntityFormComponent implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroyed.next();
-    this.destroyed.complete();
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   private buildForm() {
@@ -46,7 +46,7 @@ export class EntityFormComponent implements OnChanges, OnDestroy {
 
     this.formGroup.valueChanges
       .pipe(
-        takeUntil(this.destroyed),
+        takeUntil(this.destroyed$),
         skip(1),
         debounceTime(500)
       )

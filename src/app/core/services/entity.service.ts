@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
-import { tap, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Entity } from '@state/entity/entity.model';
-import { Update } from '@ngrx/entity';
 
 @Injectable({
   providedIn: 'root'
