@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
@@ -14,7 +14,8 @@ import { State } from '@state/entity/entity.reducer';
 
 @Component({
   templateUrl: './entity.component.html',
-  styleUrls: ['./entity.component.css']
+  styleUrls: ['./entity.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntityComponent implements OnInit {
   entity: Observable<Entity>;
