@@ -1,10 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
 import { tap, filter, map, switchMap, startWith } from 'rxjs/operators';
 
 import { getLoading, getSelectedEntity } from '@state/entity';
@@ -26,9 +24,7 @@ export class EntityComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private store: Store<State>,
-    private httpClient: HttpClient,
-    private router: Router
+    private store: Store<State>
   ) {}
 
   ngOnInit() {
@@ -40,7 +36,6 @@ export class EntityComponent implements OnInit {
       map((entity) => ({...entity}))
     );
 
-    // FIXME: ExpressionChangedAfterItHasBeenCheckedError related to isLoading
     this.isLoading = this.store.pipe(select(getLoading));
     this.showErrors = false;
   }

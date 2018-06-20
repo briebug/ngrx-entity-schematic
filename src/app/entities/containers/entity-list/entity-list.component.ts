@@ -18,7 +18,7 @@ export class EntityListComponent implements OnInit {
   entities: Observable<Entity[]>;
   isLoading: Observable<Boolean>;
 
-  constructor(private store: Store<State>, private httpClient: HttpClient) {}
+  constructor(private store: Store<State>) {}
 
   ngOnInit() {
     this.store.dispatch(new EntitySearch());
