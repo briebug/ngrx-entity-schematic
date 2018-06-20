@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -11,7 +11,8 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   templateUrl: './entity-list.component.html',
-  styleUrls: ['./entity-list.component.css']
+  styleUrls: ['./entity-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntityListComponent implements OnInit {
   entities: Observable<Entity[]>;
