@@ -5,7 +5,6 @@ import { cold, hot } from 'jasmine-marbles';
 import { Observable, empty } from 'rxjs';
 
 import {
-  BriebugActionTypes,
   InsertBriebug,
   InsertBriebugSuccess,
   InsertBriebugFail,
@@ -164,6 +163,32 @@ describe('BriebugEffects', () => {
       const expected = cold('-f', { f: failAction });
 
       expect(effects.update).toBeObservable(expected);
+    });
+  });
+
+  describe('delete', () => {
+    it('should return DeleteBriebugByIdSuccess action with entity ID on success', () => {
+      const entity = generateEntity();
+      const deleteAction = new DeleteBriebugById({ id: entity.id });
+      const successAction = new DeleteBriebugByIdSuccess({ id: entity.id });
+
+      actions = hot('a-', { a: deleteAction });
+      service.deleteById.and.returnValue(cold('-e|', { e: entity.id }));
+      const expected = cold('-s', { s: successAction });
+
+      expect(effects.delete).toBeObservable(expected);
+    });
+
+    it('should return DeleteBriebugByIdFail with error object on failure', () => {
+      const entity = generateEntity();
+      const deleteAction = new DeleteBriebugById({ id: entity.id });
+      const failAction = new DeleteBriebugByIdFail({ error: 'fail' });
+
+      actions = hot('a-', { a: deleteAction });
+      service.deleteById.and.returnValue(cold('-#|', {}, { message: 'fail'}));
+      const expected = cold('-f', { f: failAction });
+
+      expect(effects.delete).toBeObservable(expected);
     });
   });
 
