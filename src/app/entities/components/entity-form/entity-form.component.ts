@@ -24,8 +24,8 @@ export class BriebugFormComponent implements OnChanges, OnDestroy {
   formGroup: FormGroup;
 
   @Input() briebug: Briebug;
-  @Input() disableFields: Boolean;
-  @Input() showErrors: Boolean;
+  @Input() disableFields: boolean;
+  @Input() showErrors: boolean;
   @Output() submit = new EventEmitter<Briebug>();
   @Output() briebugChanged = new EventEmitter<{ briebug: Briebug; valid: boolean }>();
 

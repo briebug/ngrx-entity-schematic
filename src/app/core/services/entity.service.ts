@@ -38,7 +38,10 @@ export class BriebugService {
       .pipe(switchMap(() => of(briebug)));
   }
 
-  deleteById(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.BASE_URL}entities/${id}`);
+  deleteById(id: number): Observable<number> {
+    return this.httpClient.delete<void>(`${this.BASE_URL}entities/${id}`)
+      // The following pipe can be removed if your backend service returns the
+      // ID of the deleted entity:
+      .pipe(switchMap(() => of(id)));
   }
 }

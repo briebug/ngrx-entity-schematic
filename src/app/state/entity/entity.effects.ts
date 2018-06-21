@@ -219,7 +219,7 @@ export class BriebugEffects {
     .pipe(
       exhaustMap((action) =>
         this.service.deleteById(action.payload.id).pipe(
-          map((briebug: Briebug) => new DeleteBriebugByIdSuccess({ result: briebug })),
+          map((id: number) => new DeleteBriebugByIdSuccess({ id })),
           catchError(({ message }) =>
             of(new DeleteBriebugByIdFail({ error: message }))
           )
