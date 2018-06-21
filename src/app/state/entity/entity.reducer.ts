@@ -126,7 +126,7 @@ export function briebugReducer(state = initialState, action: BriebugActions): Br
 
     case BriebugActionTypes.DeleteBriebugByIdSuccess:
       return {
-        ...adapter.removeOne(action.payload.result.id, state),
+        ...adapter.removeOne(action.payload.id, state),
         loading: false,
         error: ''
       };

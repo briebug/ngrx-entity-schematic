@@ -29,10 +29,10 @@ import { BriebugState } from '@state/entity/entity.reducer';
 export class BriebugComponent implements OnInit {
   briebug$: Observable<Briebug>;
   briebugEdits: Briebug;
-  errorMessage$: Observable<String>;
-  isLoading$: Observable<Boolean>;
-  showFormErrors: Boolean;
-  valid: Boolean;
+  errorMessage$: Observable<string>;
+  isLoading$: Observable<boolean>;
+  showFormErrors: boolean;
+  valid: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -71,7 +71,7 @@ export class BriebugComponent implements OnInit {
     this.showFormErrors = false;
   }
 
-  onBriebugChanged({ briebug, valid }: { briebug: Briebug; valid: Boolean }) {
+  onBriebugChanged({ briebug, valid }: { briebug: Briebug; valid: boolean }) {
     this.briebugEdits = briebug;
     this.valid = valid;
   }
