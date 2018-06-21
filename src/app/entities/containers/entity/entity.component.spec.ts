@@ -2,14 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import * as fromRoot from '@state/app.reducer';
 import { StoreModule } from '@ngrx/store';
 
-import { EntityComponent } from './entity.component';
+import { BriebugComponent } from './entity.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { EntityFormComponent } from '../../components/entity-form/entity-form.component';
+import { BriebugFormComponent } from '../../components/entity-form/entity-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-describe('EntityComponent', () => {
-  let component: EntityComponent;
-  let fixture: ComponentFixture<EntityComponent>;
+describe('BriebugComponent', () => {
+  let component: BriebugComponent;
+  let fixture: ComponentFixture<BriebugComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -19,15 +19,15 @@ describe('EntityComponent', () => {
         StoreModule.forRoot(fromRoot.appReducer)
       ],
       declarations: [
-        EntityComponent,
-        EntityFormComponent
+        BriebugComponent,
+        BriebugFormComponent
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EntityComponent);
+    fixture = TestBed.createComponent(BriebugComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -4,10 +4,10 @@
 <p *ngIf="errorMessage$ | async" class="error-message">{{errorMessage$ | async}}</p>
 
 <ul>
-  <li *ngFor="let entity of entities$ | async">
-    <b>Name</b>: {{entity.name}}<br>
-    <b>Description</b>: {{entity.description}}<br>
-    <a [routerLink]="['/entities', entity.id]">(Edit)</a>
+  <li *ngFor="let briebug of briebugEntities$ | async">
+    <b>Name</b>: {{briebug.name}}<br>
+    <b>Description</b>: {{briebug.description}}<br>
+    <a [routerLink]="['/entities', briebug.id]">(Edit)</a>
   </li>
 </ul>
 

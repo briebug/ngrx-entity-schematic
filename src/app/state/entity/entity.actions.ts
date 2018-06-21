@@ -1,160 +1,160 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Entity } from './entity.model';
+import { Briebug } from './entity.model';
 
-export enum EntityActionTypes {
-  InsertEntity = '[Entity] Insert',
-  InsertEntitySuccess = '[Entity] Insert Success',
-  InsertEntityFail = '[Entity] Insert Fail',
+export enum BriebugActionTypes {
+  InsertBriebug = '[Briebug] Insert',
+  InsertBriebugSuccess = '[Briebug] Insert Success',
+  InsertBriebugFail = '[Briebug] Insert Fail',
 
-  SearchAllEntityEntities = '[Entity] Search',
-  SearchAllEntityEntitiesSuccess = '[Entity] Search Success',
-  SearchAllEntityEntitiesFail = '[Entity] Search Fail',
+  SearchAllBriebugEntities = '[Briebug] Search',
+  SearchAllBriebugEntitiesSuccess = '[Briebug] Search Success',
+  SearchAllBriebugEntitiesFail = '[Briebug] Search Fail',
 
-  LoadEntityById = '[Entity] Load By ID',
-  LoadEntityByIdSuccess = '[Entity] Load Success',
-  LoadEntityByIdFail = '[Entity] Load Fail',
+  LoadBriebugById = '[Briebug] Load By ID',
+  LoadBriebugByIdSuccess = '[Briebug] Load Success',
+  LoadBriebugByIdFail = '[Briebug] Load Fail',
 
-  UpdateEntity = '[Entity] Update',
-  UpdateEntitySuccess = '[Entity] Update Success',
-  UpdateEntityFail = '[Entity] Update Fail',
+  UpdateBriebug = '[Briebug] Update',
+  UpdateBriebugSuccess = '[Briebug] Update Success',
+  UpdateBriebugFail = '[Briebug] Update Fail',
 
-  DeleteEntityById = '[Entity] Delete By ID',
-  DeleteEntityByIdSuccess = '[Entity] Delete Success',
-  DeleteEntityByIdFail = '[Entity] Delete Fail',
+  DeleteBriebugById = '[Briebug] Delete By ID',
+  DeleteBriebugByIdSuccess = '[Briebug] Delete Success',
+  DeleteBriebugByIdFail = '[Briebug] Delete Fail',
 
-  SetEntityPaging = '[Entity] Set Paging',
-  SetEntityFilter = '[Entity] Set Filter',
-  SetEntitySorting = '[Entity] Set Sorting',
+  SetBriebugPaging = '[Briebug] Set Paging',
+  SetBriebugFilter = '[Briebug] Set Filter',
+  SetBriebugSorting = '[Briebug] Set Sorting',
 
-  SelectEntityById = '[Entity] Select By ID'
+  SelectBriebugById = '[Briebug] Select By ID'
 }
 
 // ========================================= INSERT
 
-export class InsertEntity implements Action {
-  readonly type = EntityActionTypes.InsertEntity;
-  constructor(public payload: { entity: Entity }) {}
+export class InsertBriebug implements Action {
+  readonly type = BriebugActionTypes.InsertBriebug;
+  constructor(public payload: { briebug: Briebug }) {}
 }
 
-export class InsertEntitySuccess implements Action {
-  readonly type = EntityActionTypes.InsertEntitySuccess;
-  constructor(public payload: { result: Entity }) {}
+export class InsertBriebugSuccess implements Action {
+  readonly type = BriebugActionTypes.InsertBriebugSuccess;
+  constructor(public payload: { result: Briebug }) {}
 }
 
-export class InsertEntityFail implements Action {
-  readonly type = EntityActionTypes.InsertEntityFail;
+export class InsertBriebugFail implements Action {
+  readonly type = BriebugActionTypes.InsertBriebugFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= SEARCH
 
-export class SearchAllEntityEntities implements Action {
-  readonly type = EntityActionTypes.SearchAllEntityEntities;
+export class SearchAllBriebugEntities implements Action {
+  readonly type = BriebugActionTypes.SearchAllBriebugEntities;
 }
 
-export class SearchAllEntityEntitiesSuccess implements Action {
-  readonly type = EntityActionTypes.SearchAllEntityEntitiesSuccess;
-  constructor(public payload: { result: Entity[] }) {}
+export class SearchAllBriebugEntitiesSuccess implements Action {
+  readonly type = BriebugActionTypes.SearchAllBriebugEntitiesSuccess;
+  constructor(public payload: { result: Array<Briebug> }) {}
 }
 
-export class SearchAllEntityEntitiesFail implements Action {
-  readonly type = EntityActionTypes.SearchAllEntityEntitiesFail;
+export class SearchAllBriebugEntitiesFail implements Action {
+  readonly type = BriebugActionTypes.SearchAllBriebugEntitiesFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= LOAD BY ID
 
-export class LoadEntityById implements Action {
-  readonly type = EntityActionTypes.LoadEntityById;
+export class LoadBriebugById implements Action {
+  readonly type = BriebugActionTypes.LoadBriebugById;
   constructor(public payload: { id: number }) {}
 }
 
-export class LoadEntityByIdSuccess implements Action {
-  readonly type = EntityActionTypes.LoadEntityByIdSuccess;
-  constructor(public payload: { result: Entity }) {}
+export class LoadBriebugByIdSuccess implements Action {
+  readonly type = BriebugActionTypes.LoadBriebugByIdSuccess;
+  constructor(public payload: { result: Briebug }) {}
 }
 
-export class LoadEntityByIdFail implements Action {
-  readonly type = EntityActionTypes.LoadEntityByIdFail;
+export class LoadBriebugByIdFail implements Action {
+  readonly type = BriebugActionTypes.LoadBriebugByIdFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= UPDATE
 
-export class UpdateEntity implements Action {
-  readonly type = EntityActionTypes.UpdateEntity;
-  constructor(public payload: { entity: Entity }) {}
+export class UpdateBriebug implements Action {
+  readonly type = BriebugActionTypes.UpdateBriebug;
+  constructor(public payload: { briebug: Briebug }) {}
 }
 
-export class UpdateEntitySuccess implements Action {
-  readonly type = EntityActionTypes.UpdateEntitySuccess;
-  constructor(public payload: { update: Update<Entity> }) {}
+export class UpdateBriebugSuccess implements Action {
+  readonly type = BriebugActionTypes.UpdateBriebugSuccess;
+  constructor(public payload: { update: Update<Briebug> }) {}
 }
 
-export class UpdateEntityFail implements Action {
-  readonly type = EntityActionTypes.UpdateEntityFail;
+export class UpdateBriebugFail implements Action {
+  readonly type = BriebugActionTypes.UpdateBriebugFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= DELETE
 
-export class DeleteEntityById implements Action {
-  readonly type = EntityActionTypes.DeleteEntityById;
+export class DeleteBriebugById implements Action {
+  readonly type = BriebugActionTypes.DeleteBriebugById;
   constructor(public payload: { id: number }) {}
 }
 
-export class DeleteEntityByIdSuccess implements Action {
-  readonly type = EntityActionTypes.DeleteEntityByIdSuccess;
-  constructor(public payload: { result: Entity }) {}
+export class DeleteBriebugByIdSuccess implements Action {
+  readonly type = BriebugActionTypes.DeleteBriebugByIdSuccess;
+  constructor(public payload: { result: Briebug }) {}
 }
 
-export class DeleteEntityByIdFail implements Action {
-  readonly type = EntityActionTypes.DeleteEntityByIdFail;
+export class DeleteBriebugByIdFail implements Action {
+  readonly type = BriebugActionTypes.DeleteBriebugByIdFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= PAGING
 
-export class SetEntityPaging implements Action {
-  readonly type = EntityActionTypes.SetEntityPaging;
+export class SetBriebugPaging implements Action {
+  readonly type = BriebugActionTypes.SetBriebugPaging;
   constructor(public payload: { limit: number; page: number }) {}
 }
 
-export class SetEntityFilter implements Action {
-  readonly type = EntityActionTypes.SetEntityFilter;
+export class SetBriebugFilter implements Action {
+  readonly type = BriebugActionTypes.SetBriebugFilter;
   constructor(public payload: { filter: string; }) {}
 }
 
-export class SetEntitySorting implements Action {
-  readonly type = EntityActionTypes.SetEntitySorting;
+export class SetBriebugSorting implements Action {
+  readonly type = BriebugActionTypes.SetBriebugSorting;
   constructor(public payload: { sorting: string }) {}
 }
 
 // ========================================= SELECTED ID
 
-export class SelectEntityById implements Action {
-  readonly type = EntityActionTypes.SelectEntityById;
+export class SelectBriebugById implements Action {
+  readonly type = BriebugActionTypes.SelectBriebugById;
   constructor(public payload: { id: number }) {}
 }
 
-export type EntityActions =
-  | InsertEntity
-  | InsertEntitySuccess
-  | InsertEntityFail
-  | SearchAllEntityEntities
-  | SearchAllEntityEntitiesSuccess
-  | SearchAllEntityEntitiesFail
-  | LoadEntityById
-  | LoadEntityByIdSuccess
-  | LoadEntityByIdFail
-  | UpdateEntity
-  | UpdateEntitySuccess
-  | UpdateEntityFail
-  | DeleteEntityById
-  | DeleteEntityByIdSuccess
-  | DeleteEntityByIdFail
-  | SetEntityPaging
-  | SetEntityFilter
-  | SetEntitySorting
-  | SelectEntityById;
+export type BriebugActions =
+  | InsertBriebug
+  | InsertBriebugSuccess
+  | InsertBriebugFail
+  | SearchAllBriebugEntities
+  | SearchAllBriebugEntitiesSuccess
+  | SearchAllBriebugEntitiesFail
+  | LoadBriebugById
+  | LoadBriebugByIdSuccess
+  | LoadBriebugByIdFail
+  | UpdateBriebug
+  | UpdateBriebugSuccess
+  | UpdateBriebugFail
+  | DeleteBriebugById
+  | DeleteBriebugByIdSuccess
+  | DeleteBriebugByIdFail
+  | SetBriebugPaging
+  | SetBriebugFilter
+  | SetBriebugSorting
+  | SelectBriebugById;

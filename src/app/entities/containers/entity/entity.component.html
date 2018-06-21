@@ -3,12 +3,12 @@
 <p *ngIf="isLoading$ | async">Loading...</p>
 <p *ngIf="errorMessage$ | async" class="error-message">{{errorMessage$ | async}}</p>
 
-<app-entity-form
-  [entity]="entity$ | async"
+<app-briebug-form
+  [briebug]="briebug$ | async"
   [disableFields]="isLoading$ | async"
   [showErrors]="showFormErrors"
-  (entityChange)="onEntityChange($event)"
+  (briebugChanged)="onBriebugChanged($event)"
   (submit)="onSubmit($event)"
-></app-entity-form>
+></app-briebug-form>
 
 <a routerLink="/entities">Back to list</a>

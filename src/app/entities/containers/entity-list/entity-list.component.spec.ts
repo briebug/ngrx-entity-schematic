@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EntityListComponent } from './entity-list.component';
+import { BriebugListComponent } from './entity-list.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromRoot from '@state/app.reducer';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('EntityListComponent', () => {
-  let component: EntityListComponent;
-  let fixture: ComponentFixture<EntityListComponent>;
+describe('BriebugListComponent', () => {
+  let component: BriebugListComponent;
+  let fixture: ComponentFixture<BriebugListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EntityListComponent ],
+      declarations: [ BriebugListComponent ],
       imports: [
         RouterTestingModule,
         StoreModule.forRoot(fromRoot.appReducer)
@@ -21,7 +21,7 @@ describe('EntityListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EntityListComponent);
+    fixture = TestBed.createComponent(BriebugListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

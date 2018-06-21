@@ -3,39 +3,39 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Entity } from '@state/entity/entity.model';
+import { Briebug } from '@state/entity/entity.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EntityService {
+export class BriebugService {
   BASE_URL = 'api/';
 
   constructor(private httpClient: HttpClient) {}
 
-  create(entity: Entity): Observable<Entity> {
-    return this.httpClient.post<Entity>(`${this.BASE_URL}entities`, {
-      ...entity,
+  create(briebug: Briebug): Observable<Briebug> {
+    return this.httpClient.post<Briebug>(`${this.BASE_URL}entities`, {
+      ...briebug,
       // We clear out ID to indicate that this should be a new entry:
       id: null
     });
   }
 
-  search(): Observable<Array<Entity>> {
+  search(): Observable<Array<Briebug>> {
     // TODO: get based on state.paging (filter, sorting, page, limit)
-    return this.httpClient.get<Array<Entity>>(`${this.BASE_URL}entities`);
+    return this.httpClient.get<Array<Briebug>>(`${this.BASE_URL}entities`);
   }
 
-  getById(id: number): Observable<Entity> {
-    return this.httpClient.get<Entity>(`${this.BASE_URL}entities/${id}`);
+  getById(id: number): Observable<Briebug> {
+    return this.httpClient.get<Briebug>(`${this.BASE_URL}entities/${id}`);
   }
 
-  update(entity: Entity): Observable<Entity> {
+  update(briebug: Briebug): Observable<Briebug> {
     return this.httpClient
-      .put<Entity>(`${this.BASE_URL}entities/${entity.id}`, entity)
+      .put<Briebug>(`${this.BASE_URL}entities/${briebug.id}`, briebug)
       // The following pipe can be removed if your backend service returns the
       // edited value:
-      .pipe(switchMap(() => of(entity)));
+      .pipe(switchMap(() => of(briebug)));
   }
 
   deleteById(id: number): Observable<void> {

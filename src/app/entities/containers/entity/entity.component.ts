@@ -11,46 +11,48 @@ import {
   shareReplay
 } from 'rxjs/operators';
 
-import { getLoading, getSelectedEntity, getError } from '@state/entity';
-import { Entity } from '@state/entity/entity.model';
+import { getLoading, getSelectedBriebug, getError } from '@state/entity';
+import { Briebug } from '@state/entity/entity.model';
 import {
-  LoadEntityById,
-  InsertEntity,
-  UpdateEntity,
-  SelectEntityById
+  LoadBriebugById,
+  InsertBriebug,
+  UpdateBriebug,
+  SelectBriebugById
 } from '@state/entity/entity.actions';
-import { State } from '@state/entity/entity.reducer';
+import { BriebugState } from '@state/entity/entity.reducer';
 
 @Component({
   templateUrl: './entity.component.html',
   styleUrls: ['./entity.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EntityComponent implements OnInit {
-  entity$: Observable<Entity>;
-  isLoading$: Observable<Boolean>;
-  valid: Boolean;
-  showFormErrors: Boolean;
-  entityEdits: Entity;
+export class BriebugComponent implements OnInit {
+  briebug$: Observable<Briebug>;
+  briebugEdits: Briebug;
   errorMessage$: Observable<String>;
+  isLoading$: Observable<Boolean>;
+  showFormErrors: Boolean;
+  valid: Boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private store: Store<State>
+    private store: Store<BriebugState>
   ) {}
 
   ngOnInit() {
-    this.entity$ = this.activatedRoute.paramMap.pipe(
+    this.briebug$ = this.activatedRoute.paramMap.pipe(
       filter((params) =>
         params.has('id') || this.activatedRoute.routeConfig.path === 'add'
       ),
       map((params) => params.get('id')),
       tap((id) => {
-        const EntityAction = id ? LoadEntityById : SelectEntityById;
-        this.store.dispatch(new EntityAction({ id: +id || null }));
+        const BriebugAction = id ? LoadBriebugById : SelectBriebugById;
+        this.store.dispatch(new BriebugAction({ id: +id || null }));
       }),
-      switchMap(() => this.store.pipe(select(getSelectedEntity))),
-      map((entity) => ({ ...entity }))
+      switchMap(() => this.store.pipe(select(getSelectedBriebug))),
+      map((briebug) => {
+        return { ...briebug };
+      })
     );
 
     // The following shareReplay calls allow us to use the async pipe multiple
@@ -69,8 +71,8 @@ export class EntityComponent implements OnInit {
     this.showFormErrors = false;
   }
 
-  onEntityChange({ entity, valid }: { entity: Entity; valid: Boolean }) {
-    this.entityEdits = entity;
+  onBriebugChanged({ briebug, valid }: { briebug: Briebug; valid: Boolean }) {
+    this.briebugEdits = briebug;
     this.valid = valid;
   }
 
@@ -81,7 +83,7 @@ export class EntityComponent implements OnInit {
       return;
     }
 
-    const EntityAction = this.entityEdits.id ? UpdateEntity : InsertEntity;
-    this.store.dispatch(new EntityAction({ entity: this.entityEdits }));
+    const BriebugAction = this.briebugEdits.id ? UpdateBriebug : InsertBriebug;
+    this.store.dispatch(new BriebugAction({ briebug: this.briebugEdits }));
   }
 }

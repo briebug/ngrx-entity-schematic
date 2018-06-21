@@ -1,10 +1,10 @@
 import { RouterReducerState } from '@ngrx/router-store';
 import { RouterStateUrl } from './state-utils';
-import { State as entityState } from './entity/entity.reducer';
+import { BriebugState } from './entity/entity.reducer';
 
 export interface AppState {
   router: RouterReducerState<RouterStateUrl>;
-  entity: entityState;
+  briebug: BriebugState;
 }
 
 export type State = AppState;

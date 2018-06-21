@@ -2,21 +2,21 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { EntitiesModule } from './entities.module';
-import { EntityListComponent } from './containers/entity-list/entity-list.component';
-import { EntityComponent } from './containers/entity/entity.component';
+import { BriebugListComponent } from './containers/entity-list/entity-list.component';
+import { BriebugComponent } from './containers/entity/entity.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: EntityListComponent
+    component: BriebugListComponent
   },
   {
     path: 'add',
-    component: EntityComponent
+    component: BriebugComponent
   },
   {
     path: ':id',
-    component: EntityComponent
+    component: BriebugComponent
   }
 ];
 

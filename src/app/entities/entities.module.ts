@@ -3,12 +3,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { EntityComponent } from './containers/entity/entity.component';
-import { EntityListComponent } from './containers/entity-list/entity-list.component';
-import { EntityFormComponent } from './components/entity-form/entity-form.component';
+import { BriebugComponent } from './containers/entity/entity.component';
+import { BriebugListComponent } from './containers/entity-list/entity-list.component';
+import { BriebugFormComponent } from './components/entity-form/entity-form.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  declarations: [EntityListComponent, EntityComponent, EntityFormComponent]
+  declarations: [BriebugListComponent, BriebugComponent, BriebugFormComponent]
 })
 export class EntitiesModule {}
