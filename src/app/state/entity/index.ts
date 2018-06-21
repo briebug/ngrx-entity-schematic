@@ -34,7 +34,7 @@ export const getError = createSelector(
   fromBriebugState.getError
 );
 
-export const getPaging = createSelector(
+export const getQuery = createSelector(
   getBriebugState,
-  fromBriebugState.getPaging
+  fromBriebugState.getQuery
 );

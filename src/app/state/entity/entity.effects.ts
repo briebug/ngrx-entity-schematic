@@ -29,9 +29,7 @@ import {
   DeleteBriebugById,
   DeleteBriebugByIdSuccess,
   DeleteBriebugByIdFail,
-  SetBriebugPaging,
-  SetBriebugFilter,
-  SetBriebugSorting,
+  SetSearchQuery,
   SelectBriebugById
 } from './entity.actions';
 import { Briebug } from './entity.model';
@@ -257,32 +255,10 @@ export class BriebugEffects {
     dispatch: false
   })
   paging: Observable<Action> = this.actions$
-    .ofType<SetBriebugPaging>(BriebugActionTypes.SetBriebugPaging)
+    .ofType<SetSearchQuery>(BriebugActionTypes.SetSearchQuery)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.limit & action.payload.page
-      })
-    );
-
-  @Effect({
-    dispatch: false
-  })
-  filter: Observable<Action> = this.actions$
-    .ofType<SetBriebugFilter>(BriebugActionTypes.SetBriebugFilter)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.filter
-      })
-    );
-
-  @Effect({
-    dispatch: false
-  })
-  sorting: Observable<Action> = this.actions$
-    .ofType<SetBriebugSorting>(BriebugActionTypes.SetBriebugSorting)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.sorting
       })
     );
 
