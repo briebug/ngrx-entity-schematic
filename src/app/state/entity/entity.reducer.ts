@@ -1,8 +1,8 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Entity } from './entity.model';
-import { EntityActions, EntityActionTypes } from './entity.actions';
+import { Briebug } from './entity.model';
+import { BriebugActions, BriebugActionTypes } from './entity.actions';
 
-export interface State extends EntityState<Entity> {
+export interface BriebugState extends EntityState<Briebug> {
   // additional entities state properties
   selectedId: number;
   loading: boolean;
@@ -15,10 +15,10 @@ export interface State extends EntityState<Entity> {
   };
 }
 
-export const adapter: EntityAdapter<Entity> = createEntityAdapter<Entity>();
+export const adapter: EntityAdapter<Briebug> = createEntityAdapter<Briebug>();
 
-export const initialState: State = adapter.getInitialState({
-  // additional entity state properties
+export const initialState: BriebugState = adapter.getInitialState({
+  // additional briebug state properties
   selectedId: null,
   loading: false,
   error: '',
@@ -30,93 +30,93 @@ export const initialState: State = adapter.getInitialState({
   }
 });
 
-export function reducer(state = initialState, action: EntityActions): State {
+export function briebugReducer(state = initialState, action: BriebugActions): BriebugState {
   switch (action.type) {
-    case EntityActionTypes.InsertEntity:
+    case BriebugActionTypes.InsertBriebug:
       return {
         ...state,
         loading: true,
         error: ''
       };
 
-    case EntityActionTypes.InsertEntitySuccess:
+    case BriebugActionTypes.InsertBriebugSuccess:
       return {
         ...adapter.addOne(action.payload.result, state),
         loading: false
       };
 
-    case EntityActionTypes.InsertEntityFail:
+    case BriebugActionTypes.InsertBriebugFail:
       return {
         ...state,
         loading: false,
-        error: 'Entity insert failed: ' + action.payload.error
+        error: 'Briebug insert failed: ' + action.payload.error
       };
 
-    case EntityActionTypes.SearchAllEntityEntities:
+    case BriebugActionTypes.SearchAllBriebugEntities:
       return {
         ...adapter.removeAll(state),
         loading: true,
         error: ''
       };
 
-    case EntityActionTypes.LoadEntityById:
-      return {
-        ...adapter.removeAll(state),
-        selectedId: action.payload.id,
-        loading: true,
-        error: ''
-      };
-
-    case EntityActionTypes.SearchAllEntityEntitiesSuccess:
+    case BriebugActionTypes.SearchAllBriebugEntitiesSuccess:
       return {
         ...adapter.addAll(action.payload.result, state),
         loading: false,
         error: ''
       };
 
-    case EntityActionTypes.SearchAllEntityEntitiesFail:
+    case BriebugActionTypes.SearchAllBriebugEntitiesFail:
       return {
         ...state,
         loading: false,
-        error: 'Entity search failed: ' + action.payload.error
+        error: 'Briebug search failed: ' + action.payload.error
       };
 
-    case EntityActionTypes.LoadEntityByIdSuccess:
+    case BriebugActionTypes.LoadBriebugById:
+      return {
+        ...adapter.removeAll(state),
+        selectedId: action.payload.id,
+        loading: true,
+        error: ''
+      };
+
+    case BriebugActionTypes.LoadBriebugByIdSuccess:
       return {
         ...adapter.addOne(action.payload.result, state),
         loading: false,
         error: ''
       };
 
-    case EntityActionTypes.LoadEntityByIdFail:
+    case BriebugActionTypes.LoadBriebugByIdFail:
       return {
         ...state,
         loading: false,
-        error: 'Entity load failed: ' + action.payload.error
+        error: 'Briebug load failed: ' + action.payload.error
       };
 
-    case EntityActionTypes.UpdateEntity:
+    case BriebugActionTypes.UpdateBriebug:
       return {
         ...state,
         loading: true,
         error: ''
       };
 
-    case EntityActionTypes.UpdateEntitySuccess:
+    case BriebugActionTypes.UpdateBriebugSuccess:
       return {
         ...adapter.updateOne(action.payload.update, state),
         loading: false,
         error: ''
       };
 
-    case EntityActionTypes.UpdateEntityFail:
+    case BriebugActionTypes.UpdateBriebugFail:
       return {
         ...state,
         loading: false,
-        error: 'Entity update failed: ' + action.payload.error
+        error: 'Briebug update failed: ' + action.payload.error
       };
 
-    case EntityActionTypes.DeleteEntityById:
+    case BriebugActionTypes.DeleteBriebugById:
       return {
         ...state,
         selectedId: action.payload.id,
@@ -124,23 +124,23 @@ export function reducer(state = initialState, action: EntityActions): State {
         error: ''
       };
 
-    case EntityActionTypes.DeleteEntityByIdSuccess:
+    case BriebugActionTypes.DeleteBriebugByIdSuccess:
       return {
         ...adapter.removeOne(action.payload.result.id, state),
         loading: false,
         error: ''
       };
 
-    case EntityActionTypes.DeleteEntityByIdFail:
+    case BriebugActionTypes.DeleteBriebugByIdFail:
       return {
         ...state,
         loading: false,
-        error: 'Entity delete failed: ' + action.payload.error
+        error: 'Briebug delete failed: ' + action.payload.error
       };
 
-    case EntityActionTypes.SetEntityPaging:
-    case EntityActionTypes.SetEntityFilter:
-    case EntityActionTypes.SetEntitySorting:
+    case BriebugActionTypes.SetBriebugPaging:
+    case BriebugActionTypes.SetBriebugFilter:
+    case BriebugActionTypes.SetBriebugSorting:
       return {
         ...state,
         paging: {
@@ -149,7 +149,7 @@ export function reducer(state = initialState, action: EntityActions): State {
         }
       };
 
-    case EntityActionTypes.SelectEntityById:
+    case BriebugActionTypes.SelectBriebugById:
       return {
         ...state,
         selectedId: action.payload.id,
@@ -161,7 +161,7 @@ export function reducer(state = initialState, action: EntityActions): State {
   }
 }
 
-export const getSelectedId = (state: State) => state.selectedId;
-export const getLoading = (state: State) => state.loading;
-export const getError = (state: State) => state.error;
-export const getPaging = (state: State) => state.paging;
+export const getSelectedId = (state: BriebugState) => state.selectedId;
+export const getLoading = (state: BriebugState) => state.loading;
+export const getError = (state: BriebugState) => state.error;
+export const getPaging = (state: BriebugState) => state.paging;

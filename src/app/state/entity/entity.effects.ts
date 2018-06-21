@@ -13,43 +13,43 @@ import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 
 import {
-  EntityActionTypes,
-  InsertEntity,
-  InsertEntitySuccess,
-  InsertEntityFail,
-  SearchAllEntityEntities,
-  SearchAllEntityEntitiesSuccess,
-  SearchAllEntityEntitiesFail,
-  LoadEntityById,
-  LoadEntityByIdSuccess,
-  LoadEntityByIdFail,
-  UpdateEntity,
-  UpdateEntitySuccess,
-  UpdateEntityFail,
-  DeleteEntityById,
-  DeleteEntityByIdSuccess,
-  DeleteEntityByIdFail,
-  SetEntityPaging,
-  SetEntityFilter,
-  SetEntitySorting,
-  SelectEntityById
+  BriebugActionTypes,
+  InsertBriebug,
+  InsertBriebugSuccess,
+  InsertBriebugFail,
+  SearchAllBriebugEntities,
+  SearchAllBriebugEntitiesSuccess,
+  SearchAllBriebugEntitiesFail,
+  LoadBriebugById,
+  LoadBriebugByIdSuccess,
+  LoadBriebugByIdFail,
+  UpdateBriebug,
+  UpdateBriebugSuccess,
+  UpdateBriebugFail,
+  DeleteBriebugById,
+  DeleteBriebugByIdSuccess,
+  DeleteBriebugByIdFail,
+  SetBriebugPaging,
+  SetBriebugFilter,
+  SetBriebugSorting,
+  SelectBriebugById
 } from './entity.actions';
-import { Entity } from './entity.model';
-import { EntityService } from '@core/services/entity.service';
+import { Briebug } from './entity.model';
+import { BriebugService } from '@core/services/entity.service';
 
 @Injectable()
-export class EntityEffects {
+export class BriebugEffects {
   // ========================================= INSERT
 
   @Effect()
   insert: Observable<Action> = this.actions$
-    .ofType<InsertEntity>(EntityActionTypes.InsertEntity)
+    .ofType<InsertBriebug>(BriebugActionTypes.InsertBriebug)
     .pipe(
       exhaustMap((action) =>
-        this.service.create(action.payload.entity).pipe(
-          map((entity: Entity) => new InsertEntitySuccess({ result: entity })),
+        this.service.create(action.payload.briebug).pipe(
+          map((briebug: Briebug) => new InsertBriebugSuccess({ result: briebug })),
           catchError(({ message }) =>
-            of(new InsertEntityFail({ error: message }))
+            of(new InsertBriebugFail({ error: message }))
           )
         )
       )
@@ -60,7 +60,7 @@ export class EntityEffects {
     dispatch: false
   })
   insertSuccess: Observable<Action> = this.actions$
-    .ofType<InsertEntitySuccess>(EntityActionTypes.InsertEntitySuccess)
+    .ofType<InsertBriebugSuccess>(BriebugActionTypes.InsertBriebugSuccess)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.result
@@ -72,7 +72,7 @@ export class EntityEffects {
     dispatch: false
   })
   insertFail: Observable<Action> = this.actions$
-    .ofType<InsertEntityFail>(EntityActionTypes.InsertEntityFail)
+    .ofType<InsertBriebugFail>(BriebugActionTypes.InsertBriebugFail)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.error
@@ -83,17 +83,17 @@ export class EntityEffects {
 
   @Effect()
   search: Observable<Action> = this.actions$
-    .ofType<SearchAllEntityEntities>(EntityActionTypes.SearchAllEntityEntities)
+    .ofType<SearchAllBriebugEntities>(BriebugActionTypes.SearchAllBriebugEntities)
     .pipe(
       // Use the state's filtering and pagination values in this search call
       // here if desired:
       exhaustMap((action) =>
         this.service.search().pipe(
-          map((entities: Entity[]) =>
-            new SearchAllEntityEntitiesSuccess({ result: entities })
+          map((entities: Array<Briebug>) =>
+            new SearchAllBriebugEntitiesSuccess({ result: entities })
           ),
           catchError(({ message }) =>
-            of(new SearchAllEntityEntitiesFail({ error: message }))
+            of(new SearchAllBriebugEntitiesFail({ error: message }))
           )
         )
       )
@@ -104,7 +104,7 @@ export class EntityEffects {
     dispatch: false
   })
   searchSuccess: Observable<Action> = this.actions$
-    .ofType<SearchAllEntityEntitiesSuccess>(EntityActionTypes.SearchAllEntityEntitiesSuccess)
+    .ofType<SearchAllBriebugEntitiesSuccess>(BriebugActionTypes.SearchAllBriebugEntitiesSuccess)
     .pipe(
       tap((entities) => {
         // do stuff with action.payload.result
@@ -116,7 +116,7 @@ export class EntityEffects {
     dispatch: false
   })
   searchFail: Observable<Action> = this.actions$
-    .ofType<SearchAllEntityEntitiesFail>(EntityActionTypes.SearchAllEntityEntitiesFail)
+    .ofType<SearchAllBriebugEntitiesFail>(BriebugActionTypes.SearchAllBriebugEntitiesFail)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.error
@@ -127,14 +127,14 @@ export class EntityEffects {
 
   @Effect()
   loadById: Observable<Action> = this.actions$
-    .ofType<LoadEntityById>(EntityActionTypes.LoadEntityById)
+    .ofType<LoadBriebugById>(BriebugActionTypes.LoadBriebugById)
     .pipe(
       switchMap((action) =>
         this.service.getById(action.payload.id).pipe(
-          map((entity: Entity) => new LoadEntityByIdSuccess({ result: entity })
+          map((briebug: Briebug) => new LoadBriebugByIdSuccess({ result: briebug })
           ),
           catchError(({ message }) =>
-            of(new LoadEntityByIdFail({ error: message }))
+            of(new LoadBriebugByIdFail({ error: message }))
           )
         )
       )
@@ -145,7 +145,7 @@ export class EntityEffects {
     dispatch: false
   })
   loadByIdSuccess: Observable<Action> = this.actions$
-    .ofType<LoadEntityByIdSuccess>(EntityActionTypes.LoadEntityByIdSuccess)
+    .ofType<LoadBriebugByIdSuccess>(BriebugActionTypes.LoadBriebugByIdSuccess)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.result
@@ -157,7 +157,7 @@ export class EntityEffects {
     dispatch: false
   })
   loadByIdFail: Observable<Action> = this.actions$
-    .ofType<LoadEntityByIdFail>(EntityActionTypes.LoadEntityByIdFail)
+    .ofType<LoadBriebugByIdFail>(BriebugActionTypes.LoadBriebugByIdFail)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.error
@@ -168,20 +168,20 @@ export class EntityEffects {
 
   @Effect()
   update: Observable<Action> = this.actions$
-    .ofType<UpdateEntity>(EntityActionTypes.UpdateEntity)
+    .ofType<UpdateBriebug>(BriebugActionTypes.UpdateBriebug)
     .pipe(
       exhaustMap((action) =>
-        this.service.update(action.payload.entity).pipe(
-          map((entity: Entity) =>
-            new UpdateEntitySuccess({
+        this.service.update(action.payload.briebug).pipe(
+          map((briebug: Briebug) =>
+            new UpdateBriebugSuccess({
               update: {
-                id: entity.id,
-                changes: entity
-              } as Update<Entity>
+                id: briebug.id,
+                changes: briebug
+              } as Update<Briebug>
             })
           ),
           catchError(({ message }) =>
-            of(new UpdateEntityFail({ error: message }))
+            of(new UpdateBriebugFail({ error: message }))
           )
         )
       )
@@ -192,7 +192,7 @@ export class EntityEffects {
     dispatch: false
   })
   updateSuccess: Observable<Action> = this.actions$
-    .ofType<UpdateEntitySuccess>(EntityActionTypes.UpdateEntitySuccess)
+    .ofType<UpdateBriebugSuccess>(BriebugActionTypes.UpdateBriebugSuccess)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.result
@@ -204,7 +204,7 @@ export class EntityEffects {
     dispatch: false
   })
   updateFail: Observable<Action> = this.actions$
-    .ofType<UpdateEntityFail>(EntityActionTypes.UpdateEntityFail)
+    .ofType<UpdateBriebugFail>(BriebugActionTypes.UpdateBriebugFail)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.error
@@ -215,13 +215,13 @@ export class EntityEffects {
 
   @Effect()
   delete: Observable<Action> = this.actions$
-    .ofType<DeleteEntityById>(EntityActionTypes.DeleteEntityById)
+    .ofType<DeleteBriebugById>(BriebugActionTypes.DeleteBriebugById)
     .pipe(
       exhaustMap((action) =>
         this.service.deleteById(action.payload.id).pipe(
-          map((entity: Entity) => new DeleteEntityByIdSuccess({ result: entity })),
+          map((briebug: Briebug) => new DeleteBriebugByIdSuccess({ result: briebug })),
           catchError(({ message }) =>
-            of(new DeleteEntityByIdFail({ error: message }))
+            of(new DeleteBriebugByIdFail({ error: message }))
           )
         )
       )
@@ -232,7 +232,7 @@ export class EntityEffects {
     dispatch: false
   })
   deleteSuccess: Observable<Action> = this.actions$
-    .ofType<UpdateEntitySuccess>(EntityActionTypes.UpdateEntitySuccess)
+    .ofType<UpdateBriebugSuccess>(BriebugActionTypes.UpdateBriebugSuccess)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.result
@@ -244,7 +244,7 @@ export class EntityEffects {
     dispatch: false
   })
   deleteFail: Observable<Action> = this.actions$
-    .ofType<DeleteEntityByIdFail>(EntityActionTypes.DeleteEntityByIdFail)
+    .ofType<DeleteBriebugByIdFail>(BriebugActionTypes.DeleteBriebugByIdFail)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.error
@@ -257,7 +257,7 @@ export class EntityEffects {
     dispatch: false
   })
   paging: Observable<Action> = this.actions$
-    .ofType<SetEntityPaging>(EntityActionTypes.SetEntityPaging)
+    .ofType<SetBriebugPaging>(BriebugActionTypes.SetBriebugPaging)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.limit & action.payload.page
@@ -268,7 +268,7 @@ export class EntityEffects {
     dispatch: false
   })
   filter: Observable<Action> = this.actions$
-    .ofType<SetEntityFilter>(EntityActionTypes.SetEntityFilter)
+    .ofType<SetBriebugFilter>(BriebugActionTypes.SetBriebugFilter)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.filter
@@ -279,7 +279,7 @@ export class EntityEffects {
     dispatch: false
   })
   sorting: Observable<Action> = this.actions$
-    .ofType<SetEntitySorting>(EntityActionTypes.SetEntitySorting)
+    .ofType<SetBriebugSorting>(BriebugActionTypes.SetBriebugSorting)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.sorting
@@ -292,12 +292,12 @@ export class EntityEffects {
     dispatch: false
   })
   selectedId: Observable<Action> = this.actions$
-    .ofType<SelectEntityById>(EntityActionTypes.SelectEntityById)
+    .ofType<SelectBriebugById>(BriebugActionTypes.SelectBriebugById)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.id
       })
     );
 
-  constructor(private actions$: Actions, private service: EntityService) {}
+  constructor(private actions$: Actions, private service: BriebugService) {}
 }

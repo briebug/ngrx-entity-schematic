@@ -1,23 +1,33 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+  OnDestroy,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
-import { Entity } from '@state/entity/entity.model';
+import { Briebug } from '@state/entity/entity.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil, skip, debounceTime } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-entity-form',
+  selector: 'app-briebug-form',
   templateUrl: './entity-form.component.html',
-  styleUrls: ['./entity-form.component.css']
+  styleUrls: ['./entity-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EntityFormComponent implements OnChanges, OnDestroy {
+export class BriebugFormComponent implements OnChanges, OnDestroy {
   formGroup: FormGroup;
 
-  @Input() entity: Entity;
+  @Input() briebug: Briebug;
   @Input() disableFields: Boolean;
   @Input() showErrors: Boolean;
-  @Output() submit = new EventEmitter<Entity>();
-  @Output() entityChange = new EventEmitter<{ entity: Entity; valid: boolean }>();
+  @Output() submit = new EventEmitter<Briebug>();
+  @Output() briebugChanged = new EventEmitter<{ briebug: Briebug; valid: boolean }>();
 
   private destroyed$ = new Subject<void>();
 
@@ -26,8 +36,8 @@ export class EntityFormComponent implements OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.entity && changes.entity.currentValue) {
-      this.formGroup.patchValue(this.entity);
+    if (changes.briebug && changes.briebug.currentValue) {
+      this.formGroup.patchValue(this.briebug);
     }
   }
 
@@ -51,8 +61,8 @@ export class EntityFormComponent implements OnChanges, OnDestroy {
         debounceTime(500)
       )
       .subscribe((value) => {
-        this.entityChange.emit({
-          entity: value,
+        this.briebugChanged.emit({
+          briebug: value,
           valid: this.formGroup.valid
         });
       });

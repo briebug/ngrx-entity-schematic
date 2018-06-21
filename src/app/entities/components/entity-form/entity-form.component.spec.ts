@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EntityFormComponent } from './entity-form.component';
+import { BriebugFormComponent } from './entity-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-describe('EntityFormComponent', () => {
-  let component: EntityFormComponent;
-  let fixture: ComponentFixture<EntityFormComponent>;
+describe('BreibugFormComponent', () => {
+  let component: BriebugFormComponent;
+  let fixture: ComponentFixture<BriebugFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ ReactiveFormsModule ],
-      declarations: [ EntityFormComponent ]
+      declarations: [ BriebugFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EntityFormComponent);
+    fixture = TestBed.createComponent(BriebugFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

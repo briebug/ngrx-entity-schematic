@@ -2,12 +2,12 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { EntityService } from './services/entity.service';
+import { BriebugService } from './services/entity.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
   declarations: [],
-  providers: [EntityService]
+  providers: [BriebugService]
 })
 export class CoreModule {
   constructor(
