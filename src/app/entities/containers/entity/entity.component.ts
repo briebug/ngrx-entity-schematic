@@ -1,7 +1,7 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { tap, filter, map, switchMap, startWith } from 'rxjs/operators';
 

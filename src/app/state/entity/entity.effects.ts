@@ -6,11 +6,10 @@ import {
   map,
   catchError,
   tap,
-  switchMap,
-  withLatestFrom
+  switchMap
 } from 'rxjs/operators';
 import { Actions, Effect } from '@ngrx/effects';
-import { Action, Store, select } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 
 import {
