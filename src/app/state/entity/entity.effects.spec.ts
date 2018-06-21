@@ -6,27 +6,27 @@ import { Observable, empty } from 'rxjs';
 
 import {
   EntityActionTypes,
-  EntityInsert,
-  EntityInsertSuccess,
-  EntityInsertFail,
-  EntitySearch,
-  EntitySearchSuccess,
-  EntitySearchFail,
-  EntityLoadById,
-  EntityLoadByIdSuccess,
-  EntityLoadByIdFail,
-  EntityUpdate,
-  EntityUpdateSuccess,
-  EntityUpdateFail,
-  EntityDeleteById,
-  EntityDeleteSuccess,
-  EntityDeleteFail,
-  EntitySetPaging,
-  EntitySetFilter,
-  EntitySetSorting,
-  EntitySelectById
+  InsertEntity,
+  InsertEntitySuccess,
+  InsertEntityFail,
+  SearchAllEntityEntities,
+  SearchAllEntityEntitiesSuccess,
+  SearchAllEntityEntitiesFail,
+  LoadEntityById,
+  LoadEntityByIdSuccess,
+  LoadEntityByIdFail,
+  UpdateEntity,
+  UpdateEntitySuccess,
+  UpdateEntityFail,
+  DeleteEntityById,
+  DeleteEntityByIdSuccess,
+  DeleteEntityByIdFail,
+  SetEntityPaging,
+  SetEntityFilter,
+  SetEntitySorting,
+  SelectEntityById
 } from './entity.actions';
-import { generateEntity } from './entity.model';
+import { generateEntity, generateEntityArray } from './entity.model';
 import { EntityService } from '@core/services/entity.service';
 import { EntityEffects } from '@state/entity/entity.effects';
 
@@ -75,18 +75,54 @@ describe('EntityEffects', () => {
   });
 
   describe('insert', () => {
+    it('should return InsertEntitySuccess action with entity on success', () => {
+      const entity = generateEntity();
+      const insertAction = new InsertEntity({ entity: entity });
+      const successAction = new InsertEntitySuccess({ result: entity });
 
-      it('should return InsertSuccess action with entity on success', () => {
-        const entity = generateEntity();
-        const insertAction = new EntityInsert({ entity: entity });
-        const successAction = new EntityInsertSuccess({ result: entity });
+      actions = hot('a-', { a: insertAction });
+      service.create.and.returnValue(cold('-e|', { e: entity }));
+      const expected = cold('-s', { s: successAction });
 
-        actions = hot('i-', { i: insertAction });
-        service.create.and.returnValue(cold('-e|', { e: entity }));
-        const expected = cold('-s', { s: successAction });
+      expect(effects.insert).toBeObservable(expected);
+    });
 
-        expect(effects.insert).toBeObservable(expected);
-      });
+    it('should return InsertEntityFail with error object on failure', () => {
+      const entity = generateEntity();
+      const insertAction = new InsertEntity({ entity: entity });
+      const failAction = new InsertEntityFail({ error: 'fail' });
+
+      actions = hot('i-', { i: insertAction });
+      service.create.and.returnValue(cold('-#|', {}, { message: 'fail'}));
+      const expected = cold('-f', { f: failAction });
+
+      expect(effects.insert).toBeObservable(expected);
+    });
+  });
+
+  describe('search', () => {
+    it('should return SearchAllEntityEntitiesSuccess action with entities on success', () => {
+      const entities = generateEntityArray();
+      const searchAction = new SearchAllEntityEntities();
+      const successAction = new SearchAllEntityEntitiesSuccess({ result: entities });
+
+      actions = hot('a-', { a: searchAction });
+      service.search.and.returnValue(cold('-e|', { e: entities }));
+      const expected = cold('-s', { s: successAction });
+
+      expect(effects.search).toBeObservable(expected);
+    });
+
+    it('should return SearchAllEntityEntitiesFail with error object on failure', () => {
+      const searchAction = new SearchAllEntityEntities();
+      const failAction = new SearchAllEntityEntitiesFail({ error: 'fail' });
+
+      actions = hot('a-', { a: searchAction });
+      service.search.and.returnValue(cold('-#|', {}, { message: 'fail'}));
+      const expected = cold('-f', { f: failAction });
+
+      expect(effects.search).toBeObservable(expected);
+    });
   });
 
 });
