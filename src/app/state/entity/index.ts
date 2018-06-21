@@ -1,39 +1,40 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
-import * as fromEntity from './entity.reducer';
-import { State as EntityState } from './entity.reducer';
+import * as fromBriebugState from './entity.reducer';
+import { BriebugState } from './entity.reducer';
 
-export const getEntityState = createFeatureSelector<EntityState>('entity');
+export const getBriebugState = createFeatureSelector<BriebugState>('briebug');
 
 export const {
-  selectIds: getEntityIds,
-  selectEntities: getEntityEntities,
-  selectAll: getAllEntityEntities,
-  selectTotal: getTotalEntityEntities
-} = fromEntity.adapter.getSelectors(getEntityState);
+  selectIds: getAllBriebugIds,
+  selectEntities: getAllBriebugEntitiesAsMap,
+  selectAll: getAllBriebugEntitiesAsArray,
+  selectTotal: getTotalBriebugEntities
+} = fromBriebugState.adapter.getSelectors(getBriebugState);
 
-export const getSelectedEntityId = createSelector(
-  getEntityState,
-  fromEntity.getSelectedId
+export const getSelectedBriebugId = createSelector(
+  getBriebugState,
+  fromBriebugState.getSelectedId
 );
 
-export const getSelectedEntity = createSelector(
-  getSelectedEntityId,
-  getEntityEntities,
-  (selectedEntityId, entities) => selectedEntityId && entities[selectedEntityId]
+export const getSelectedBriebug = createSelector(
+  getSelectedBriebugId,
+  getAllBriebugEntitiesAsMap,
+  (selectedBriebugId, briebugEntities) =>
+    selectedBriebugId && briebugEntities[selectedBriebugId]
 );
 
 export const getLoading = createSelector(
-  getEntityState,
-  fromEntity.getLoading
+  getBriebugState,
+  fromBriebugState.getLoading
 );
 
 export const getError = createSelector(
-  getEntityState,
-  fromEntity.getError
+  getBriebugState,
+  fromBriebugState.getError
 );
 
 export const getPaging = createSelector(
-  getEntityState,
-  fromEntity.getPaging
+  getBriebugState,
+  fromBriebugState.getPaging
 );

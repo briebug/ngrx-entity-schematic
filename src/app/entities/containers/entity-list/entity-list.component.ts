@@ -4,26 +4,26 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
-import { getAllEntityEntities, getLoading, getError } from '@state/entity';
-import { State } from '@state/entity/entity.reducer';
-import { SearchAllEntityEntities } from '@state/entity/entity.actions';
-import { Entity } from '@state/entity/entity.model';
+import { getAllBriebugEntitiesAsArray, getLoading, getError } from '@state/entity';
+import { BriebugState } from '@state/entity/entity.reducer';
+import { SearchAllBriebugEntities } from '@state/entity/entity.actions';
+import { Briebug } from '@state/entity/entity.model';
 
 @Component({
   templateUrl: './entity-list.component.html',
   styleUrls: ['./entity-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EntityListComponent implements OnInit {
-  entities$: Observable<Entity[]>;
+export class BriebugListComponent implements OnInit {
+  briebugEntities$: Observable<Array<Briebug>>;
   isLoading$: Observable<Boolean>;
   errorMessage$: Observable<String>;
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<BriebugState>) {}
 
   ngOnInit() {
-    this.store.dispatch(new SearchAllEntityEntities());
-    this.entities$ = this.store.pipe(select(getAllEntityEntities));
+    this.store.dispatch(new SearchAllBriebugEntities());
+    this.briebugEntities$ = this.store.pipe(select(getAllBriebugEntitiesAsArray));
     this.isLoading$ = this.store.pipe(select(getLoading));
     this.errorMessage$ = this.store.pipe(
       select(getError),

@@ -9,14 +9,14 @@ import { StoreModule } from '@ngrx/store';
 import { appMetaReducers, appReducer } from './app.reducer';
 import { CustomRouterStateSerializer } from './state-utils';
 import { environment } from '../../environments/environment';
-import { EntityEffects } from '@state/entity/entity.effects';
+import { BriebugEffects } from '@state/entity/entity.effects';
 
 @NgModule({
   imports: [
     CommonModule,
     StoreRouterConnectingModule,
     StoreModule.forRoot(appReducer, { metaReducers: appMetaReducers }),
-    EffectsModule.forRoot([EntityEffects]),
+    EffectsModule.forRoot([BriebugEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   declarations: []

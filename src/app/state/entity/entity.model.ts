@@ -1,4 +1,4 @@
-export interface Entity {
+export interface Briebug {
   id: number;
   name: string;
   description: string;
