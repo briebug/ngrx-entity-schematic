@@ -7,7 +7,8 @@
   <li *ngFor="let briebug of briebugEntities$ | async">
     <b>Name</b>: {{briebug.name}}<br>
     <b>Description</b>: {{briebug.description}}<br>
-    <a [routerLink]="['/entities', briebug.id]">(Edit)</a>
+    <button [routerLink]="['/entities', briebug.id]">Edit</button>&nbsp;
+    <button (click)="deleteBriebug(briebug.id)">Delete</button>
   </li>
 </ul>
 

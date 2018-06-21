@@ -106,7 +106,7 @@ export class DeleteBriebugById implements Action {
 
 export class DeleteBriebugByIdSuccess implements Action {
   readonly type = BriebugActionTypes.DeleteBriebugByIdSuccess;
-  constructor(public payload: { result: Briebug }) {}
+  constructor(public payload: { id: number }) {}
 }
 
 export class DeleteBriebugByIdFail implements Action {
