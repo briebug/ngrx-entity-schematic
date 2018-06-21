@@ -87,7 +87,7 @@ export class BriebugEffects {
     .pipe(
       // Use the state's filtering and pagination values in this search call
       // here if desired:
-      exhaustMap((action) =>
+      exhaustMap(() =>
         this.service.search().pipe(
           map((entities: Array<Briebug>) =>
             new SearchAllBriebugEntitiesSuccess({ result: entities })
