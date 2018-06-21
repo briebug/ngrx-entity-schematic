@@ -249,7 +249,7 @@ export class BriebugEffects {
       })
     );
 
-  // ========================================= PAGING
+  // ========================================= QUERY
 
   @Effect({
     dispatch: false
