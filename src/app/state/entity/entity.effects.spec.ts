@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Actions } from '@ngrx/effects';
 import { cold, hot } from 'jasmine-marbles';
-import { Observable, empty } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import {
   InsertBriebug,
@@ -19,11 +18,7 @@ import {
   UpdateBriebugFail,
   DeleteBriebugById,
   DeleteBriebugByIdSuccess,
-  DeleteBriebugByIdFail,
-  SetBriebugPaging,
-  SetBriebugFilter,
-  SetBriebugSorting,
-  SelectBriebugById
+  DeleteBriebugByIdFail
 } from './entity.actions';
 import { generateEntity, generateEntityArray } from './entity.model';
 import { BriebugService } from '@core/services/entity.service';
