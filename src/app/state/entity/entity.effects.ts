@@ -14,25 +14,25 @@ import { Update } from '@ngrx/entity';
 
 import {
   EntityActionTypes,
-  EntityInsert,
-  EntityInsertSuccess,
-  EntityInsertFail,
-  EntitySearch,
-  EntitySearchSuccess,
-  EntitySearchFail,
-  EntityLoadById,
-  EntityLoadByIdSuccess,
-  EntityLoadByIdFail,
-  EntityUpdate,
-  EntityUpdateSuccess,
-  EntityUpdateFail,
-  EntityDeleteById,
-  EntityDeleteSuccess,
-  EntityDeleteFail,
-  EntitySetPaging,
-  EntitySetFilter,
-  EntitySetSorting,
-  EntitySelectById
+  InsertEntity,
+  InsertEntitySuccess,
+  InsertEntityFail,
+  SearchAllEntityEntities,
+  SearchAllEntityEntitiesSuccess,
+  SearchAllEntityEntitiesFail,
+  LoadEntityById,
+  LoadEntityByIdSuccess,
+  LoadEntityByIdFail,
+  UpdateEntity,
+  UpdateEntitySuccess,
+  UpdateEntityFail,
+  DeleteEntityById,
+  DeleteEntityByIdSuccess,
+  DeleteEntityByIdFail,
+  SetEntityPaging,
+  SetEntityFilter,
+  SetEntitySorting,
+  SelectEntityById
 } from './entity.actions';
 import { Entity } from './entity.model';
 import { EntityService } from '@core/services/entity.service';
@@ -43,13 +43,13 @@ export class EntityEffects {
 
   @Effect()
   insert: Observable<Action> = this.actions$
-    .ofType<EntityInsert>(EntityActionTypes.EntityInsert)
+    .ofType<InsertEntity>(EntityActionTypes.InsertEntity)
     .pipe(
       exhaustMap((action) =>
         this.service.create(action.payload.entity).pipe(
-          map((entity: Entity) => new EntityInsertSuccess({ result: entity })),
+          map((entity: Entity) => new InsertEntitySuccess({ result: entity })),
           catchError(({ message }) =>
-            of(new EntityInsertFail({ error: message }))
+            of(new InsertEntityFail({ error: message }))
           )
         )
       )
@@ -60,7 +60,7 @@ export class EntityEffects {
     dispatch: false
   })
   insertSuccess: Observable<Action> = this.actions$
-    .ofType<EntityInsertSuccess>(EntityActionTypes.EntityInsertSuccess)
+    .ofType<InsertEntitySuccess>(EntityActionTypes.InsertEntitySuccess)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.result
@@ -72,7 +72,7 @@ export class EntityEffects {
     dispatch: false
   })
   insertFail: Observable<Action> = this.actions$
-    .ofType<EntityInsertFail>(EntityActionTypes.EntityInsertFail)
+    .ofType<InsertEntityFail>(EntityActionTypes.InsertEntityFail)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.error
@@ -83,17 +83,17 @@ export class EntityEffects {
 
   @Effect()
   search: Observable<Action> = this.actions$
-    .ofType<EntitySearch>(EntityActionTypes.EntitySearch)
+    .ofType<SearchAllEntityEntities>(EntityActionTypes.SearchAllEntityEntities)
     .pipe(
       // Use the state's filtering and pagination values in this search call
       // here if desired:
       exhaustMap((action) =>
         this.service.search().pipe(
           map((entities: Entity[]) =>
-            new EntitySearchSuccess({ result: entities })
+            new SearchAllEntityEntitiesSuccess({ result: entities })
           ),
           catchError(({ message }) =>
-            of(new EntitySearchFail({ error: message }))
+            of(new SearchAllEntityEntitiesFail({ error: message }))
           )
         )
       )
@@ -104,7 +104,7 @@ export class EntityEffects {
     dispatch: false
   })
   searchSuccess: Observable<Action> = this.actions$
-    .ofType<EntitySearchSuccess>(EntityActionTypes.EntitySearchSuccess)
+    .ofType<SearchAllEntityEntitiesSuccess>(EntityActionTypes.SearchAllEntityEntitiesSuccess)
     .pipe(
       tap((entities) => {
         // do stuff with action.payload.result
@@ -116,7 +116,7 @@ export class EntityEffects {
     dispatch: false
   })
   searchFail: Observable<Action> = this.actions$
-    .ofType<EntitySearchFail>(EntityActionTypes.EntitySearchFail)
+    .ofType<SearchAllEntityEntitiesFail>(EntityActionTypes.SearchAllEntityEntitiesFail)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.error
@@ -127,14 +127,14 @@ export class EntityEffects {
 
   @Effect()
   loadById: Observable<Action> = this.actions$
-    .ofType<EntityLoadById>(EntityActionTypes.EntityLoadById)
+    .ofType<LoadEntityById>(EntityActionTypes.LoadEntityById)
     .pipe(
       switchMap((action) =>
         this.service.getById(action.payload.id).pipe(
-          map((entity: Entity) => new EntityLoadByIdSuccess({ result: entity })
+          map((entity: Entity) => new LoadEntityByIdSuccess({ result: entity })
           ),
           catchError(({ message }) =>
-            of(new EntityLoadByIdFail({ error: message }))
+            of(new LoadEntityByIdFail({ error: message }))
           )
         )
       )
@@ -145,7 +145,7 @@ export class EntityEffects {
     dispatch: false
   })
   loadByIdSuccess: Observable<Action> = this.actions$
-    .ofType<EntityLoadByIdSuccess>(EntityActionTypes.EntityLoadByIdSuccess)
+    .ofType<LoadEntityByIdSuccess>(EntityActionTypes.LoadEntityByIdSuccess)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.result
@@ -157,7 +157,7 @@ export class EntityEffects {
     dispatch: false
   })
   loadByIdFail: Observable<Action> = this.actions$
-    .ofType<EntityLoadByIdFail>(EntityActionTypes.EntityLoadByIdFail)
+    .ofType<LoadEntityByIdFail>(EntityActionTypes.LoadEntityByIdFail)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.error
@@ -168,12 +168,12 @@ export class EntityEffects {
 
   @Effect()
   update: Observable<Action> = this.actions$
-    .ofType<EntityUpdate>(EntityActionTypes.EntityUpdate)
+    .ofType<UpdateEntity>(EntityActionTypes.UpdateEntity)
     .pipe(
       exhaustMap((action) =>
         this.service.update(action.payload.entity).pipe(
           map((entity: Entity) =>
-            new EntityUpdateSuccess({
+            new UpdateEntitySuccess({
               update: {
                 id: entity.id,
                 changes: entity
@@ -181,7 +181,7 @@ export class EntityEffects {
             })
           ),
           catchError(({ message }) =>
-            of(new EntityUpdateFail({ error: message }))
+            of(new UpdateEntityFail({ error: message }))
           )
         )
       )
@@ -192,7 +192,7 @@ export class EntityEffects {
     dispatch: false
   })
   updateSuccess: Observable<Action> = this.actions$
-    .ofType<EntityUpdateSuccess>(EntityActionTypes.EntityUpdateSuccess)
+    .ofType<UpdateEntitySuccess>(EntityActionTypes.UpdateEntitySuccess)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.result
@@ -204,7 +204,7 @@ export class EntityEffects {
     dispatch: false
   })
   updateFail: Observable<Action> = this.actions$
-    .ofType<EntityUpdateFail>(EntityActionTypes.EntityUpdateFail)
+    .ofType<UpdateEntityFail>(EntityActionTypes.UpdateEntityFail)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.error
@@ -215,13 +215,13 @@ export class EntityEffects {
 
   @Effect()
   delete: Observable<Action> = this.actions$
-    .ofType<EntityDeleteById>(EntityActionTypes.EntityDeleteById)
+    .ofType<DeleteEntityById>(EntityActionTypes.DeleteEntityById)
     .pipe(
       exhaustMap((action) =>
         this.service.deleteById(action.payload.id).pipe(
-          map((entity: Entity) => new EntityDeleteSuccess({ result: entity })),
+          map((entity: Entity) => new DeleteEntityByIdSuccess({ result: entity })),
           catchError(({ message }) =>
-            of(new EntityDeleteFail({ error: message }))
+            of(new DeleteEntityByIdFail({ error: message }))
           )
         )
       )
@@ -232,7 +232,7 @@ export class EntityEffects {
     dispatch: false
   })
   deleteSuccess: Observable<Action> = this.actions$
-    .ofType<EntityUpdateSuccess>(EntityActionTypes.EntityUpdateSuccess)
+    .ofType<UpdateEntitySuccess>(EntityActionTypes.UpdateEntitySuccess)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.result
@@ -244,7 +244,7 @@ export class EntityEffects {
     dispatch: false
   })
   deleteFail: Observable<Action> = this.actions$
-    .ofType<EntityDeleteFail>(EntityActionTypes.EntityDeleteFail)
+    .ofType<DeleteEntityByIdFail>(EntityActionTypes.DeleteEntityByIdFail)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.error
@@ -257,7 +257,7 @@ export class EntityEffects {
     dispatch: false
   })
   paging: Observable<Action> = this.actions$
-    .ofType<EntitySetPaging>(EntityActionTypes.EntitySetPaging)
+    .ofType<SetEntityPaging>(EntityActionTypes.SetEntityPaging)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.limit & action.payload.page
@@ -268,7 +268,7 @@ export class EntityEffects {
     dispatch: false
   })
   filter: Observable<Action> = this.actions$
-    .ofType<EntitySetFilter>(EntityActionTypes.EntitySetFilter)
+    .ofType<SetEntityFilter>(EntityActionTypes.SetEntityFilter)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.filter
@@ -279,7 +279,7 @@ export class EntityEffects {
     dispatch: false
   })
   sorting: Observable<Action> = this.actions$
-    .ofType<EntitySetSorting>(EntityActionTypes.EntitySetSorting)
+    .ofType<SetEntitySorting>(EntityActionTypes.SetEntitySorting)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.sorting
@@ -292,7 +292,7 @@ export class EntityEffects {
     dispatch: false
   })
   selectedId: Observable<Action> = this.actions$
-    .ofType<EntitySelectById>(EntityActionTypes.EntitySelectById)
+    .ofType<SelectEntityById>(EntityActionTypes.SelectEntityById)
     .pipe(
       tap((action) => {
         // do stuff with: action.payload.id

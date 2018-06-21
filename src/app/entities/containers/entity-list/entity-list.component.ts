@@ -4,9 +4,9 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
-import { getAllEntity, getLoading, getError } from '@state/entity';
+import { getAllEntityEntities, getLoading, getError } from '@state/entity';
 import { State } from '@state/entity/entity.reducer';
-import { EntitySearch } from '@state/entity/entity.actions';
+import { SearchAllEntityEntities } from '@state/entity/entity.actions';
 import { Entity } from '@state/entity/entity.model';
 
 @Component({
@@ -22,8 +22,8 @@ export class EntityListComponent implements OnInit {
   constructor(private store: Store<State>) {}
 
   ngOnInit() {
-    this.store.dispatch(new EntitySearch());
-    this.entities$ = this.store.pipe(select(getAllEntity));
+    this.store.dispatch(new SearchAllEntityEntities());
+    this.entities$ = this.store.pipe(select(getAllEntityEntities));
     this.isLoading$ = this.store.pipe(select(getLoading));
     this.errorMessage$ = this.store.pipe(
       select(getError),
