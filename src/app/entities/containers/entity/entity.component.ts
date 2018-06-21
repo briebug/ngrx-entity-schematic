@@ -3,11 +3,22 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { tap, filter, map, switchMap, startWith } from 'rxjs/operators';
+import {
+  tap,
+  filter,
+  map,
+  switchMap,
+  shareReplay
+} from 'rxjs/operators';
 
-import { getLoading, getSelectedEntity } from '@state/entity';
+import { getLoading, getSelectedEntity, getError } from '@state/entity';
 import { Entity } from '@state/entity/entity.model';
-import { EntityLoadById, EntityInsert, EntityUpdate } from '@state/entity/entity.actions';
+import {
+  LoadEntityById,
+  InsertEntity,
+  UpdateEntity,
+  SelectEntityById
+} from '@state/entity/entity.actions';
 import { State } from '@state/entity/entity.reducer';
 
 @Component({
@@ -16,11 +27,12 @@ import { State } from '@state/entity/entity.reducer';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntityComponent implements OnInit {
-  entity: Observable<Entity>;
-  isLoading: Observable<Boolean>;
+  entity$: Observable<Entity>;
+  isLoading$: Observable<Boolean>;
   valid: Boolean;
-  showErrors: Boolean;
+  showFormErrors: Boolean;
   entityEdits: Entity;
+  errorMessage$: Observable<String>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -28,16 +40,33 @@ export class EntityComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.entity = this.activatedRoute.paramMap.pipe(
-      filter((params) => params.has('id')),
+    this.entity$ = this.activatedRoute.paramMap.pipe(
+      filter((params) =>
+        params.has('id') || this.activatedRoute.routeConfig.path === 'add'
+      ),
       map((params) => params.get('id')),
-      tap((id) => this.store.dispatch(new EntityLoadById({ id: +id }))),
+      tap((id) => {
+        const EntityAction = id ? LoadEntityById : SelectEntityById;
+        this.store.dispatch(new EntityAction({ id: +id || null }));
+      }),
       switchMap(() => this.store.pipe(select(getSelectedEntity))),
-      map((entity) => ({...entity}))
+      map((entity) => ({ ...entity }))
     );
 
-    this.isLoading = this.store.pipe(select(getLoading));
-    this.showErrors = false;
+    // The following shareReplay calls allow us to use the async pipe multiple
+    // times without creating multiple subscriptions:
+
+    this.isLoading$ = this.store.pipe(
+      select(getLoading),
+      shareReplay()
+    );
+
+    this.errorMessage$ = this.store.pipe(
+      select(getError),
+      shareReplay()
+    );
+
+    this.showFormErrors = false;
   }
 
   onEntityChange({ entity, valid }: { entity: Entity; valid: Boolean }) {
@@ -46,13 +75,13 @@ export class EntityComponent implements OnInit {
   }
 
   onSubmit() {
-    this.showErrors = true;
+    this.showFormErrors = true;
 
     if (!this.valid) {
       return;
     }
 
-    const EntityAction = this.entityEdits.id ? EntityUpdate : EntityInsert;
+    const EntityAction = this.entityEdits.id ? UpdateEntity : InsertEntity;
     this.store.dispatch(new EntityAction({ entity: this.entityEdits }));
   }
 }

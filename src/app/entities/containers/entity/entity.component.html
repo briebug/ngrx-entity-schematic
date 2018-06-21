@@ -1,10 +1,12 @@
 <h1>Test Entity</h1>
-<p *ngIf="isLoading | async">Loading...</p>
+<!-- FIXME: This is not showing when loading: -->
+<p *ngIf="isLoading$ | async">Loading...</p>
+<p *ngIf="errorMessage$ | async" class="error-message">{{errorMessage$ | async}}</p>
 
 <app-entity-form
-  [entity]="entity | async"
-  [disableFields]="isLoading | async"
-  [showErrors]="showErrors"
+  [entity]="entity$ | async"
+  [disableFields]="isLoading$ | async"
+  [showErrors]="showFormErrors"
   (entityChange)="onEntityChange($event)"
   (submit)="onSubmit($event)"
 ></app-entity-form>
