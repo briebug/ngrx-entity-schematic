@@ -1,4 +1,4 @@
-import { Briebug } from '@state/entity/entity.model';
+import { Briebug } from '@state/briebug/briebug.model';
 
 export class InMemoryDataService {
   createDb() {

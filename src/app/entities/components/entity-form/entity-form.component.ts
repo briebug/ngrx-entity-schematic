@@ -9,7 +9,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { Briebug } from '@state/entity/entity.model';
+import { Briebug } from '@state/briebug/briebug.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil, skip, debounceTime } from 'rxjs/operators';

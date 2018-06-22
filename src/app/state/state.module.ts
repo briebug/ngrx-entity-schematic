@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { appMetaReducers, appReducer } from './app.reducer';
 import { CustomRouterStateSerializer } from './state-utils';
 import { environment } from '../../environments/environment';
-import { BriebugEffects } from '@state/entity/entity.effects';
+import { BriebugEffects } from '@state/briebug/briebug.effects';
 
 @NgModule({
   imports: [

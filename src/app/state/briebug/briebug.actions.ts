@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Briebug } from './entity.model';
-import { BriebugSearchQuery } from '@state/entity/entity.reducer';
+import { Briebug } from './briebug.model';
+import { BriebugSearchQuery } from '@state/briebug/briebug.reducer';
 
 export enum BriebugActionTypes {
   InsertBriebug = '[Briebug] Insert',

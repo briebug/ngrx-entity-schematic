@@ -1,7 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
-import * as fromBriebugState from './entity.reducer';
-import { BriebugState } from './entity.reducer';
+import * as fromBriebugState from './briebug.reducer';
+import { BriebugState } from './briebug.reducer';
 
 export const getBriebugState = createFeatureSelector<BriebugState>('briebug');
 

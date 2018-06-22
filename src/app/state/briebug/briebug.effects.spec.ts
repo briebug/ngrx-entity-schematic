@@ -19,10 +19,10 @@ import {
   DeleteBriebugById,
   DeleteBriebugByIdSuccess,
   DeleteBriebugByIdFail
-} from './entity.actions';
-import { generateEntity, generateEntityArray } from './entity.model';
+} from './briebug.actions';
+import { generateEntity, generateEntityArray } from './briebug.model';
 import { BriebugService } from '@core/services/entity.service';
-import { BriebugEffects } from '@state/entity/entity.effects';
+import { BriebugEffects } from '@state/briebug/briebug.effects';
 
 describe('BriebugEffects', () => {
   let actions: Observable<any>;
