@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 import { Briebug } from './entity.model';
+import { BriebugSearchQuery } from '@state/entity/entity.reducer';
 
 export enum BriebugActionTypes {
   InsertBriebug = '[Briebug] Insert',
@@ -23,10 +24,7 @@ export enum BriebugActionTypes {
   DeleteBriebugByIdSuccess = '[Briebug] Delete Success',
   DeleteBriebugByIdFail = '[Briebug] Delete Fail',
 
-  SetBriebugPaging = '[Briebug] Set Paging',
-  SetBriebugFilter = '[Briebug] Set Filter',
-  SetBriebugSorting = '[Briebug] Set Sorting',
-
+  SetSearchQuery = '[Briebug] Set Search Query',
   SelectBriebugById = '[Briebug] Select By ID'
 }
 
@@ -114,21 +112,11 @@ export class DeleteBriebugByIdFail implements Action {
   constructor(public payload: { error: string }) {}
 }
 
-// ========================================= PAGING
+// ========================================= QUERY
 
-export class SetBriebugPaging implements Action {
-  readonly type = BriebugActionTypes.SetBriebugPaging;
-  constructor(public payload: { limit: number; page: number }) {}
-}
-
-export class SetBriebugFilter implements Action {
-  readonly type = BriebugActionTypes.SetBriebugFilter;
-  constructor(public payload: { filter: string; }) {}
-}
-
-export class SetBriebugSorting implements Action {
-  readonly type = BriebugActionTypes.SetBriebugSorting;
-  constructor(public payload: { sorting: string }) {}
+export class SetSearchQuery implements Action {
+  readonly type = BriebugActionTypes.SetSearchQuery;
+  constructor(public payload: Partial<BriebugSearchQuery>) {}
 }
 
 // ========================================= SELECTED ID
@@ -154,7 +142,5 @@ export type BriebugActions =
   | DeleteBriebugById
   | DeleteBriebugByIdSuccess
   | DeleteBriebugByIdFail
-  | SetBriebugPaging
-  | SetBriebugFilter
-  | SetBriebugSorting
+  | SetSearchQuery
   | SelectBriebugById;

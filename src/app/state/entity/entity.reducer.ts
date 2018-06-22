@@ -2,17 +2,19 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Briebug } from './entity.model';
 import { BriebugActions, BriebugActionTypes } from './entity.actions';
 
+export interface BriebugSearchQuery {
+  filter: string;
+  sorting: string;
+  limit: number;
+  page: number;
+}
+
 export interface BriebugState extends EntityState<Briebug> {
   // additional entities state properties
   selectedId: number;
   loading: boolean;
   error: string;
-  paging: {
-    filter: string;
-    sorting: string;
-    limit: number;
-    page: number;
-  };
+  query: BriebugSearchQuery;
 }
 
 export const adapter: EntityAdapter<Briebug> = createEntityAdapter<Briebug>();
@@ -22,7 +24,7 @@ export const initialState: BriebugState = adapter.getInitialState({
   selectedId: null,
   loading: false,
   error: '',
-  paging: {
+  query: {
     filter: '',
     sorting: '',
     limit: 999,
@@ -138,13 +140,11 @@ export function briebugReducer(state = initialState, action: BriebugActions): Br
         error: 'Briebug delete failed: ' + action.payload.error
       };
 
-    case BriebugActionTypes.SetBriebugPaging:
-    case BriebugActionTypes.SetBriebugFilter:
-    case BriebugActionTypes.SetBriebugSorting:
+    case BriebugActionTypes.SetSearchQuery:
       return {
         ...state,
-        paging: {
-          ...state.paging,
+        query: {
+          ...state.query,
           ...action.payload
         }
       };
@@ -164,4 +164,4 @@ export function briebugReducer(state = initialState, action: BriebugActions): Br
 export const getSelectedId = (state: BriebugState) => state.selectedId;
 export const getLoading = (state: BriebugState) => state.loading;
 export const getError = (state: BriebugState) => state.error;
-export const getPaging = (state: BriebugState) => state.paging;
+export const getQuery = (state: BriebugState) => state.query;
