@@ -24,7 +24,12 @@ export const initialState: BriebugState = adapter.getInitialState({
   selectedId: null,
   loading: false,
   error: '',
-  query: {}
+  query: {
+    filter: '',
+    sorting: '',
+    limit: 999,
+    page: 1
+  }
 });
 
 export function briebugReducer(state = initialState, action: BriebugActions): BriebugState {
