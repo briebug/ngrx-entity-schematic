@@ -263,6 +263,23 @@ describe('briebugReducer', () => {
     });
   });
 
+  describe('upon SetSearchQuery', () => {
+    it('should set the query', () => {
+      const newQuery = {
+        filter: 'someFilter',
+        sorting: 'someSort',
+        limit: 1000000000000,
+        page: 888888
+      };
+      const action = new actions.SetSearchQuery(newQuery);
+
+      expect(briebugReducer(initialState, action)).toEqual({
+        ...initialState,
+        query: newQuery
+      });
+    });
+  });
+
   describe('upon SelectBriebugById', () => {
     it('should set the id and clear any error', () => {
       const id = 73;
@@ -275,8 +292,6 @@ describe('briebugReducer', () => {
       });
     });
   });
-
-  // TODO: Add query reducer tests when the implementation is finished
 });
 
 describe('getters', () => {
@@ -296,6 +311,10 @@ describe('getters', () => {
         .toEqual(INITIAL_STATE_WITH_ERROR.error);
     });
   });
-
-  // TODO: Add query getter tests when the implementation is finished
+  describe('getQuery', () => {
+    it('should return the selected id', () => {
+      expect(getQuery(initialState))
+        .toEqual(initialState.query);
+    });
+  });
 });
