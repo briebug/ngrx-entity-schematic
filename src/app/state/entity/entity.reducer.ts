@@ -44,7 +44,8 @@ export function briebugReducer(state = initialState, action: BriebugActions): Br
     case BriebugActionTypes.InsertBriebugSuccess:
       return {
         ...adapter.addOne(action.payload.result, state),
-        loading: false
+        loading: false,
+        error: ''
       };
 
     case BriebugActionTypes.InsertBriebugFail:

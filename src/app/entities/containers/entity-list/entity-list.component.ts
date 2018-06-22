@@ -29,7 +29,6 @@ export class BriebugListComponent implements OnInit {
   constructor(private store: Store<BriebugState>) {}
 
   ngOnInit() {
-    this.store.dispatch(new SearchAllBriebugEntities());
     this.briebugEntities$ = this.store.pipe(
       select(getAllBriebugEntitiesAsArray)
     );
@@ -38,6 +37,8 @@ export class BriebugListComponent implements OnInit {
       // This allows us to use the async pipe twice without creating two subscriptions:
       shareReplay()
     );
+
+    this.store.dispatch(new SearchAllBriebugEntities());
   }
 
   deleteBriebug(id) {
