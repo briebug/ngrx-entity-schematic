@@ -265,17 +265,17 @@ describe('briebugReducer', () => {
 
   describe('upon SetSearchQuery', () => {
     it('should set the query', () => {
-      const newQuery = {
+      const query = {
         filter: 'someFilter',
         sorting: 'someSort',
         limit: 1000000000000,
         page: 888888
       };
-      const action = new actions.SetSearchQuery(newQuery);
+      const action = new actions.SetSearchQuery(query);
 
       expect(briebugReducer(initialState, action)).toEqual({
         ...initialState,
-        query: newQuery
+        query
       });
     });
   });
