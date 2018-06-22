@@ -20,7 +20,7 @@ import {
   DeleteBriebugByIdSuccess,
   DeleteBriebugByIdFail
 } from './briebug.actions';
-import { generateEntity, generateEntityArray } from './briebug.model';
+import { generateBriebug, generateBriebugArray } from './briebug.model';
 import { BriebugService } from '@core/services/entity.service';
 import { BriebugEffects } from '@state/briebug/briebug.effects';
 
@@ -57,7 +57,7 @@ describe('BriebugEffects', () => {
 
   describe('insert', () => {
     it('should return InsertBriebugSuccess action with entity on success', () => {
-      const entity = generateEntity();
+      const entity = generateBriebug();
       const insertAction = new InsertBriebug({ briebug: entity });
       const successAction = new InsertBriebugSuccess({ result: entity });
 
@@ -69,7 +69,7 @@ describe('BriebugEffects', () => {
     });
 
     it('should return InsertBriebugFail with error object on failure', () => {
-      const entity = generateEntity();
+      const entity = generateBriebug();
       const insertAction = new InsertBriebug({ briebug: entity });
       const failAction = new InsertBriebugFail({ error: 'fail' });
 
@@ -83,7 +83,7 @@ describe('BriebugEffects', () => {
 
   describe('search', () => {
     it('should return SearchAllBriebugEntitiesSuccess action with entities on success', () => {
-      const entities = generateEntityArray();
+      const entities = generateBriebugArray();
       const searchAction = new SearchAllBriebugEntities();
       const successAction = new SearchAllBriebugEntitiesSuccess({ result: entities });
 
@@ -108,7 +108,7 @@ describe('BriebugEffects', () => {
 
   describe('loadById', () => {
     it('should return LoadBriebugByIdSuccess action with entity on success', () => {
-      const entity = generateEntity();
+      const entity = generateBriebug();
       const loadAction = new LoadBriebugById({ id: entity.id });
       const successAction = new LoadBriebugByIdSuccess({ result: entity});
 
@@ -120,7 +120,7 @@ describe('BriebugEffects', () => {
     });
 
     it('should return LoadBriebugByIdFail with error object on failure', () => {
-      const entity = generateEntity();
+      const entity = generateBriebug();
       const loadAction = new LoadBriebugById({ id: entity.id });
       const failAction = new LoadBriebugByIdFail({ error: 'fail' });
 
@@ -134,7 +134,7 @@ describe('BriebugEffects', () => {
 
   describe('update', () => {
     it('should return UpdateBriebugSuccess action with entity on success', () => {
-      const entity = generateEntity();
+      const entity = generateBriebug();
       const updateAction = new UpdateBriebug({ briebug: entity });
       const successAction = new UpdateBriebugSuccess({ update: {
         id: entity.id,
@@ -149,7 +149,7 @@ describe('BriebugEffects', () => {
     });
 
     it('should return UpdateBriebugFail with error object on failure', () => {
-      const entity = generateEntity();
+      const entity = generateBriebug();
       const updateAction = new UpdateBriebug({ briebug: entity });
       const failAction = new UpdateBriebugFail({ error: 'fail' });
 
@@ -163,7 +163,7 @@ describe('BriebugEffects', () => {
 
   describe('delete', () => {
     it('should return DeleteBriebugByIdSuccess action with entity ID on success', () => {
-      const entity = generateEntity();
+      const entity = generateBriebug();
       const deleteAction = new DeleteBriebugById({ id: entity.id });
       const successAction = new DeleteBriebugByIdSuccess({ id: entity.id });
 
@@ -175,7 +175,7 @@ describe('BriebugEffects', () => {
     });
 
     it('should return DeleteBriebugByIdFail with error object on failure', () => {
-      const entity = generateEntity();
+      const entity = generateBriebug();
       const deleteAction = new DeleteBriebugById({ id: entity.id });
       const failAction = new DeleteBriebugByIdFail({ error: 'fail' });
 
