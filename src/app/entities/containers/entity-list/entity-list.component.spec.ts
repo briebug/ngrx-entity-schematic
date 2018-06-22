@@ -7,7 +7,7 @@ import { withLatestFrom } from 'rxjs/operators';
 import { BriebugListComponent } from './entity-list.component';
 import { appReducer } from '@state/app.reducer';
 import { AppState } from '@state/app.interfaces';
-import { SearchAllBriebugEntities } from '@state/entity/entity.actions';
+import { SearchAllBriebugEntities } from '@state/briebug/briebug.actions';
 
 describe('BriebugListComponent', () => {
   let component: BriebugListComponent;
