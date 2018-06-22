@@ -39,8 +39,8 @@ import { BriebugService } from '@core/services/entity.service';
 
 @Injectable()
 export class BriebugEffects {
-  // ========================================= INSERT
 
+  // ========================================= INSERT
   @Effect()
   insert: Observable<Action> = this.actions$
     .ofType<InsertBriebug>(BriebugActionTypes.InsertBriebug)
@@ -55,32 +55,7 @@ export class BriebugEffects {
       )
     );
 
-  // remove this if you don't need to do anything upon insert success
-  @Effect({
-    dispatch: false
-  })
-  insertSuccess: Observable<Action> = this.actions$
-    .ofType<InsertBriebugSuccess>(BriebugActionTypes.InsertBriebugSuccess)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.result
-      })
-    );
-
-  // remove this if you don't need to do anything upon insert fail
-  @Effect({
-    dispatch: false
-  })
-  insertFail: Observable<Action> = this.actions$
-    .ofType<InsertBriebugFail>(BriebugActionTypes.InsertBriebugFail)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.error
-      })
-    );
-
   // ========================================= SEARCH
-
   @Effect()
   search: Observable<Action> = this.actions$
     .ofType<SearchAllBriebugEntities>(BriebugActionTypes.SearchAllBriebugEntities)
@@ -99,32 +74,7 @@ export class BriebugEffects {
       )
     );
 
-  // remove this if you don't need to do anything upon search success
-  @Effect({
-    dispatch: false
-  })
-  searchSuccess: Observable<Action> = this.actions$
-    .ofType<SearchAllBriebugEntitiesSuccess>(BriebugActionTypes.SearchAllBriebugEntitiesSuccess)
-    .pipe(
-      tap((entities) => {
-        // do stuff with action.payload.result
-      })
-    );
-
-  // remove this if you don't need to do anything upon search fail
-  @Effect({
-    dispatch: false
-  })
-  searchFail: Observable<Action> = this.actions$
-    .ofType<SearchAllBriebugEntitiesFail>(BriebugActionTypes.SearchAllBriebugEntitiesFail)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.error
-      })
-    );
-
   // ========================================= LOAD BY ID
-
   @Effect()
   loadById: Observable<Action> = this.actions$
     .ofType<LoadBriebugById>(BriebugActionTypes.LoadBriebugById)
@@ -140,32 +90,7 @@ export class BriebugEffects {
       )
     );
 
-  // remove this if you don't need to do anything upon load by id success
-  @Effect({
-    dispatch: false
-  })
-  loadByIdSuccess: Observable<Action> = this.actions$
-    .ofType<LoadBriebugByIdSuccess>(BriebugActionTypes.LoadBriebugByIdSuccess)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.result
-      })
-    );
-
-  // remove this if you don't need to do anything upon load by id fail
-  @Effect({
-    dispatch: false
-  })
-  loadByIdFail: Observable<Action> = this.actions$
-    .ofType<LoadBriebugByIdFail>(BriebugActionTypes.LoadBriebugByIdFail)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.error
-      })
-    );
-
   // ========================================= UPDATE
-
   @Effect()
   update: Observable<Action> = this.actions$
     .ofType<UpdateBriebug>(BriebugActionTypes.UpdateBriebug)
@@ -187,32 +112,7 @@ export class BriebugEffects {
       )
     );
 
-  // remove this if you don't need to do anything upon update success
-  @Effect({
-    dispatch: false
-  })
-  updateSuccess: Observable<Action> = this.actions$
-    .ofType<UpdateBriebugSuccess>(BriebugActionTypes.UpdateBriebugSuccess)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.result
-      })
-    );
-
-  // remove this if you don't need to do anything upon update fail
-  @Effect({
-    dispatch: false
-  })
-  updateFail: Observable<Action> = this.actions$
-    .ofType<UpdateBriebugFail>(BriebugActionTypes.UpdateBriebugFail)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.error
-      })
-    );
-
   // ========================================= DELETE
-
   @Effect()
   delete: Observable<Action> = this.actions$
     .ofType<DeleteBriebugById>(BriebugActionTypes.DeleteBriebugById)
@@ -227,32 +127,7 @@ export class BriebugEffects {
       )
     );
 
-  // remove this if you don't need to do anything upon delete success
-  @Effect({
-    dispatch: false
-  })
-  deleteSuccess: Observable<Action> = this.actions$
-    .ofType<UpdateBriebugSuccess>(BriebugActionTypes.UpdateBriebugSuccess)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.result
-      })
-    );
-
-  // remove this if you don't need to do anything upon delete fail
-  @Effect({
-    dispatch: false
-  })
-  deleteFail: Observable<Action> = this.actions$
-    .ofType<DeleteBriebugByIdFail>(BriebugActionTypes.DeleteBriebugByIdFail)
-    .pipe(
-      tap((action) => {
-        // do stuff with: action.payload.error
-      })
-    );
-
   // ========================================= PAGING
-
   @Effect({
     dispatch: false
   })
@@ -287,7 +162,6 @@ export class BriebugEffects {
     );
 
   // ========================================= SELECTED ID
-
   @Effect({
     dispatch: false
   })
