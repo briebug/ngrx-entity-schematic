@@ -31,8 +31,8 @@ import {
   DeleteBriebugByIdFail,
   SetSearchQuery,
   SelectBriebugById
-} from './entity.actions';
-import { Briebug } from './entity.model';
+} from './briebug.actions';
+import { Briebug } from './briebug.model';
 import { BriebugService } from '@core/services/entity.service';
 
 @Injectable()

@@ -3,8 +3,8 @@ import {
   generateBriebug,
   generateBriebugMap,
   generateBriebugArray
-} from './entity.model';
-import * as actions from './entity.actions';
+} from './briebug.model';
+import * as actions from './briebug.actions';
 import {
   briebugReducer,
   initialState,
@@ -12,7 +12,7 @@ import {
   getLoading,
   getError,
   getQuery
-} from './entity.reducer';
+} from './briebug.reducer';
 import { Update } from '@ngrx/entity';
 
 const INITIAL_STATE_WITH_ERROR = {

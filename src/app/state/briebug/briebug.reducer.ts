@@ -1,6 +1,6 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Briebug } from './entity.model';
-import { BriebugActions, BriebugActionTypes } from './entity.actions';
+import { Briebug } from './briebug.model';
+import { BriebugActions, BriebugActionTypes } from './briebug.actions';
 
 export interface BriebugSearchQuery {
   filter: string;

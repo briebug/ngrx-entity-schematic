@@ -11,15 +11,15 @@ import {
   shareReplay
 } from 'rxjs/operators';
 
-import { getLoading, getSelectedBriebug, getError } from '@state/entity';
-import { Briebug } from '@state/entity/entity.model';
+import { getLoading, getSelectedBriebug, getError } from '@state/briebug';
+import { Briebug } from '@state/briebug/briebug.model';
 import {
   LoadBriebugById,
   InsertBriebug,
   UpdateBriebug,
   SelectBriebugById
-} from '@state/entity/entity.actions';
-import { BriebugState } from '@state/entity/entity.reducer';
+} from '@state/briebug/briebug.actions';
+import { BriebugState } from '@state/briebug/briebug.reducer';
 
 @Component({
   templateUrl: './entity.component.html',
