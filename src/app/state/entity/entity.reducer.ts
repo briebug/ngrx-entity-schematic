@@ -3,10 +3,10 @@ import { Briebug } from './entity.model';
 import { BriebugActions, BriebugActionTypes } from './entity.actions';
 
 export interface BriebugSearchQuery {
-  filter?: string;
-  sorting?: string;
-  limit?: number;
-  page?: number;
+  filter: string;
+  sorting: string;
+  limit: number;
+  page: number;
 }
 
 export interface BriebugState extends EntityState<Briebug> {

@@ -116,7 +116,7 @@ export class DeleteBriebugByIdFail implements Action {
 
 export class SetSearchQuery implements Action {
   readonly type = BriebugActionTypes.SetSearchQuery;
-  constructor(public payload: BriebugSearchQuery) {}
+  constructor(public payload: Partial<BriebugSearchQuery>) {}
 }
 
 // ========================================= SELECTED ID
