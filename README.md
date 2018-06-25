@@ -1,27 +1,42 @@
-# NgrxEntityGenerator
+# NgRx Entity Generator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
+## Usage
 
-## Development server
+## Development
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Copy src project to schematic template files
 
-## Code scaffolding
+Read the template app, `/schematic-src`, and copy all the necessary files into the schematic folder, `/src`. During the copy, replace all "entity" placeholders with their respective template placeholder.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```shell
+build:files
+```
 
-## Build
+#### Entity string mapping
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+| Entity | Template variable | Before | After |
+| ------ | ----------------- |--|--|
+|Briebug|`<%= classify(name) %>` |`class InsertBriebug`|`class Insert<%= classify(name) %>` |
+|briebug|`<%= name %>` |`import {} from './briebug.model'`|`import {} from './<%= name %>.model'`|
 
-## Running unit tests
+#### About
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+This schematic uses a template project that's the working blueprint for what the schematic will eventually generate. This pattern was chosen to provide a faster and easier development cycle when testing the template app as a standalone application with the typical dev feedback provided by the Angular CLI. The alternative would involve developing against the template files (which include template variable like `<%= classify(name) %>`) and having to run the schematic locally on every change.
 
-## Running end-to-end tests
+### Developing the `buildFiles` script
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+When editing the script that copies and modifies the blueprint files into the schematic directory. The following commands all for quick dev feedback and debugging.
 
-## Further help
+Compile the `buildFiles` script into `/tmp` in one shell
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```shell
+build:ts
+```
+
+In another shell, run the script and watch the `/tmp` dir for changes. Allows for attaching a debugger on port `9222`. See the attached `.vscode/launch.json` file for debugging with VSCode.
+
+```shell
+build:run
+```
+
+Once both of these are run, changes to `./buildFiles.ts` should recompile and trigger an update to nodemon. Then trigger the VSCode debugger `f5` and that will land a breakpoint on line:1 of the app. Step over that to get to your breakpoint.
