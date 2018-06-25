@@ -8,7 +8,8 @@ import {
   filter,
   map,
   switchMap,
-  shareReplay
+  shareReplay,
+  combineLatest
 } from 'rxjs/operators';
 
 import { getLoading, getSelectedBriebug, getError } from '@state/briebug';
@@ -27,10 +28,36 @@ import { BriebugState } from '@state/briebug/briebug.reducer';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BriebugComponent implements OnInit {
-  briebug$: Observable<Briebug>;
+  briebug$ = this.activatedRoute.paramMap.pipe(
+    combineLatest(this.activatedRoute.url),
+    filter(([params, url]) =>
+      params.has('id') || url[0].path === 'add'
+    ),
+    map(([params]) => params.get('id')),
+    tap((id) => {
+      // If no ID is present, then the user is here to add a new entity.
+      const BriebugAction = id ? LoadBriebugById : SelectBriebugById;
+      this.store.dispatch(new BriebugAction({ id: +id || null }));
+    }),
+    switchMap(() =>
+      this.store.pipe(select(getSelectedBriebug))
+    ),
+    map((briebug) =>
+      ({ ...briebug })
+    )
+  );
+  // The following shareReplay calls allow us to use the async pipe multiple
+  // times without creating multiple subscriptions:
+  errorMessage$ = this.store.pipe(
+    select(getError),
+    shareReplay()
+  );
+  isLoading$ = this.store.pipe(
+    select(getLoading),
+    shareReplay()
+  );
+
   briebugEdits: Briebug;
-  errorMessage$: Observable<string>;
-  isLoading$: Observable<boolean>;
   showFormErrors: boolean;
   valid: boolean;
 
@@ -40,34 +67,6 @@ export class BriebugComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.briebug$ = this.activatedRoute.paramMap.pipe(
-      filter((params) =>
-        params.has('id') || this.activatedRoute.routeConfig.path === 'add'
-      ),
-      map((params) => params.get('id')),
-      tap((id) => {
-        const BriebugAction = id ? LoadBriebugById : SelectBriebugById;
-        this.store.dispatch(new BriebugAction({ id: +id || null }));
-      }),
-      switchMap(() => this.store.pipe(select(getSelectedBriebug))),
-      map((briebug) => {
-        return { ...briebug };
-      })
-    );
-
-    // The following shareReplay calls allow us to use the async pipe multiple
-    // times without creating multiple subscriptions:
-
-    this.isLoading$ = this.store.pipe(
-      select(getLoading),
-      shareReplay()
-    );
-
-    this.errorMessage$ = this.store.pipe(
-      select(getError),
-      shareReplay()
-    );
-
     this.showFormErrors = false;
   }
 
