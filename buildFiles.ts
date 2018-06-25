@@ -13,7 +13,7 @@ const RootPath = `${process.cwd()}/${LocalRootFolder}`;
 const names = {
   file: `__name@dasherize`,
   class: `<%= classify(name) %>`,
-  name: `<%= name %>`
+  name: `<%= name %>`,
 };
 const newEntityFolder = `${RootPath}/${names.file}@if-flat__`;
 
@@ -59,8 +59,6 @@ interface SourceNodes {
     if (!node.isFolder) {
       console.log(`modifying path: ${node.relativePath}`);
 
-      replaceEntityPaths(node, readFileSync(`${RootPath}/${node.relativePath}`, 'utf8'));
-
       // Should be last internal file modification, will loose reference in file to 'Entity' after this
       replaceEntityWithTemplateVariable(
         node,
@@ -77,27 +75,16 @@ interface SourceNodes {
   nodes.filter((node) => node.isFolder).forEach((node) => removeFolder(node));
 })(process.argv.slice(2));
 
-function replaceEntityPaths(node: SourceNodes, file: string) {
-  if (!file) {
-    return console.log('Error reading file');
-  }
-
-  const newFile = file
-    .replace(/entity.actions/g, `${names.name}.actions`)
-    .replace(/entity.effects/g, `${names.name}.effects`)
-    .replace(/entity.model/g, `${names.name}.model`)
-    .replace(/entity.reducer/g, `${names.name}.reducer`);
-
-  return writeFileSync(`${RootPath}/${node.relativePath}`, newFile);
-}
-
-// replace "entity" placeholders with template string format (<%= ENTITY &>) for the schematic to use
 function replaceEntityWithTemplateVariable(node: SourceNodes, file: string) {
   if (!file) {
     return console.log('Error reading file');
   }
 
-  const newFile = file.replace(/Entity/g, names.class);
+  // replace "entity" placeholders with template string format (<%= ENTITY &>) for the schematic to use
+
+  const newFile = file
+    .replace(/Briebug/g, names.class) // `<%= classify(name) %>`
+    .replace(/briebug/g, `${names.name}`); // `<%= name %>`
 
   return writeFileSync(`${RootPath}/${node.relativePath}`, newFile);
 }

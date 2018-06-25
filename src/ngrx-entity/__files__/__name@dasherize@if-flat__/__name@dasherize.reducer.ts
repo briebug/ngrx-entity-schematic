@@ -1,28 +1,30 @@
-import { <%= classify(name) %>State, <%= classify(name) %>Adapter, create<%= classify(name) %>Adapter } from '@ngrx/entity';
-import { <%= classify(name) %> } from './entity.model';
-import { <%= classify(name) %>Actions, <%= classify(name) %>ActionTypes } from './entity.actions';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { <%= classify(name) %> } from './<%= name %>.model';
+import { <%= classify(name) %>Actions, <%= classify(name) %>ActionTypes } from './<%= name %>.actions';
 
-export interface State extends <%= classify(name) %>State<<%= classify(name) %>> {
+export interface <%= classify(name) %>SearchQuery {
+  filter: string;
+  sorting: string;
+  limit: number;
+  page: number;
+}
+
+export interface <%= classify(name) %>State extends EntityState<<%= classify(name) %>> {
   // additional entities state properties
   selectedId: number;
   loading: boolean;
   error: string;
-  paging: {
-    filter: string;
-    sorting: string;
-    limit: number;
-    page: number;
-  };
+  query: <%= classify(name) %>SearchQuery;
 }
 
-export const adapter: <%= classify(name) %>Adapter<<%= classify(name) %>> = create<%= classify(name) %>Adapter<<%= classify(name) %>>();
+export const adapter: EntityAdapter<<%= classify(name) %>> = createEntityAdapter<<%= classify(name) %>>();
 
-export const initialState: State = adapter.getInitialState({
-  // additional entity state properties
+export const initialState: <%= classify(name) %>State = adapter.getInitialState({
+  // additional <%= name %> state properties
   selectedId: null,
   loading: false,
   error: '',
-  paging: {
+  query: {
     filter: '',
     sorting: '',
     limit: 999,
@@ -30,93 +32,94 @@ export const initialState: State = adapter.getInitialState({
   }
 });
 
-export function reducer(state = initialState, action: <%= classify(name) %>Actions): State {
+export function <%= name %>Reducer(state = initialState, action: <%= classify(name) %>Actions): <%= classify(name) %>State {
   switch (action.type) {
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>Insert:
+    case <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>:
       return {
         ...state,
         loading: true,
         error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>InsertSuccess:
+    case <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>Success:
       return {
         ...adapter.addOne(action.payload.result, state),
-        loading: false
+        loading: false,
+        error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>InsertFail:
+    case <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>Fail:
       return {
         ...state,
         loading: false,
         error: '<%= classify(name) %> insert failed: ' + action.payload.error
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>Search:
+    case <%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>Entities:
       return {
         ...adapter.removeAll(state),
         loading: true,
         error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>LoadById:
-      return {
-        ...adapter.removeAll(state),
-        selectedId: action.payload.id,
-        loading: true,
-        error: ''
-      };
-
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>SearchSuccess:
+    case <%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>EntitiesSuccess:
       return {
         ...adapter.addAll(action.payload.result, state),
         loading: false,
         error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>SearchFail:
+    case <%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>EntitiesFail:
       return {
         ...state,
         loading: false,
         error: '<%= classify(name) %> search failed: ' + action.payload.error
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>LoadByIdSuccess:
+    case <%= classify(name) %>ActionTypes.Load<%= classify(name) %>ById:
+      return {
+        ...adapter.removeAll(state),
+        selectedId: action.payload.id,
+        loading: true,
+        error: ''
+      };
+
+    case <%= classify(name) %>ActionTypes.Load<%= classify(name) %>ByIdSuccess:
       return {
         ...adapter.addOne(action.payload.result, state),
         loading: false,
         error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>LoadByIdFail:
+    case <%= classify(name) %>ActionTypes.Load<%= classify(name) %>ByIdFail:
       return {
         ...state,
         loading: false,
         error: '<%= classify(name) %> load failed: ' + action.payload.error
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>Update:
+    case <%= classify(name) %>ActionTypes.Update<%= classify(name) %>:
       return {
         ...state,
         loading: true,
         error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>UpdateSuccess:
+    case <%= classify(name) %>ActionTypes.Update<%= classify(name) %>Success:
       return {
         ...adapter.updateOne(action.payload.update, state),
         loading: false,
         error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>UpdateFail:
+    case <%= classify(name) %>ActionTypes.Update<%= classify(name) %>Fail:
       return {
         ...state,
         loading: false,
         error: '<%= classify(name) %> update failed: ' + action.payload.error
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>DeleteById:
+    case <%= classify(name) %>ActionTypes.Delete<%= classify(name) %>ById:
       return {
         ...state,
         selectedId: action.payload.id,
@@ -124,32 +127,30 @@ export function reducer(state = initialState, action: <%= classify(name) %>Actio
         error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>DeleteSuccess:
+    case <%= classify(name) %>ActionTypes.Delete<%= classify(name) %>ByIdSuccess:
       return {
-        ...adapter.removeOne(action.payload.result.id, state),
+        ...adapter.removeOne(action.payload.id, state),
         loading: false,
         error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>DeleteFail:
+    case <%= classify(name) %>ActionTypes.Delete<%= classify(name) %>ByIdFail:
       return {
         ...state,
         loading: false,
         error: '<%= classify(name) %> delete failed: ' + action.payload.error
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>SetPaging:
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>SetFilter:
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>SetSorting:
+    case <%= classify(name) %>ActionTypes.SetSearchQuery:
       return {
         ...state,
-        paging: {
-          ...state.paging,
+        query: {
+          ...state.query,
           ...action.payload
         }
       };
 
-    case <%= classify(name) %>ActionTypes.<%= classify(name) %>SelectById:
+    case <%= classify(name) %>ActionTypes.Select<%= classify(name) %>ById:
       return {
         ...state,
         selectedId: action.payload.id,
@@ -161,7 +162,7 @@ export function reducer(state = initialState, action: <%= classify(name) %>Actio
   }
 }
 
-export const getSelectedId = (state: State) => state.selectedId;
-export const getLoading = (state: State) => state.loading;
-export const getError = (state: State) => state.error;
-export const getPaging = (state: State) => state.paging;
+export const getSelectedId = (state: <%= classify(name) %>State) => state.selectedId;
+export const getLoading = (state: <%= classify(name) %>State) => state.loading;
+export const getError = (state: <%= classify(name) %>State) => state.error;
+export const getQuery = (state: <%= classify(name) %>State) => state.query;

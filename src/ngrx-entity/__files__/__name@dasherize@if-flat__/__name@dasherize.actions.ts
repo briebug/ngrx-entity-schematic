@@ -1,160 +1,146 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { <%= classify(name) %> } from './entity.model';
+import { <%= classify(name) %> } from './<%= name %>.model';
+import { <%= classify(name) %>SearchQuery } from '@state/<%= name %>/<%= name %>.reducer';
 
 export enum <%= classify(name) %>ActionTypes {
-  <%= classify(name) %>Insert = '[<%= classify(name) %>] Insert',
-  <%= classify(name) %>InsertSuccess = '[<%= classify(name) %>] Insert Success',
-  <%= classify(name) %>InsertFail = '[<%= classify(name) %>] Insert Fail',
+  Insert<%= classify(name) %> = '[<%= classify(name) %>] Insert',
+  Insert<%= classify(name) %>Success = '[<%= classify(name) %>] Insert Success',
+  Insert<%= classify(name) %>Fail = '[<%= classify(name) %>] Insert Fail',
 
-  <%= classify(name) %>Search = '[<%= classify(name) %>] Search',
-  <%= classify(name) %>SearchSuccess = '[<%= classify(name) %>] Search Success',
-  <%= classify(name) %>SearchFail = '[<%= classify(name) %>] Search Fail',
+  SearchAll<%= classify(name) %>Entities = '[<%= classify(name) %>] Search',
+  SearchAll<%= classify(name) %>EntitiesSuccess = '[<%= classify(name) %>] Search Success',
+  SearchAll<%= classify(name) %>EntitiesFail = '[<%= classify(name) %>] Search Fail',
 
-  <%= classify(name) %>LoadById = '[<%= classify(name) %>] Load By ID',
-  <%= classify(name) %>LoadByIdSuccess = '[<%= classify(name) %>] Load Success',
-  <%= classify(name) %>LoadByIdFail = '[<%= classify(name) %>] Load Fail',
+  Load<%= classify(name) %>ById = '[<%= classify(name) %>] Load By ID',
+  Load<%= classify(name) %>ByIdSuccess = '[<%= classify(name) %>] Load Success',
+  Load<%= classify(name) %>ByIdFail = '[<%= classify(name) %>] Load Fail',
 
-  <%= classify(name) %>Update = '[<%= classify(name) %>] Update',
-  <%= classify(name) %>UpdateSuccess = '[<%= classify(name) %>] Update Success',
-  <%= classify(name) %>UpdateFail = '[<%= classify(name) %>] Update Fail',
+  Update<%= classify(name) %> = '[<%= classify(name) %>] Update',
+  Update<%= classify(name) %>Success = '[<%= classify(name) %>] Update Success',
+  Update<%= classify(name) %>Fail = '[<%= classify(name) %>] Update Fail',
 
-  <%= classify(name) %>DeleteById = '[<%= classify(name) %>] Delete By ID',
-  <%= classify(name) %>DeleteSuccess = '[<%= classify(name) %>] Delete Success',
-  <%= classify(name) %>DeleteFail = '[<%= classify(name) %>] Delete Fail',
+  Delete<%= classify(name) %>ById = '[<%= classify(name) %>] Delete By ID',
+  Delete<%= classify(name) %>ByIdSuccess = '[<%= classify(name) %>] Delete Success',
+  Delete<%= classify(name) %>ByIdFail = '[<%= classify(name) %>] Delete Fail',
 
-  <%= classify(name) %>SetPaging = '[<%= classify(name) %>] Set Paging',
-  <%= classify(name) %>SetFilter = '[<%= classify(name) %>] Set Filter',
-  <%= classify(name) %>SetSorting = '[<%= classify(name) %>] Set Sorting',
-
-  <%= classify(name) %>SelectById = '[<%= classify(name) %>] Select By ID'
+  SetSearchQuery = '[<%= classify(name) %>] Set Search Query',
+  Select<%= classify(name) %>ById = '[<%= classify(name) %>] Select By ID'
 }
 
 // ========================================= INSERT
 
-export class <%= classify(name) %>Insert implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>Insert;
-  constructor(public payload: { entity: <%= classify(name) %> }) {}
+export class Insert<%= classify(name) %> implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>;
+  constructor(public payload: { <%= name %>: <%= classify(name) %> }) {}
 }
 
-export class <%= classify(name) %>InsertSuccess implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>InsertSuccess;
+export class Insert<%= classify(name) %>Success implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>Success;
   constructor(public payload: { result: <%= classify(name) %> }) {}
 }
 
-export class <%= classify(name) %>InsertFail implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>InsertFail;
+export class Insert<%= classify(name) %>Fail implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>Fail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= SEARCH
 
-export class <%= classify(name) %>Search implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>Search;
+export class SearchAll<%= classify(name) %>Entities implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>Entities;
 }
 
-export class <%= classify(name) %>SearchSuccess implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>SearchSuccess;
-  constructor(public payload: { result: <%= classify(name) %>[] }) {}
+export class SearchAll<%= classify(name) %>EntitiesSuccess implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>EntitiesSuccess;
+  constructor(public payload: { result: Array<<%= classify(name) %>> }) {}
 }
 
-export class <%= classify(name) %>SearchFail implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>SearchFail;
+export class SearchAll<%= classify(name) %>EntitiesFail implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>EntitiesFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= LOAD BY ID
 
-export class <%= classify(name) %>LoadById implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>LoadById;
+export class Load<%= classify(name) %>ById implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Load<%= classify(name) %>ById;
   constructor(public payload: { id: number }) {}
 }
 
-export class <%= classify(name) %>LoadByIdSuccess implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>LoadByIdSuccess;
+export class Load<%= classify(name) %>ByIdSuccess implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Load<%= classify(name) %>ByIdSuccess;
   constructor(public payload: { result: <%= classify(name) %> }) {}
 }
 
-export class <%= classify(name) %>LoadByIdFail implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>LoadByIdFail;
+export class Load<%= classify(name) %>ByIdFail implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Load<%= classify(name) %>ByIdFail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= UPDATE
 
-export class <%= classify(name) %>Update implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>Update;
-  constructor(public payload: { entity: <%= classify(name) %> }) {}
+export class Update<%= classify(name) %> implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Update<%= classify(name) %>;
+  constructor(public payload: { <%= name %>: <%= classify(name) %> }) {}
 }
 
-export class <%= classify(name) %>UpdateSuccess implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>UpdateSuccess;
+export class Update<%= classify(name) %>Success implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Update<%= classify(name) %>Success;
   constructor(public payload: { update: Update<<%= classify(name) %>> }) {}
 }
 
-export class <%= classify(name) %>UpdateFail implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>UpdateFail;
+export class Update<%= classify(name) %>Fail implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Update<%= classify(name) %>Fail;
   constructor(public payload: { error: string }) {}
 }
 
 // ========================================= DELETE
 
-export class <%= classify(name) %>DeleteById implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>DeleteById;
+export class Delete<%= classify(name) %>ById implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Delete<%= classify(name) %>ById;
   constructor(public payload: { id: number }) {}
 }
 
-export class <%= classify(name) %>DeleteSuccess implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>DeleteSuccess;
-  constructor(public payload: { result: <%= classify(name) %> }) {}
+export class Delete<%= classify(name) %>ByIdSuccess implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Delete<%= classify(name) %>ByIdSuccess;
+  constructor(public payload: { id: number }) {}
 }
 
-export class <%= classify(name) %>DeleteFail implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>DeleteFail;
+export class Delete<%= classify(name) %>ByIdFail implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Delete<%= classify(name) %>ByIdFail;
   constructor(public payload: { error: string }) {}
 }
 
-// ========================================= PAGING
+// ========================================= QUERY
 
-export class <%= classify(name) %>SetPaging implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>SetPaging;
-  constructor(public payload: { limit: number; page: number }) {}
-}
-
-export class <%= classify(name) %>SetFilter implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>SetFilter;
-  constructor(public payload: { filter: string; }) {}
-}
-
-export class <%= classify(name) %>SetSorting implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>SetSorting;
-  constructor(public payload: { sorting: string }) {}
+export class SetSearchQuery implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.SetSearchQuery;
+  constructor(public payload: Partial<<%= classify(name) %>SearchQuery>) {}
 }
 
 // ========================================= SELECTED ID
 
-export class <%= classify(name) %>SelectById implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.<%= classify(name) %>SelectById;
+export class Select<%= classify(name) %>ById implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Select<%= classify(name) %>ById;
   constructor(public payload: { id: number }) {}
 }
 
 export type <%= classify(name) %>Actions =
-  | <%= classify(name) %>Insert
-  | <%= classify(name) %>InsertSuccess
-  | <%= classify(name) %>InsertFail
-  | <%= classify(name) %>Search
-  | <%= classify(name) %>SearchSuccess
-  | <%= classify(name) %>SearchFail
-  | <%= classify(name) %>LoadById
-  | <%= classify(name) %>LoadByIdSuccess
-  | <%= classify(name) %>LoadByIdFail
-  | <%= classify(name) %>Update
-  | <%= classify(name) %>UpdateSuccess
-  | <%= classify(name) %>UpdateFail
-  | <%= classify(name) %>DeleteById
-  | <%= classify(name) %>DeleteSuccess
-  | <%= classify(name) %>DeleteFail
-  | <%= classify(name) %>SetPaging
-  | <%= classify(name) %>SetFilter
-  | <%= classify(name) %>SetSorting
-  | <%= classify(name) %>SelectById;
+  | Insert<%= classify(name) %>
+  | Insert<%= classify(name) %>Success
+  | Insert<%= classify(name) %>Fail
+  | SearchAll<%= classify(name) %>Entities
+  | SearchAll<%= classify(name) %>EntitiesSuccess
+  | SearchAll<%= classify(name) %>EntitiesFail
+  | Load<%= classify(name) %>ById
+  | Load<%= classify(name) %>ByIdSuccess
+  | Load<%= classify(name) %>ByIdFail
+  | Update<%= classify(name) %>
+  | Update<%= classify(name) %>Success
+  | Update<%= classify(name) %>Fail
+  | Delete<%= classify(name) %>ById
+  | Delete<%= classify(name) %>ByIdSuccess
+  | Delete<%= classify(name) %>ByIdFail
+  | SetSearchQuery
+  | Select<%= classify(name) %>ById;

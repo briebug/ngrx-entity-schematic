@@ -1,10 +1,10 @@
 import { RouterReducerState } from '@ngrx/router-store';
 import { RouterStateUrl } from './state-utils';
-import { State as entityState } from './entity/entity.reducer';
+import { <%= classify(name) %>State } from './<%= name %>/<%= name %>.reducer';
 
 export interface AppState {
   router: RouterReducerState<RouterStateUrl>;
-  entity: entityState;
+  <%= name %>: <%= classify(name) %>State;
 }
 
 export type State = AppState;
