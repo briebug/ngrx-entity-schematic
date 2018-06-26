@@ -4,7 +4,8 @@
   "scripts": {
     "build:ts": "node_modules/typescript/bin/tsc -w -p tsconfig.file-build.json",
     "build:run": "nodemon --inspect-brk --watch tmp tmp/index.js",
-    "build:files": "node_modules/typescript/bin/tsc -p tsconfig.file-build.json && node ./tmp/buildFiles.js"
+    "build:files": "node_modules/typescript/bin/tsc -p tsconfig.file-build.json && node ./tmp/buildFiles.js",
+    "clean": "git checkout -- sandbox-app && git clean -fd sandbox-app"
   },
   "dependencies": {
     "@angular-devkit/core": "^0.6.8",
