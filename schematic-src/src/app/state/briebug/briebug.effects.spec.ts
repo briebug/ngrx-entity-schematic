@@ -21,7 +21,8 @@ import {
   DeleteBriebugByIdFail
 } from './briebug.actions';
 import { generateBriebug, generateBriebugArray } from './briebug.model';
-import { BriebugService } from '@core/services/entity.service';
+// TODO: Change this path when you move your service file:
+import { BriebugService } from './briebug.service';
 import { BriebugEffects } from '@state/briebug/briebug.effects';
 
 describe('BriebugEffects', () => {

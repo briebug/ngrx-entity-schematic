@@ -33,7 +33,8 @@ import {
   Select<%= classify(name) %>ById
 } from './<%= name %>.actions';
 import { <%= classify(name) %> } from './<%= name %>.model';
-import { <%= classify(name) %>Service } from '@core/services/entity.service';
+// TODO: Change this path when you move your service file:
+import { <%= classify(name) %>Service } from './<%= name %>.service';
 
 @Injectable()
 export class <%= classify(name) %>Effects {

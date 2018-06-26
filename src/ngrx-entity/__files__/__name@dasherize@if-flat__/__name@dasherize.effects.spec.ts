@@ -21,7 +21,8 @@ import {
   Delete<%= classify(name) %>ByIdFail
 } from './<%= name %>.actions';
 import { generate<%= classify(name) %>, generate<%= classify(name) %>Array } from './<%= name %>.model';
-import { <%= classify(name) %>Service } from '@core/services/entity.service';
+// TODO: Change this path when you move your service file:
+import { <%= classify(name) %>Service } from './<%= name %>.service';
 import { <%= classify(name) %>Effects } from '@state/<%= name %>/<%= name %>.effects';
 
 describe('<%= classify(name) %>Effects', () => {
