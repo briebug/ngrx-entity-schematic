@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { Store, StoreModule, select } from '@ngrx/store';
-import { withLatestFrom } from 'rxjs/operators';
+import { Store, StoreModule } from '@ngrx/store';
 
 import { BriebugListComponent } from './entity-list.component';
 import { appReducer } from '@state/app.reducer';
@@ -12,11 +11,6 @@ import {
   SearchAllBriebugEntitiesSuccess,
   SearchAllBriebugEntitiesFail
 } from '@state/briebug/briebug.actions';
-import {
-  getAllBriebugEntitiesAsArray,
-  getLoading,
-  getError
-} from '@state/briebug';
 import { generateBriebugArray } from '@state/briebug/briebug.model';
 
 describe('BriebugListComponent', () => {

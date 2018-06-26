@@ -5,7 +5,7 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 import * as fromRoot from '@state/app.reducer';
 import { Store, StoreModule, select } from '@ngrx/store';
-import { of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { BriebugComponent } from './entity.component';
 import { BriebugFormComponent } from '../../components/entity-form/entity-form.component';
@@ -19,7 +19,7 @@ import {
   UpdateBriebug,
   InsertBriebug
 } from '@state/briebug/briebug.actions';
-import { startWith, skip } from 'rxjs/operators';
+import { skip } from 'rxjs/operators';
 
 describe('BriebugComponent', () => {
   let component: BriebugComponent;
