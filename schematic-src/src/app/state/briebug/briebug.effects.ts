@@ -33,7 +33,8 @@ import {
   SelectBriebugById
 } from './briebug.actions';
 import { Briebug } from './briebug.model';
-import { BriebugService } from '@core/services/entity.service';
+// TODO: Change this path when you move your service file:
+import { BriebugService } from './briebug.service';
 
 @Injectable()
 export class BriebugEffects {
