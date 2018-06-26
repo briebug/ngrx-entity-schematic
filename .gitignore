@@ -36,3 +36,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Schematic Outputs
+src/**/*.js
+!src/**/__files__/**/*.js
+src/**/*.js.map
+src/**/*.d.ts
