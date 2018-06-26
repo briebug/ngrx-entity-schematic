@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 import * as fromRoot from '@state/app.reducer';
-import { Store, StoreModule, select } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { Subject } from 'rxjs';
 
 import { BriebugComponent } from './entity.component';
