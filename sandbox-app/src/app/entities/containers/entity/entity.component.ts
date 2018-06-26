@@ -39,12 +39,8 @@ export class BriebugComponent implements OnInit {
       const BriebugAction = id ? LoadBriebugById : SelectBriebugById;
       this.store.dispatch(new BriebugAction({ id: +id || null }));
     }),
-    switchMap(() =>
-      this.store.pipe(select(getSelectedBriebug))
-    ),
-    map((briebug) =>
-      ({ ...briebug })
-    )
+    switchMap(() => this.store.pipe(select(getSelectedBriebug))),
+    map((briebug) => ({ ...briebug }))
   );
   // The following shareReplay calls allow us to use the async pipe multiple
   // times without creating multiple subscriptions:

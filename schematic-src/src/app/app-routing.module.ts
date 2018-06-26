@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'entities',
-    loadChildren: 'src/app/entities/entities-routing.module#EntitiesRoutingModule'
+    loadChildren: 'src/app/entities/entities.module#EntitiesModule'
   },
   {
     path: '**',
