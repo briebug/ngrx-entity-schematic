@@ -16,7 +16,7 @@ export class BriebugService {
   create(briebug: Briebug): Observable<Briebug> {
     return this.httpClient.post<Briebug>(`${this.BASE_URL}entities`, {
       ...briebug,
-      // We clear out ID to indicate that this should be a new entry:
+      // We clear out the ID to indicate that this should be a new entry:
       id: null
     });
   }
@@ -41,7 +41,7 @@ export class BriebugService {
   deleteById(id: number): Observable<number> {
     return this.httpClient.delete<void>(`${this.BASE_URL}entities/${id}`)
       // The following pipe can be removed if your backend service returns the
-      // ID of the deleted entity:
+      // ID or body of the deleted entity:
       .pipe(switchMap(() => of(id)));
   }
 }
