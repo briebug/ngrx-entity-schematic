@@ -75,7 +75,7 @@
     typescript "~2.9.1"
     webpack-sources "^1.1.0"
 
-"@angular-devkit/core@0.6.8":
+"@angular-devkit/core@0.6.8", "@angular-devkit/core@^0.6.8":
   version "0.6.8"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-0.6.8.tgz#3b09d97bd2588f0091df11921f7ed772431806aa"
   dependencies:
@@ -84,7 +84,7 @@
     rxjs "^6.0.0"
     source-map "^0.5.6"
 
-"@angular-devkit/schematics@0.6.8":
+"@angular-devkit/schematics@0.6.8", "@angular-devkit/schematics@^0.6.8":
   version "0.6.8"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-0.6.8.tgz#6360a0271f1f422862bf932a03b3741e76ac5ff0"
   dependencies:

@@ -1,0 +1,15 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Adds NgRx an entity to the application",
+      "factory": "./ngrx-entity/index",
+      "schema": "./ngrx-entity/schema.json"
+    },
+    "ngrx-entity": {
+      "description": "Adds NgRx an entity to the application",
+      "factory": "./ngrx-entity/index",
+      "schema": "./ngrx-entity/schema.json"
+    }
+  }
+}
