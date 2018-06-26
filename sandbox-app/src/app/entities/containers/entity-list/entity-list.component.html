@@ -1,0 +1,15 @@
+<h1>Test Entities</h1>
+
+<p *ngIf="isLoading$ | async">Loading...</p>
+<p *ngIf="errorMessage$ | async" class="error-message">{{errorMessage$ | async}}</p>
+
+<ul>
+  <li *ngFor="let briebug of briebugEntities$ | async">
+    <b>Name</b>: {{briebug.name}}<br>
+    <b>Description</b>: {{briebug.description}}<br>
+    <button [routerLink]="['/entities', briebug.id]">Edit</button>&nbsp;
+    <button (click)="deleteBriebug(briebug.id)">Delete</button>
+  </li>
+</ul>
+
+<a routerLink="/entities/add">(Add new entity)</a>

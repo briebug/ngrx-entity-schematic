@@ -1,0 +1,16 @@
+label {
+  margin-right: 10px;
+}
+
+input {
+  margin-bottom: 10px;
+  width: 250px;
+}
+
+.invalid {
+  color: red;
+}
+
+button {
+  margin-bottom: 10px;
+}
