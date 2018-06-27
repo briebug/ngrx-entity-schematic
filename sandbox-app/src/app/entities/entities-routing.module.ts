@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EntitiesModule } from './entities.module';
 import { BriebugListComponent } from './containers/entity-list/entity-list.component';
 import { BriebugComponent } from './containers/entity/entity.component';
 
@@ -21,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [EntitiesModule, RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class EntitiesRoutingModule {}
