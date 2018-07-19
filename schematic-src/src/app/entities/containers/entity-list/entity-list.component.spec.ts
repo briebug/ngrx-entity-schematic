@@ -4,14 +4,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Store, StoreModule } from '@ngrx/store';
 
 import { BriebugListComponent } from './entity-list.component';
-import { appReducer } from '@state/app.reducer';
-import { AppState } from '@state/app.interfaces';
+import { appReducer } from '../../../state/app.reducer';
+import { AppState } from '../../../state/app.interfaces';
 import {
   SearchAllBriebugEntities,
   SearchAllBriebugEntitiesSuccess,
   SearchAllBriebugEntitiesFail
-} from '@state/briebug/briebug.actions';
-import { generateBriebugArray } from '@state/briebug/briebug.model';
+} from '../../../state/briebug/briebug.actions';
+import { generateBriebugArray } from '../../../state/briebug/briebug.model';
 
 describe('BriebugListComponent', () => {
   let component: BriebugListComponent;
