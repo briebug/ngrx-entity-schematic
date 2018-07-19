@@ -8,11 +8,12 @@ import {
   OnDestroy,
   ChangeDetectionStrategy
 } from '@angular/core';
-
-import { Briebug } from '@state/briebug/briebug.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
+
 import { takeUntil, skip, debounceTime } from 'rxjs/operators';
+
+import { Briebug } from '../../../state/briebug/briebug.model';
 
 @Component({
   selector: 'app-briebug-form',

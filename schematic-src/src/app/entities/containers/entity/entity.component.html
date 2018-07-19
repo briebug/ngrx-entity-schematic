@@ -8,7 +8,7 @@
   [disableFields]="isLoading$ | async"
   [showErrors]="showFormErrors"
   (briebugChanged)="onBriebugChanged($event)"
-  (submit)="onSubmit($event)"
+  (submit)="onSubmit()"
 ></app-briebug-form>
 
 <a routerLink="/entities">Back to list</a>
