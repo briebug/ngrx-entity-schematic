@@ -1,3 +1,7 @@
+// If we need to nest files in the package, see Kevin Schuchard's commit -
+// 5af3e6a8ca21d982d3279341727c7044d504cba9 - for an older recursive folder
+// crawling implementation.
+
 import {
   removeSync,
   ensureDirSync,
@@ -17,13 +21,6 @@ const names = {
 };
 const newEntityFolder = `${RootPath}/${names.file}@if-flat__`;
 
-interface SourceNodes {
-  fullPath: string;
-  relativePath: string;
-  isFolder: boolean;
-  renameValue: string;
-}
-
 (function init(...args) {
   const options = args[0];
 
@@ -35,74 +32,56 @@ interface SourceNodes {
   removeSync(LocalRootFolder);
 
   // copy schematic entity src files from demo project
-  copySync('schematic-src/src/app/state', LocalRootFolder);
+  copySync('schematic-src/src/app/state/briebug', LocalRootFolder);
 
   // map file data, Klaw scans recursively
-  const nodes: Array<SourceNodes> = klawSync(LocalRootFolder).map((res) => {
+  const relativeFilePaths: Array<string> = klawSync(LocalRootFolder).map((res) => {
     // get everything after ${LocalRootFolder}
-    // res.path = .../ngrx-entity-generator/__files__/entity/entity.actions.ts
-    const relativePath = res.path.split(LocalRootFolder).slice(-1)[0]; // /entity/entity.actions.ts
-    const filenameParts = relativePath.split('/');
-    const renameValue = (filenameParts.length > 2 && filenameParts[1]) || '';
+    // res.path = .../ngrx-entity-generator/__files__/briebug/briebug.actions.ts
+    const relativePath = res.path.split(LocalRootFolder).slice(-1)[0]; // /briebug/briebug.actions.ts
 
-    return {
-      fullPath: res.path,
+    return relativePath;
+  });
+
+  relativeFilePaths.forEach((relativePath: string) => {
+    console.log(`modifying path: ${relativePath}`);
+
+    // Should be last internal file modification, will loose reference in file to 'Entity' after this
+    replaceEntityWithTemplateVariable(
       relativePath,
-      isFolder: !relativePath.endsWith('.ts'),
-      renameValue,
-    };
+      readFileSync(`${RootPath}/${relativePath}`, 'utf8')
+    );
+
+    // create __files__/${EntityName} folder
+    ensureDirSync(newEntityFolder);
+
+    renameEntityFiles(relativePath, names.file);
   });
-
-  // prettyPrint(fileNodes);
-
-  nodes.forEach((node: SourceNodes) => {
-    if (!node.isFolder) {
-      console.log(`modifying path: ${node.relativePath}`);
-
-      // Should be last internal file modification, will loose reference in file to 'Entity' after this
-      replaceEntityWithTemplateVariable(
-        node,
-        readFileSync(`${RootPath}/${node.relativePath}`, 'utf8')
-      );
-
-      // create __files__/${EntityName} folder
-      ensureDirSync(newEntityFolder);
-
-      renameEntityFiles(node, names.file);
-    }
-  });
-
-  nodes.filter((node) => node.isFolder).forEach((node) => removeFolder(node));
 })(process.argv.slice(2));
 
-function replaceEntityWithTemplateVariable(node: SourceNodes, file: string) {
+function replaceEntityWithTemplateVariable(relativePath: string, file: string) {
   if (!file) {
     return console.log('Error reading file');
   }
 
-  // replace "entity" placeholders with template string format (<%= ENTITY &>) for the schematic to use
+  // replace "briebug" placeholders with template string format (<%= ENTITY &>) for the schematic to use
 
   const newFile = file
     .replace(/Briebug/g, names.class) // `<%= classify(name) %>`
-    .replace(/briebug/g, `${names.name}`); // `<%= name %>`
+    .replace(/briebug/g, names.name); // `<%= name %>`
 
-  return writeFileSync(`${RootPath}/${node.relativePath}`, newFile);
+  return writeFileSync(`${RootPath}/${relativePath}`, newFile);
 }
 
-function renameEntityFiles(node: SourceNodes, name: string) {
-  if (node.renameValue) {
-    const newName = node.relativePath
-      .replace(new RegExp(`${node.renameValue}`, 'i'), `${name}@if-flat__`)
-      .replace(new RegExp(`${node.renameValue}`, 'i'), name);
+function renameEntityFiles(relativePath: string, name: string) {
+  const schemaPlaceholderString = `${name}@if-flat__`;
+  const newPathAndName = `/${schemaPlaceholderString}${
+    relativePath
+      .replace(new RegExp('briebug', 'i'), schemaPlaceholderString)
+  }`;
 
-    return renameSync(`${RootPath}${node.relativePath}`, `${RootPath}${newName}`);
-  }
-}
-
-function removeFolder(node: SourceNodes) {
-  return node.relativePath && removeSync(`${RootPath}${node.relativePath}`);
-}
-
-function prettyPrint(thing: any) {
-  return console.log(JSON.stringify(thing, null, 4));
+  return renameSync(
+    `${RootPath}${relativePath}`,
+    `${RootPath}${newPathAndName}`
+  );
 }
