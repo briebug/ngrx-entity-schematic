@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { <%= classify(name) %> } from '@state/<%= name %>/<%= name %>.model';
+import { <%= classify(name) %> } from './<%= name %>.model';
 
 @Injectable({
   providedIn: 'root'
