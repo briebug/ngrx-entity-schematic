@@ -11,11 +11,12 @@ import * as klawSync from 'klaw-sync';
 const LocalRootFolder = 'src/ngrx-entity/__files__';
 const RootPath = `${process.cwd()}/${LocalRootFolder}`;
 const names = {
-  file: `__name@dasherize`,
+  folder: `__name@dasherize`,
+  file: `__name@dasherize__`,
   class: `<%= classify(name) %>`,
   name: `<%= name %>`,
 };
-const newEntityFolder = `${RootPath}/${names.file}@if-flat__`;
+const newEntityFolder = `${RootPath}/${names.folder}@if-flat__`;
 
 interface SourceNodes {
   fullPath: string;
@@ -68,7 +69,7 @@ interface SourceNodes {
       // create __files__/${EntityName} folder
       ensureDirSync(newEntityFolder);
 
-      renameEntityFiles(node, names.file);
+      renameEntityFiles(node, names);
     }
   });
 
@@ -89,11 +90,11 @@ function replaceEntityWithTemplateVariable(node: SourceNodes, file: string) {
   return writeFileSync(`${RootPath}/${node.relativePath}`, newFile);
 }
 
-function renameEntityFiles(node: SourceNodes, name: string) {
+function renameEntityFiles(node: SourceNodes, name: any) {
   if (node.renameValue) {
     const newName = node.relativePath
-      .replace(new RegExp(`${node.renameValue}`, 'i'), `${name}@if-flat__`)
-      .replace(new RegExp(`${node.renameValue}`, 'i'), name);
+      .replace(new RegExp(`${node.renameValue}`, 'i'), `${name.folder}@if-flat__`)
+      .replace(new RegExp(`${node.renameValue}`, 'i'), name.file);
 
     return renameSync(`${RootPath}${node.relativePath}`, `${RootPath}${newName}`);
   }

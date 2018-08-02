@@ -10,6 +10,7 @@ import {
   template,
 } from '@angular-devkit/schematics';
 import { NgRxOptions } from './utility/util';
+import { parseName } from './utility/parseName';
 
 export default function(options: NgRxOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
@@ -19,17 +20,21 @@ export default function(options: NgRxOptions): Rule {
 
 function addNgRxFiles(options: NgRxOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    const dir = './'; // read path from where uses runs schematic?
-    context.logger.debug(`adding NgRX files to ${dir} dir`);
-    options.name = 'TEST';
+    const path = './src/app/state'; // read path from where uses runs schematic?
+    const entityName = 'TEST';
+    context.logger.debug(`adding NgRX files to ${path} dir`);
+
+    const parsedPath = parseName(path, entityName);
+    options.name = parsedPath.name;
+    options.path = parsedPath.path;
 
     const templateSource = apply(url('./__files__'), [
       template({
         ...strings,
-        'if-flat': (s: string) => options.flat ? '' : s,
+        'if-flat': (s: string) => (options.flat ? '' : s),
         ...options,
       }),
-      move(dir),
+      move(options.path),
     ]);
 
     return templateSource(context);
