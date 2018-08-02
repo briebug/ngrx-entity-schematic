@@ -1,11 +1,20 @@
 {
-  "name": "ngrx-entity-generator",
-  "version": "0.0.0",
+  "name": "@briebug/ngrx-entity-schematic",
+  "version": "1.0.0",
+  "main": "src/ngrx-entity/index.js",
+  "schematics": "./src/collection.json",
   "scripts": {
-    "build:ts": "node_modules/typescript/bin/tsc -w -p tsconfig.file-build.json",
-    "build:run": "nodemon --inspect-brk --watch tmp tmp/index.js",
-    "build:files": "node_modules/typescript/bin/tsc -p tsconfig.file-build.json && node ./tmp/buildFiles.js",
-    "clean": "git checkout -- sandbox-app && git clean -fd sandbox-app"
+    "build:fileBuilder": "node_modules/typescript/bin/tsc -w -p tsconfig.file-build.json",
+    "watch:fileBuilder": "nodemon --inspect-brk --watch tmp ./tmp/buildFiles.js",
+    "build:run:fileBuilder": "node_modules/typescript/bin/tsc -p tsconfig.file-build.json && node ./tmp/buildFiles.js",
+    "build:schematic": "tsc -p tsconfig.schematic.json",
+    "build:schematic:watch": "tsc -p tsconfig.schematic.json -watch",
+    "clean": "git checkout HEAD -- sandbox-app && git clean -fd sandbox-app",
+    "clean:launch": "npm run clean && npm run launch",
+    "launch": "cd sandbox-app && ng g @briebug/ngrx-entity-schematic:ngrx-entity-schematic",
+    "test:ci": "npm run clean:launch && npm run test:sandbox && npm run clean",
+    "test:sandbox": "cd sandbox-app && npm run lint && npm run test && npm run e2e && npm run build",
+    "link:schematic": "yarn link && cd sandbox-app && yarn link @briebug/ngrx-entity-schematic"
   },
   "dependencies": {
     "@angular-devkit/core": "^0.6.8",

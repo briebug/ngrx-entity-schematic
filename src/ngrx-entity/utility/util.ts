@@ -1,1 +1,4 @@
-export interface NgRxOptions {}
+export interface NgRxOptions {
+  flat?: boolean,
+  name?: string
+}
