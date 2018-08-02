@@ -23,7 +23,7 @@ import {
 import { generate<%= classify(name) %>, generate<%= classify(name) %>Array } from './<%= name %>.model';
 // TODO: Change this path when you move your service file:
 import { <%= classify(name) %>Service } from './<%= name %>.service';
-import { <%= classify(name) %>Effects } from '@state/<%= name %>/<%= name %>.effects';
+import { <%= classify(name) %>Effects } from './<%= name %>.effects';
 
 describe('<%= classify(name) %>Effects', () => {
   let actions: Observable<any>;

@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 import { <%= classify(name) %> } from './<%= name %>.model';
-import { <%= classify(name) %>SearchQuery } from '@state/<%= name %>/<%= name %>.reducer';
+import { <%= classify(name) %>SearchQuery } from './<%= name %>.reducer';
 
 export enum <%= classify(name) %>ActionTypes {
   Insert<%= classify(name) %> = '[<%= classify(name) %>] Insert',
