@@ -1,6 +1,29 @@
 # NgRx Entity Generator
 
-## Usage
+## How to Use
+
+### Run schematic
+
+Generate Entity files
+
+```shell
+ng g @briebug/ngrx-entity-schematic:ngrx-entity-schematic ENTITY_NAME
+```
+
+Generate Entity files at a specific relative path
+
+```shell
+ng g @briebug/ngrx-entity-schematic:ngrx-entity-schematic ENTITY_NAME --path RELATIVE/PATH
+```
+
+Generate Entity files with NgRx setup files
+
+```shell
+ng g @briebug/ngrx-entity-schematic:ngrx-entity-schematic ENTITY_NAME --init
+```
+
+- `ENTITY_NAME`, `--path`, and `--init` flags can be used together.
+- `ENTITY_NAME` is **required** as the first argument after the schematic name
 
 ## Development
 
@@ -12,16 +35,22 @@ yarn link:schematic
 
 ### Run schematic locally
 
-Compile the schematic code
+You can run or re-run schematic against `sandbox-app` and pass options
 
 ```shell
-yarn build:schematic
+yarn launch ENTITY_NAME --init
 ```
 
 Reset the `sandbox-app` to it's version controlled state, then execute the schematic locally against the `sandbox-app`.
 
 ```shell
 yarn clean:launch
+```
+
+Compile the schematic code if changes have been made to `./src/*`
+
+```shell
+yarn build:schematic
 ```
 
 ### Copy `schematic-src` files into schematic template files
@@ -41,11 +70,11 @@ yarn build:run:fileBuilder
 
 #### About
 
-This schematic uses a template project that's the working blueprint for what the schematic will eventually generate. This pattern was chosen to provide a faster and easier development cycle when testing the template app as a standalone application with the typical dev feedback provided by the Angular CLI. The alternative would involve developing against the template files (which include template variable like `<%= classify(name) %>`) and having to run the schematic locally on every change.
+This schematic uses a template project that acts as the working blueprint for what the schematic will eventually generate. This pattern was chosen to provide a faster and easier development cycle when testing the blueprint app as a standalone application providing the typical dev feedback by the Angular  CLI and other devtools. The alternative would involve developing against the template files (which include template variables like `<%= classify(name) %>`) and having to run the schematic locally on every change.
 
 ### Developing the `buildFiles` script
 
-When editing the script that copies and modifies the blueprint files into the schematic directory. The following commands all for quick dev feedback and debugging.
+This script copies and modifies the blueprint Entity files into the schematic `__files__` directory. The following commands allow for quick dev feedback and debugging.
 
 Compile the `buildFiles` script into `/tmp` in one shell
 
@@ -53,7 +82,7 @@ Compile the `buildFiles` script into `/tmp` in one shell
 build:fileBuilder
 ```
 
-In another shell, run the script and watch the `/tmp` dir for changes. Allows for attaching a debugger on port `9222`. See the attached `.vscode/launch.json` file for debugging with VSCode.
+In another shell, run the following script which will watch the `/tmp` dir for changes. Allows for attaching a debugger on port `9222`. See the attached `.vscode/launch.json` file for debugging with VSCode. Run the `Attach Schematic` debugger.
 
 ```shell
 run:fileBuilder
@@ -65,12 +94,12 @@ Once both of these are run, changes to `./buildFiles.ts` should recompile and tr
 
 ### ./src
 
-This is the schematic code that's executed when running `ng g @briebug/ngrx-entity-schematic`.
+This is the schematic code that's executed when running `ng g @briebug/ngrx-entity-schematic:ngrx-entity-schematic`.
 
 ### ./schematic-src
 
-This the blueprint used for generating the schematic, specifically in template files in `./src/ngrx-entity/__files__`. This is a working application that defines the final form of the schematic.
+This is the blueprint app used for generating the schematic, specifically the template files in `./src/ngrx-entity/__files__`. This is a working application that defines the final form of the schematic.
 
 ### ./sandbox-app
 
-This is an application that's used for testing the schematic locally for development.
+This is an application that's used for testing the schematic locally during development.
