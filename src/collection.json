@@ -6,7 +6,7 @@
       "factory": "./ngrx-entity/index",
       "schema": "./ngrx-entity/schema.json"
     },
-    "ngrx-entity": {
+    "ngrx-entity-schematic": {
       "description": "Adds NgRx an entity to the application",
       "factory": "./ngrx-entity/index",
       "schema": "./ngrx-entity/schema.json"
