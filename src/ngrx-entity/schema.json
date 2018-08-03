@@ -11,6 +11,18 @@
         "$source": "argv",
         "index": 0
       }
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the entity files",
+      "visible": false,
+      "alias": "p"
+    },
+    "init": {
+      "type": "boolean",
+      "description": "Flag to setup NgRx.",
+      "default": false
     }
   },
   "required": []
