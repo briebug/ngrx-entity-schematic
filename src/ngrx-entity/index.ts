@@ -10,6 +10,7 @@ import {
   template,
   filter,
   noop,
+  SchematicsException,
 } from '@angular-devkit/schematics';
 import { NgRxOptions } from './utility/util';
 import { parseName } from './utility/parseName';
@@ -22,11 +23,15 @@ export default function(options: NgRxOptions): Rule {
 
 function addNgRxFiles(options: NgRxOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    const path = './src/app/state'; // read path from where uses runs schematic?
-    const entityName = 'orders';
+    if (!options.name) {
+      throw new SchematicsException('Entity name is required');
+    }
+
+    const path = options.path ? options.path : './src/app/state';
+    
     context.logger.debug(`adding NgRX files to ${path} dir`);
 
-    const parsedPath = parseName(path, entityName);
+    const parsedPath = parseName(path, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
 

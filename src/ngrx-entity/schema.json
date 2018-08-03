@@ -3,6 +3,15 @@
   "id": "BriebugSchematicsNgRxEntity",
   "title": "NgRx Generator Options Schema",
   "type": "object",
-  "properties": {},
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the component.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    }
+  },
   "required": []
 }
