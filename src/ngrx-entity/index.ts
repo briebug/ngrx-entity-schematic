@@ -28,9 +28,9 @@ function addNgRxFiles(options: NgRxOptions): Rule {
     }
 
     if (!options.path) {
-      const path = `./src/app/state`;
-      console.log(`No Entity path specified, adding files to ${path}`);
-      options.path = path;
+      // todo: determine default based on current working dir
+      options.path = `./src/app/state`;
+      console.log(`No Entity path specified, adding files to ${options.path}`);
     }
 
     context.logger.debug(`adding NgRX files to ${options.path} dir`);
