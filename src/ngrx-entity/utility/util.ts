@@ -1,5 +1,6 @@
 export interface NgRxOptions {
-  flat?: boolean;
-  name?: string;
+  name: string;
   path?: string;
+  init?: boolean;
+  flat?: boolean;
 }

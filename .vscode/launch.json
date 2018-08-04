@@ -7,7 +7,7 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "Attach Node",
+      "name": "Attach Schematic",
       "port": 9229,
       "restart": false,
       "protocol": "inspector"
