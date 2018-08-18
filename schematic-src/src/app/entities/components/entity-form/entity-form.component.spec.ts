@@ -2,9 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SimpleChange } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { BriebugFormComponent } from './entity-form.component';
-import { generateBriebug } from '@state/briebug/briebug.model';
 import { fromEvent } from 'rxjs';
+
+import { BriebugFormComponent } from './entity-form.component';
+import { generateBriebug } from '../../../state/briebug/briebug.model';
 
 describe('BreibugFormComponent', () => {
   let component: BriebugFormComponent;

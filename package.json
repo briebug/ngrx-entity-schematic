@@ -10,11 +10,11 @@
     "build:schematic": "tsc -p tsconfig.schematic.json",
     "build:schematic:watch": "tsc -p tsconfig.schematic.json -watch",
     "clean": "git checkout HEAD -- sandbox-app && git clean -fd sandbox-app",
-    "clean:launch": "npm run clean && npm run launch",
+    "clean:launch": "yarn clean && yarn launch",
     "clean:launch:all": "yarn build:run:fileBuilder && yarn build:schematic && yarn clean:launch",
     "launch": "cd sandbox-app && ng g @briebug/ngrx-entity-schematic:ngrx-entity-schematic",
-    "test:ci": "npm run clean:launch && npm run test:sandbox && npm run clean",
-    "test:sandbox": "cd sandbox-app && npm run lint && npm run test && npm run e2e && npm run build",
+    "test:ci": "yarn clean:launch briebug --init && yarn test:sandbox && yarn clean",
+    "test:sandbox": "cd sandbox-app && yarn lint && yarn test && yarn e2e && yarn build",
     "link:schematic": "yarn link && cd sandbox-app && yarn link @briebug/ngrx-entity-schematic"
   },
   "dependencies": {

@@ -3,14 +3,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
-import * as fromRoot from '@state/app.reducer';
+import * as fromRoot from '../../../state/app.reducer';
 import { Store, StoreModule } from '@ngrx/store';
 import { Subject } from 'rxjs';
 
 import { BriebugComponent } from './entity.component';
 import { BriebugFormComponent } from '../../components/entity-form/entity-form.component';
-import { AppState } from '@state/app.interfaces';
-import { generateBriebug } from '@state/briebug/briebug.model';
+import { AppState } from '../../../state/app.interfaces';
+import { generateBriebug } from '../../../state/briebug/briebug.model';
 import {
   LoadBriebugById,
   LoadBriebugByIdSuccess,
@@ -18,7 +18,7 @@ import {
   LoadBriebugByIdFail,
   UpdateBriebug,
   InsertBriebug
-} from '@state/briebug/briebug.actions';
+} from '../../../state/briebug/briebug.actions';
 import { skip } from 'rxjs/operators';
 
 describe('BriebugComponent', () => {

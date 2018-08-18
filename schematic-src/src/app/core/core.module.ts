@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { BriebugService } from '@state/briebug/briebug.service';
+import { BriebugService } from '../state/briebug/briebug.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],

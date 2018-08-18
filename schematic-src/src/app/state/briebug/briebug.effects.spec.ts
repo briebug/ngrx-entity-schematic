@@ -23,7 +23,7 @@ import {
 import { generateBriebug, generateBriebugArray } from './briebug.model';
 // TODO: Change this path when you move your service file:
 import { BriebugService } from './briebug.service';
-import { BriebugEffects } from '@state/briebug/briebug.effects';
+import { BriebugEffects } from './briebug.effects';
 
 describe('BriebugEffects', () => {
   let actions: Observable<any>;

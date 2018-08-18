@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Briebug } from '@state/briebug/briebug.model';
+import { Briebug } from './briebug.model';
 
 @Injectable({
   providedIn: 'root'
