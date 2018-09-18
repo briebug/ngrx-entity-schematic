@@ -1,16 +1,88 @@
 # NgRx Entity Generator
 
-## How to Use
+- [What it generates](#generated)
+- [How to use](#how-to-use)
+- [Schematic development](#development)
+- [Schematic architecture](#architecture)
+
+## What it generates <a name="generated"></a>
+
+This schematic creates a basic implementation of NgRx files in your project. For example, if you run the schematic for the entity "customer", the schematic will generate a `state` folder (if it doesn't already exist), and you'll end up with the following:
+
+```
+app/
+├── state/
+│   └── customer
+│       ├── customer.actions.ts
+│       ├── customer.effects.spec.ts
+│       ├── customer.effects.ts
+│       ├── customer.model.ts
+│       ├── customer.reducer.spec.ts
+│       ├── customer.reducer.ts
+│       ├── customer.service.ts
+│       ├── index.ts
+```
+with the --init option you also get:
+```
+app/
+├── state/
+│   ├── app.interfaces.ts
+│   ├── app.reducer.ts
+│   ├── state-utils.ts
+│   ├── state.module.ts
+```
+
+Continuing the example of "customer", the following are included:
+
+| action | effect | reducer |
+| ------ | ------ | ------- |
+| InsertCustomer | ✔ | ✔ |
+| InsertCustomerSuccess |  | ✔ |
+| InsertCustomerFail | | ✔ |
+| SearchAllCustomerEntities | ✔ |  ✔ |
+| SearchAllCustomerEntitiesSuccess | | ✔ |
+| SearchAllCustomerEntitiesFail |  | ✔ |
+| LoadCustomerById | ✔ | ✔ |
+| LoadCustomerByIdSuccess | | ✔ |
+| LoadCustomerByIdFail |  | ✔ |
+| UpdateCustomer | ✔ | ✔ |
+| UpdateCustomerSuccess |  | ✔ |
+| UpdateCustomerFail |  | ✔ |
+| DeleteCustomerById | ✔ | ✔ |
+| DeleteCustomerByIdSuccess |  | ✔ |
+| DeleteCustomerByIdFail |  | ✔ |
+| SetSearchQuery | ✔ | ✔ |
+| SelectCustomerById | ✔ | ✔ |
+
+### Other files:
+
+- `index.ts` exports all the selectors. 
+- `customer.service.ts` is a client for your api - it works with the sandbox app, but you will likely replace this with your own service. Just be aware that the entity expects the methods in this file.
+- `customer.model.ts` - you can safely replace this but the generated spec files use methods in this file to generate mocks.
+
+## How to Use <a name="how-to-use"></a>
+
+### Install the schematic globally
+
+```shell
+yarn global add @briebug/ngrx-entity-schematic
+```
+
+### Install NgRx in your project
+
+```shell
+yarn add @ngrx/{effects,entity,router-store,store,store-devtools} ngrx-store-freeze
+```
 
 ### Run schematic
 
-Generate Entity files
+Generate Entity files, where `ENTITY_NAME` is an all-lowercase string name for your entity.
 
 ```shell
 ng g @briebug/ngrx-entity-schematic:ngrx-entity-schematic ENTITY_NAME
 ```
 
-Generate Entity files at a specific relative path
+Generate Entity files at a specific relative path. Without the path option, a `state` folder is created in the root of the `app` folder.
 
 ```shell
 ng g @briebug/ngrx-entity-schematic:ngrx-entity-schematic ENTITY_NAME --path RELATIVE/PATH
@@ -25,12 +97,13 @@ ng g @briebug/ngrx-entity-schematic:ngrx-entity-schematic ENTITY_NAME --init
 - `ENTITY_NAME`, `--path`, and `--init` flags can be used together.
 - `ENTITY_NAME` is **required** as the first argument after the schematic name
 
-## Development
+## Schematic development <a name="development"></a>
 
-### Link the schematic to the `sandbox-app`
+Link the schematic to the `sandbox-app`, then build
 
 ```shell
 yarn link:schematic
+yarn build:schematic
 ```
 
 ### Run schematic locally
@@ -44,7 +117,7 @@ yarn launch ENTITY_NAME --init
 Reset the `sandbox-app` to it's version controlled state, then execute the schematic locally against the `sandbox-app`.
 
 ```shell
-yarn clean:launch
+yarn clean:launch ENTITY_NAME
 ```
 
 Compile the schematic code if changes have been made to `./src/*`
@@ -90,7 +163,7 @@ run:fileBuilder
 
 Once both of these are run, changes to `./buildFiles.ts` should recompile and trigger an update to nodemon. Then trigger the VSCode debugger `f5` and that will land a breakpoint on line:1 of the app. Step over that to get to your breakpoint.
 
-## Architecture
+## Schematic architecture <a name="architecture"></a>
 
 ### ./src
 
