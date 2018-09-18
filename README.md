@@ -1,5 +1,7 @@
 # NgRx Entity Generator
 
+An Angular schematic for generating NgRx files.
+
 - [What it generates](#generated)
 - [How to use](#how-to-use)
 - [Schematic development](#development)
@@ -57,8 +59,10 @@ Continuing the example of "customer", the following are included:
 ### Other files:
 
 - `index.ts` exports all the selectors. 
-- `customer.service.ts` is a client for your api - it works with the sandbox app, but you will likely replace this with your own service. Just be aware that the entity expects the methods in this file.
+- `customer.service.ts` is a client for your api - it works with the sandbox app, but you will likely replace this with your own service. Just be aware that the effects expect the methods in this file.
 - `customer.model.ts` - you can safely replace this but the generated spec files use methods in this file to generate mocks.
+
+Be sure to go through the files to remove what you don't need and tailor them to your project.
 
 ## How to Use <a name="how-to-use"></a>
 
