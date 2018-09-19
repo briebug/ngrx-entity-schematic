@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/ngrx-entity/index.js",
   "schematics": "./src/collection.json",
+	"license": "MIT",
   "scripts": {
     "build:fileBuilder": "node_modules/typescript/bin/tsc -w -p tsconfig.file-build.json",
     "watch:fileBuilder": "nodemon --inspect-brk --watch tmp ./tmp/buildFiles.js",
