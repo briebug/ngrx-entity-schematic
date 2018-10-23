@@ -1,9 +1,11 @@
 {
   "name": "@briebug/ngrx-entity-schematic",
-  "version": "0.1.0",
+  "version": "0.0.0",
+  "description": "An Angular schematic for quickly scaffolding NgRx Entities with actions, effects, reducer, model, service, and passing specs.",
+  "author": "Kevin Schuchard <schuchard.kevin@gmail.com>",
   "main": "src/ngrx-entity/index.js",
   "schematics": "./src/collection.json",
-	"license": "MIT",
+  "license": "MIT",
   "scripts": {
     "build:schematic": "tsc -p tsconfig.schematic.json",
     "build:schematic:watch": "tsc -p tsconfig.schematic.json -watch",
@@ -44,5 +46,24 @@
     "ts-node": "^6.1.2",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2"
-  }
+  },
+  "engines": {
+    "node": ">=8.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/briebug/ngrx-entity-schematic"
+  },
+  "bugs": "https://github.com/briebug/ngrx-entity-schematic/issues",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "angular",
+    "schematic",
+    "ngrx",
+    "entity",
+    "entities",
+    "scaffold"
+  ]
 }
