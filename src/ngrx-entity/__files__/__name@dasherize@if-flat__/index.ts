@@ -1,7 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
-import * as from<%= classify(name) %>State from './<%= name %>.reducer';
-import { <%= classify(name) %>State } from './<%= name %>.reducer';
+import * as from<%= classify(name) %>State from './<%= dasherize(name) %>.reducer';
+import { <%= classify(name) %>State } from './<%= dasherize(name) %>.reducer';
 
 export const get<%= classify(name) %>State = createFeatureSelector<<%= classify(name) %>State>('<%= name %>');
 

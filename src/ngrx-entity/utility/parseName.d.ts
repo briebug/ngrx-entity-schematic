@@ -12,3 +12,4 @@ export interface Location {
     path: Path;
 }
 export declare function parseName(path: string, name: string): Location;
+export declare const camelize: (word: string, splitBy?: string) => string;

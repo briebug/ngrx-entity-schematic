@@ -19,11 +19,11 @@ import {
   Delete<%= classify(name) %>ById,
   Delete<%= classify(name) %>ByIdSuccess,
   Delete<%= classify(name) %>ByIdFail
-} from './<%= name %>.actions';
-import { generate<%= classify(name) %>, generate<%= classify(name) %>Array } from './<%= name %>.model';
+} from './<%= dasherize(name) %>.actions';
+import { generate<%= classify(name) %>, generate<%= classify(name) %>Array } from './<%= dasherize(name) %>.model';
 // TODO: Change this path when you move your service file:
-import { <%= classify(name) %>Service } from './<%= name %>.service';
-import { <%= classify(name) %>Effects } from './<%= name %>.effects';
+import { <%= classify(name) %>Service } from './<%= dasherize(name) %>.service';
+import { <%= classify(name) %>Effects } from './<%= dasherize(name) %>.effects';
 
 describe('<%= classify(name) %>Effects', () => {
   let actions: Observable<any>;

@@ -31,10 +31,9 @@ import {
   Delete<%= classify(name) %>ByIdFail,
   SetSearchQuery,
   Select<%= classify(name) %>ById
-} from './<%= name %>.actions';
-import { <%= classify(name) %> } from './<%= name %>.model';
-// TODO: Change this path when you move your service file:
-import { <%= classify(name) %>Service } from './<%= name %>.service';
+} from './<%= dasherize(name) %>.actions';
+import { <%= classify(name) %> } from './<%= dasherize(name) %>.model';
+import { <%= classify(name) %>Service } from './<%= dasherize(name) %>.service';
 
 @Injectable()
 export class <%= classify(name) %>Effects {

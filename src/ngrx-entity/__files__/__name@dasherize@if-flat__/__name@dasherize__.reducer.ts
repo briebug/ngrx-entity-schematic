@@ -1,6 +1,6 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { <%= classify(name) %> } from './<%= name %>.model';
-import { <%= classify(name) %>Actions, <%= classify(name) %>ActionTypes } from './<%= name %>.actions';
+import { <%= classify(name) %> } from './<%= dasherize(name) %>.model';
+import { <%= classify(name) %>Actions, <%= classify(name) %>ActionTypes } from './<%= dasherize(name) %>.actions';
 
 export interface <%= classify(name) %>SearchQuery {
   filter: string;

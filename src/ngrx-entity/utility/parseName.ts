@@ -1,4 +1,3 @@
-
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -20,7 +19,20 @@ export function parseName(path: string, name: string): Location {
   const namePath = dirname((path + '/' + name) as Path);
 
   return {
-    name: nameWithoutPath,
+    // entity name input expects camelCase or dasherized name (customerOrder || customer-order)
+    name: camelize(nameWithoutPath, '-'),
     path: normalize('/' + namePath),
   };
 }
+
+export const camelize = (word: string, splitBy: string = '-') => {
+  const parts = word.split(splitBy);
+
+  return !parts.length
+    ? word
+    : parts[0] +
+        parts
+          .slice(1)
+          .map((part) => part[0].toUpperCase() + part.slice(1))
+          .join('');
+};
