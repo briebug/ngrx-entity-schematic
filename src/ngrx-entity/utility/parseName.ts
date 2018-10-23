@@ -19,6 +19,7 @@ export function parseName(path: string, name: string): Location {
   const namePath = dirname((path + '/' + name) as Path);
 
   return {
+    // entity name input expects camelCase or dasherized name (customerOrder || customer-order)
     name: camelize(nameWithoutPath, '-'),
     path: normalize('/' + namePath),
   };
