@@ -1,6 +1,6 @@
 {
   "name": "@briebug/ngrx-entity-schematic",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "src/ngrx-entity/index.js",
   "schematics": "./src/collection.json",
 	"license": "MIT",
