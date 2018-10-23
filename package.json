@@ -13,7 +13,7 @@
     "clean:launch": "yarn clean && yarn launch",
     "clean:build:launch": "yarn build:schematic && yarn clean:launch",
     "launch": "cd sandbox-app && ng g @briebug/ngrx-entity-schematic:add",
-    "test:ci": "yarn clean:build:launch briebug --init && yarn test:sandbox && yarn clean",
+    "test:ci": "yarn clean:build:launch briebug --init --path src/app/state && yarn test:sandbox && yarn clean",
     "test:sandbox": "cd sandbox-app && yarn lint && yarn test && yarn e2e && yarn build",
     "link:schematic": "yarn link && cd sandbox-app && yarn link @briebug/ngrx-entity-schematic"
   },
