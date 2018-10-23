@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { appMetaReducers, appReducer } from './app.reducer';
 import { CustomRouterStateSerializer } from './state-utils';
 import { environment } from '../../environments/environment';
-import { <%= classify(name) %>Effects } from './<%= name %>/<%= name %>.effects';
+import { <%= classify(name) %>Effects } from './<%= dasherize(name) %>/<%= dasherize(name) %>.effects';
 
 @NgModule({
   imports: [

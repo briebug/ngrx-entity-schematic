@@ -3,8 +3,8 @@ import {
   generate<%= classify(name) %>,
   generate<%= classify(name) %>Map,
   generate<%= classify(name) %>Array
-} from './<%= name %>.model';
-import * as actions from './<%= name %>.actions';
+} from './<%= dasherize(name) %>.model';
+import * as actions from './<%= dasherize(name) %>.actions';
 import {
   <%= name %>Reducer,
   initialState,
@@ -12,7 +12,7 @@ import {
   getLoading,
   getError,
   getQuery
-} from './<%= name %>.reducer';
+} from './<%= dasherize(name) %>.reducer';
 import { Update } from '@ngrx/entity';
 
 const INITIAL_STATE_WITH_ERROR = {
