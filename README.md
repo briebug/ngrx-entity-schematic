@@ -13,25 +13,25 @@ An Angular schematic for quickly scaffolding NgRx Entities with actions, effects
 
     yarn add @ngrx/{effects,entity,router-store,store,store-devtools} ngrx-store-freeze
 
-### Running the schematic
+### Run the schematic
 
-    ng add @briebug/ngrx-entity-schematic ENTITY --path src/app/state
+    ng add @briebug/ngrx-entity-schematic
 
-This will add the schematic as a project dependency, create all the default `ENTITY` files and write them at the `--path` specified
+This will add the schematic as a project dependency if not already and provide prompts for configuration.
 
 #### Entity name
 
 The `ENTITY` name provided should either be camel case or dasherized (`customerOrder` || `customer-order`)
 
-### Generate default Entity files
+### Optional - run the schematic with inline options
 
     ng add @briebug/ngrx-entity-schematic ENTITY
 
-### Generate Entity files at a specific relative path: `--path`
+#### Generate Entity files at a specific relative path: `--path`
 
     ng add @briebug/ngrx-entity-schematic ENTITY --path PATH/TO/WRITE
 
-### Generate Entity files with NgRx setup files: `--init`
+#### Generate Entity files with NgRx setup files: `--init`
 
     ng add @briebug/ngrx-entity-schematic ENTITY --init --path PATH/TO/WRITE
 
