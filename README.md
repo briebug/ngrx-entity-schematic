@@ -142,6 +142,12 @@ You can pass optionally pass arguments to this command
 
 There are more specific commands that allow for individually running the above workflow. Those scripts can be found in the `./package.json`.
 
+### Test commands
+
+The test command expects and entity name of `briebug` to test how the schematic runs inside the sandbox-app. Changing this script should require changes to the sandbox-app and understanding of the consequences.
+
+    "test:ci": "yarn clean:build:launch briebug --init && yarn test:sandbox && yarn clean"
+
 ## Schematic Project Architecture <a name="architecture"></a>
 
 ### ./src
