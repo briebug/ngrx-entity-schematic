@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "lib": ["es2017", "dom"],
+    "declaration": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "rootDir": "./",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "inlineSourceMap": true,
+    "strictNullChecks": true,
+    "target": "es6",
+    "types": ["node"]
+  },
+  "exclude": ["**/node_modules", "src/*/__files__/**/*"]
+}

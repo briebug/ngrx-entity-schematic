@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "BriebugSchematicsNgRxEntity",
+  "title": "NgRx Generator Options Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the entity.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "minLength": 1,
+      "x-prompt": "Enter the entity name (camelCase || dasherized)"
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the entity files",
+      "visible": false,
+      "alias": "p",
+      "x-prompt": "Enter the path at which to create the entity files"
+    },
+    "init": {
+      "type": "boolean",
+      "description": "Flag to setup NgRx.",
+      "default": false,
+      "x-prompt": "Add initalization files?"
+    }
+  },
+  "required": []
+}

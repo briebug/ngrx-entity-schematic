@@ -1,0 +1,37 @@
+<form [formGroup]="formGroup">
+  <label for="name">Name:</label>
+  <input
+    type="text"
+    formControlName="name"
+  >
+  <div
+    *ngIf="showErrors && formGroup.get('name').hasError('required')"
+    class="invalid"
+  >
+    Name is required
+  </div>
+
+  <br>
+
+  <label for="description">Description:</label>
+  <input
+    type="text"
+    formControlName="description"
+  >
+  <div
+    *ngIf="showErrors && formGroup.get('description').hasError('required')"
+    class="invalid"
+  >
+    Description is required
+  </div>
+
+  <br>
+
+  <button
+    type="submit"
+    class="btn btn-success"
+    [disabled]="disableFields"
+  >
+    Submit
+  </button>
+</form>

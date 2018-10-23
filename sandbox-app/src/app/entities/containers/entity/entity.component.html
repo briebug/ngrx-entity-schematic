@@ -1,0 +1,14 @@
+<h1>Test Entity</h1>
+<!-- FIXME: This is not showing when loading: -->
+<p *ngIf="isLoading$ | async">Loading...</p>
+<p *ngIf="errorMessage$ | async" class="error-message">{{errorMessage$ | async}}</p>
+
+<app-briebug-form
+  [briebug]="briebug$ | async"
+  [disableFields]="isLoading$ | async"
+  [showErrors]="showFormErrors"
+  (briebugChanged)="onBriebugChanged($event)"
+  (submit)="onSubmit()"
+></app-briebug-form>
+
+<a routerLink="/entities">Back to list</a>
