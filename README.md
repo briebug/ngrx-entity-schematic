@@ -110,6 +110,16 @@ Continuing the example of `customer`, the following are included:
 
 *Be sure to audit the files and tailor them to your project*
 
+## Install and use globally
+
+Optionally, you can install the package globally
+
+    yarn global add @briebug/ngrx-entity-schematic
+
+Then run the schematic in any project, assuming the angular/cli is installed and available.
+
+    ng g @briebug/ngrx-entity-schematic:add
+
 ## Local Development
 
 ### Link the schematic to the `sandbox-app`
