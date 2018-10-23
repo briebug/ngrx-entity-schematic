@@ -27,11 +27,11 @@ The `ENTITY` name provided should either be camel case or dasherized (`customerO
 
     ng add @briebug/ngrx-entity-schematic ENTITY
 
-### Generate Entity files at a specific relative path
+### Generate Entity files at a specific relative path: `--path`
 
     ng add @briebug/ngrx-entity-schematic ENTITY --path PATH/TO/WRITE
 
-### Generate Entity files with NgRx setup files
+### Generate Entity files with NgRx setup files: `--init`
 
     ng add @briebug/ngrx-entity-schematic ENTITY --init --path PATH/TO/WRITE
 
