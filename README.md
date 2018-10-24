@@ -120,6 +120,38 @@ Then run the schematic in any project, assuming the angular/cli is installed and
 
     ng g @briebug/ngrx-entity-schematic:add
 
+## Adding another entity
+
+The schematic does not yet support auto connecting the entity to the root store when running the schematic without the `--init` option. The following steps will be necessary to connect the entity to the store manually.
+
+The following example assumes that an entity named `briebug` was first added with the initialization files (`--init`), followed by another entity named `order` without the initialization files.
+
+1. add to the entity state from the `entity.reducer.ts` to the `state/app.interface.ts`.
+
+```ts
+export interface AppState {
+  router: RouterReducerState<RouterStateUrl>;
+  briebug: BriebugState;
+  order: OrderState;
+}
+```
+
+2. add the entity reducer to the parent/root reducer in `state/app.reducer.ts`.
+
+```ts
+export const appReducer: ActionReducerMap<AppState> = {
+      briebug: briebugReducer,
+      router: routerReducer,
+      order: orderReducer
+    };
+```
+
+3. add the effects class to the parent/root Effects module `state/state.module.ts` in the `EffectsModule.forRoot([])` array.
+
+```ts
+EffectsModule.forRoot([BriebugEffects, OrderEffects]),
+```
+
 ## Local Development
 
 ### Link the schematic to the `sandbox-app`
@@ -150,7 +182,7 @@ run the launch command with any inline options
 
 ### Test commands
 
-The test command expects and entity name of `briebug` to test how the schematic runs inside the sandbox-app. Changing this script should require changes to the sandbox-app and understanding of the consequences.
+The test command expects an entity name of `briebug` to test how the schematic runs inside the sandbox-app. Changing this script should require changes to the sandbox-app and understanding of the consequences.
 
     "test:ci": "yarn clean:build:launch briebug --init && yarn test:sandbox && yarn clean"
 
