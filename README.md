@@ -12,6 +12,7 @@ An Angular schematic for quickly scaffolding NgRx Entities with actions, effects
 ### Install the necessary NgRx Entity libraries in your project
 
     yarn add @ngrx/{effects,entity,router-store,store,store-devtools} ngrx-store-freeze
+    yarn add -D jasmine-marbles
 
 ### Run the schematic
 
