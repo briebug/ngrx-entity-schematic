@@ -8,7 +8,7 @@ import {
   tap,
   switchMap
 } from 'rxjs/operators';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 
@@ -41,8 +41,8 @@ export class <%= classify(name) %>Effects {
   // ========================================= INSERT
   @Effect()
   insert: Observable<Action> = this.actions$
-    .ofType<Insert<%= classify(name) %>>(<%= classify(name) %>ActionTypes.Insert<%= classify(name) %>)
     .pipe(
+      ofType<Insert<%= classify(name) %>>(<%= classify(name) %>ActionTypes.Insert<%= classify(name) %>),
       exhaustMap((action) =>
         this.service.create(action.payload.<%= name %>).pipe(
           map((<%= name %>: <%= classify(name) %>) => new Insert<%= classify(name) %>Success({ result: <%= name %> })),
@@ -56,8 +56,8 @@ export class <%= classify(name) %>Effects {
   // ========================================= SEARCH
   @Effect()
   search: Observable<Action> = this.actions$
-    .ofType<SearchAll<%= classify(name) %>Entities>(<%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>Entities)
-    .pipe(
+  .pipe(
+      ofType<SearchAll<%= classify(name) %>Entities>(<%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>Entities),
       // Use the state's filtering and pagination values in this search call
       // here if desired:
       exhaustMap(() =>
@@ -75,8 +75,8 @@ export class <%= classify(name) %>Effects {
   // ========================================= LOAD BY ID
   @Effect()
   loadById: Observable<Action> = this.actions$
-    .ofType<Load<%= classify(name) %>ById>(<%= classify(name) %>ActionTypes.Load<%= classify(name) %>ById)
-    .pipe(
+  .pipe(
+      ofType<Load<%= classify(name) %>ById>(<%= classify(name) %>ActionTypes.Load<%= classify(name) %>ById),
       switchMap((action) =>
         this.service.getById(action.payload.id).pipe(
           map((<%= name %>: <%= classify(name) %>) => new Load<%= classify(name) %>ByIdSuccess({ result: <%= name %> })
@@ -91,8 +91,8 @@ export class <%= classify(name) %>Effects {
   // ========================================= UPDATE
   @Effect()
   update: Observable<Action> = this.actions$
-    .ofType<Update<%= classify(name) %>>(<%= classify(name) %>ActionTypes.Update<%= classify(name) %>)
-    .pipe(
+  .pipe(
+      ofType<Update<%= classify(name) %>>(<%= classify(name) %>ActionTypes.Update<%= classify(name) %>),
       exhaustMap((action) =>
         this.service.update(action.payload.<%= name %>).pipe(
           map((<%= name %>: <%= classify(name) %>) =>
@@ -113,8 +113,8 @@ export class <%= classify(name) %>Effects {
   // ========================================= DELETE
   @Effect()
   delete: Observable<Action> = this.actions$
-    .ofType<Delete<%= classify(name) %>ById>(<%= classify(name) %>ActionTypes.Delete<%= classify(name) %>ById)
-    .pipe(
+  .pipe(
+      ofType<Delete<%= classify(name) %>ById>(<%= classify(name) %>ActionTypes.Delete<%= classify(name) %>ById),
       exhaustMap((action) =>
         this.service.deleteById(action.payload.id).pipe(
           map((id: number) => new Delete<%= classify(name) %>ByIdSuccess({ id })),
@@ -130,8 +130,8 @@ export class <%= classify(name) %>Effects {
     dispatch: false
   })
   paging: Observable<Action> = this.actions$
-    .ofType<SetSearchQuery>(<%= classify(name) %>ActionTypes.SetSearchQuery)
-    .pipe(
+  .pipe(
+      ofType<SetSearchQuery>(<%= classify(name) %>ActionTypes.SetSearchQuery),
       tap((action) => {
         // do stuff with: action.payload.limit & action.payload.page
       })
@@ -142,8 +142,8 @@ export class <%= classify(name) %>Effects {
     dispatch: false
   })
   selectedId: Observable<Action> = this.actions$
-    .ofType<Select<%= classify(name) %>ById>(<%= classify(name) %>ActionTypes.Select<%= classify(name) %>ById)
-    .pipe(
+  .pipe(
+      ofType<Select<%= classify(name) %>ById>(<%= classify(name) %>ActionTypes.Select<%= classify(name) %>ById),
       tap((action) => {
         // do stuff with: action.payload.id
       })
