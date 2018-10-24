@@ -153,7 +153,7 @@ export const appReducer: ActionReducerMap<AppState> = {
 EffectsModule.forRoot([BriebugEffects, OrderEffects]),
 ```
 
-## Local Development
+## Local Development <a name="development"></a>
 
 ### Link the schematic to the `sandbox-app`
 
