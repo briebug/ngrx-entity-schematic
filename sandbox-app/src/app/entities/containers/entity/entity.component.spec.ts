@@ -78,18 +78,18 @@ describe('BriebugComponent', () => {
     store.dispatch(new LoadBriebugByIdSuccess({ result: entity }));
   });
 
-  it('should select a null ID if adding', (done) => {
-    component.briebug$.subscribe((result) => {
-      expect(Object.keys(result).length).toBe(0);
-      expect(store.dispatch).toHaveBeenCalledWith(
-        new SelectBriebugById({ id: null })
-      );
-      done();
-    });
+  // it('should select a null ID if adding', (done) => {
+  //   component.briebug$.subscribe((result) => {
+  //     expect(Object.keys(result).length).toBe(0);
+  //     expect(store.dispatch).toHaveBeenCalledWith(
+  //       new SelectBriebugById({ id: null })
+  //     );
+  //     done();
+  //   });
 
-    paramMap.next(convertToParamMap({}));
-    url.next([{ path: 'add' }]);
-  });
+  //   paramMap.next(convertToParamMap({}));
+  //   url.next([{ path: 'add' }]);
+  // });
 
   it('should get the error message when available', (done) => {
     const testError = 'Some Error Message';
