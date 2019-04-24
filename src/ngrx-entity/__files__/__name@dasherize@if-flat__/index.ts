@@ -1,40 +1,46 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
-import * as from<%= classify(name) %>State from './<%= dasherize(name) %>.reducer';
+import {
+  <%= name %>Reducer,
+  getSelectedId,
+  getLoading,
+  getError,
+  getQuery
+} from './<%= dasherize(name) %>.reducer';
 import { <%= classify(name) %>State } from './<%= dasherize(name) %>.reducer';
 
 export const get<%= classify(name) %>State = createFeatureSelector<<%= classify(name) %>State>('<%= name %>');
 
 export const {
-  selectIds: getAll<%= classify(name) %>Ids,
-  selectEntities: getAll<%= classify(name) %>EntitiesAsMap,
-  selectAll: getAll<%= classify(name) %>EntitiesAsArray,
-  selectTotal: getTotal<%= classify(name) %>Entities
-} = from<%= classify(name) %>State.adapter.getSelectors(get<%= classify(name) %>State);
+  selectIds: <%= name %>Ids,
+  selectEntities: <%= name %>Entities,
+  selectAll: <%= name %>,
+  selectTotal: <%= name %>Count
+} = <%= name %>Adapter.getSelectors(get<%= classify(name) %>State);
 
-export const getSelected<%= classify(name) %>Id = createSelector(
+export const current<%= classify(name) %>Id = createSelector(
   get<%= classify(name) %>State,
-  from<%= classify(name) %>State.getSelectedId
+  getSelectedId
 );
 
-export const getSelected<%= classify(name) %> = createSelector(
-  getSelected<%= classify(name) %>Id,
-  getAll<%= classify(name) %>EntitiesAsMap,
+export const current<%= classify(name) %> = createSelector(
+  current<%= classify(name) %>Id,
+  <%= name %>Entities,
   (selected<%= classify(name) %>Id, <%= name %>Entities) =>
     selected<%= classify(name) %>Id && <%= name %>Entities[selected<%= classify(name) %>Id]
 );
 
-export const getLoading = createSelector(
+export const <%= name %>Loading = createSelector( // TODO: Need to pluraliae  name
   get<%= classify(name) %>State,
-  from<%= classify(name) %>State.getLoading
+  getLoading
 );
 
-export const getError = createSelector(
+export const <%= name %>Error = createSelector(
   get<%= classify(name) %>State,
-  from<%= classify(name) %>State.getError
+  getError
 );
 
-export const getQuery = createSelector(
+export const <%= name %>Query = createSelector(
   get<%= classify(name) %>State,
-  from<%= classify(name) %>State.getQuery
+  getQuery
 );

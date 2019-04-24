@@ -30,9 +30,9 @@ describe('<%= name %>Reducer', () => {
     });
   });
 
-  describe('upon Insert<%= classify(name) %>', () => {
+  describe('upon Create<%= classify(name) %>', () => {
     it('should set loading to true and clear any error', () => {
-      const action = new actions.Insert<%= classify(name) %>({ <%= name %>: generate<%= classify(name) %>() });
+      const action = new actions.Create<%= classify(name) %>({ <%= name %>: generate<%= classify(name) %>() });
 
       expect(<%= name %>Reducer(INITIAL_STATE_WITH_ERROR, action)).toEqual({
         ...initialState,
@@ -42,10 +42,10 @@ describe('<%= name %>Reducer', () => {
     });
   });
 
-  describe('upon Insert<%= classify(name) %>Success', () => {
+  describe('upon Create<%= classify(name) %>Success', () => {
     it('should add the given <%= classify(name) %>, set loading to false, and clear any error', () => {
       const result = generate<%= classify(name) %>();
-      const action = new actions.Insert<%= classify(name) %>Success({ result });
+      const action = new actions.Create<%= classify(name) %>Success({ result });
 
       expect(<%= name %>Reducer(INITIAL_STATE_WITH_ERROR, action)).toEqual({
         ...initialState,
@@ -56,10 +56,10 @@ describe('<%= name %>Reducer', () => {
     });
   });
 
-  describe('upon Insert<%= classify(name) %>Fail', () => {
+  describe('upon Create<%= classify(name) %>Fail', () => {
     it('should set loading to true and echo the error', () => {
       const error = 'test insert error';
-      const action = new actions.Insert<%= classify(name) %>Fail({ error });
+      const action = new actions.Create<%= classify(name) %>Fail({ error });
 
       expect(<%= name %>Reducer(initialState, action)).toEqual({
         ...initialState,
