@@ -53,7 +53,7 @@ export class BriebugComponent implements OnInit {
     shareReplay()
   );
 
-  briebugEdits: Briebug
+  briebugEdits: Briebug;
   showFormErrors: boolean;
   valid: boolean;
 
