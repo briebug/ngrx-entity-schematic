@@ -1,7 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 import {
-  <%= name %>Reducer,
+  <%= name %>Adapter,
   getSelectedId,
   getLoading,
   getError,

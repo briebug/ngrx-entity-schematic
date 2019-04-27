@@ -7,7 +7,7 @@ import {
 import * as actions from './<%= dasherize(name) %>.actions';
 import {
   <%= name %>Reducer,
-  initialState,
+  initial<%= classify(name)%>State,
   getSelectedId,
   getLoading,
   getError,
@@ -16,7 +16,7 @@ import {
 import { Update } from '@ngrx/entity';
 
 const INITIAL_STATE_WITH_ERROR = {
-  ...initialState,
+  ...initial<%= classify(name)%>State,
   error: 'some error'
 };
 const BLANK_ERROR_MESSAGE = '';
@@ -26,7 +26,7 @@ describe('<%= name %>Reducer', () => {
     it('should return the default state upon an undefined action', () => {
       const action = { type: 'NOT DEFINED' } as any;
 
-      expect(<%= name %>Reducer(initialState, action)).toEqual(initialState);
+      expect(<%= name %>Reducer(initial<%= classify(name)%>State, action)).toEqual(initial<%= classify(name)%>State);
     });
   });
 
@@ -35,7 +35,7 @@ describe('<%= name %>Reducer', () => {
       const action = new actions.Create<%= classify(name) %>({ <%= name %>: generate<%= classify(name) %>() });
 
       expect(<%= name %>Reducer(INITIAL_STATE_WITH_ERROR, action)).toEqual({
-        ...initialState,
+        ...initial<%= classify(name)%>State,
         loading: true,
         error: BLANK_ERROR_MESSAGE
       });
@@ -48,7 +48,7 @@ describe('<%= name %>Reducer', () => {
       const action = new actions.Create<%= classify(name) %>Success({ result });
 
       expect(<%= name %>Reducer(INITIAL_STATE_WITH_ERROR, action)).toEqual({
-        ...initialState,
+        ...initial<%= classify(name)%>State,
         ...generate<%= classify(name) %>Map([result]),
         loading: false,
         error: BLANK_ERROR_MESSAGE
@@ -61,8 +61,8 @@ describe('<%= name %>Reducer', () => {
       const error = 'test insert error';
       const action = new actions.Create<%= classify(name) %>Fail({ error });
 
-      expect(<%= name %>Reducer(initialState, action)).toEqual({
-        ...initialState,
+      expect(<%= name %>Reducer(initial<%= classify(name)%>State, action)).toEqual({
+        ...initial<%= classify(name)%>State,
         loading: false,
         error: `<%= classify(name) %> insert failed: ${error}`
       });
@@ -71,14 +71,14 @@ describe('<%= name %>Reducer', () => {
 
   describe('upon SearchAll<%= classify(name) %>Entities', () => {
     it('should remove <%= classify(name) %> entities, set loading to true, and clear any error', () => {
-      const initialStateWith<%= classify(name) %>Entities = {
+      const initial<%= classify(name)%>StateWith<%= classify(name) %>Entities = {
         ...INITIAL_STATE_WITH_ERROR,
         ...generate<%= classify(name) %>Map()
       };
       const action = new actions.SearchAll<%= classify(name) %>Entities();
 
-      expect(<%= name %>Reducer(initialStateWith<%= classify(name) %>Entities, action)).toEqual({
-        ...initialState,
+      expect(<%= name %>Reducer(initial<%= classify(name)%>StateWith<%= classify(name) %>Entities, action)).toEqual({
+        ...initial<%= classify(name)%>State,
         loading: true,
         error: BLANK_ERROR_MESSAGE
       });
@@ -91,7 +91,7 @@ describe('<%= name %>Reducer', () => {
       const action = new actions.SearchAll<%= classify(name) %>EntitiesSuccess({ result });
 
       expect(<%= name %>Reducer(INITIAL_STATE_WITH_ERROR, action)).toEqual({
-        ...initialState,
+        ...initial<%= classify(name)%>State,
         ...generate<%= classify(name) %>Map(result),
         loading: false,
         error: BLANK_ERROR_MESSAGE
@@ -104,8 +104,8 @@ describe('<%= name %>Reducer', () => {
       const error = 'test search error';
       const action = new actions.SearchAll<%= classify(name) %>EntitiesFail({ error });
 
-      expect(<%= name %>Reducer(initialState, action)).toEqual({
-        ...initialState,
+      expect(<%= name %>Reducer(initial<%= classify(name)%>State, action)).toEqual({
+        ...initial<%= classify(name)%>State,
         loading: false,
         error: `<%= classify(name) %> search failed: ${error}`
       });
@@ -115,14 +115,14 @@ describe('<%= name %>Reducer', () => {
   describe('upon Load<%= classify(name) %>ById', () => {
     it('should remove <%= name %> entities, set selected id, and clear any error', () => {
       const id = 8675309;
-      const initialStateWith<%= classify(name) %>Entities = {
+      const initial<%= classify(name)%>StateWith<%= classify(name) %>Entities = {
         ...INITIAL_STATE_WITH_ERROR,
         ...generate<%= classify(name) %>Map()
       };
       const action = new actions.Load<%= classify(name) %>ById({ id });
 
-      expect(<%= name %>Reducer(initialStateWith<%= classify(name) %>Entities, action)).toEqual({
-        ...initialState,
+      expect(<%= name %>Reducer(initial<%= classify(name)%>StateWith<%= classify(name) %>Entities, action)).toEqual({
+        ...initial<%= classify(name)%>State,
         selectedId: id,
         loading: true,
         error: BLANK_ERROR_MESSAGE
@@ -136,7 +136,7 @@ describe('<%= name %>Reducer', () => {
       const action = new actions.Load<%= classify(name) %>ByIdSuccess({ result });
 
       expect(<%= name %>Reducer(INITIAL_STATE_WITH_ERROR, action)).toEqual({
-        ...initialState,
+        ...initial<%= classify(name)%>State,
         ...generate<%= classify(name) %>Map([result]),
         loading: false,
         error: BLANK_ERROR_MESSAGE
@@ -149,8 +149,8 @@ describe('<%= name %>Reducer', () => {
       const error = 'test load by id error';
       const action = new actions.Load<%= classify(name) %>ByIdFail({ error });
 
-      expect(<%= name %>Reducer(initialState, action)).toEqual({
-        ...initialState,
+      expect(<%= name %>Reducer(initial<%= classify(name)%>State, action)).toEqual({
+        ...initial<%= classify(name)%>State,
         loading: false,
         error: `<%= classify(name) %> load failed: ${error}`
       });
@@ -163,7 +163,7 @@ describe('<%= name %>Reducer', () => {
       const action = new actions.Update<%= classify(name) %>({ <%= name %> });
 
       expect(<%= name %>Reducer(INITIAL_STATE_WITH_ERROR, action)).toEqual({
-        ...initialState,
+        ...initial<%= classify(name)%>State,
         loading: true,
         error: BLANK_ERROR_MESSAGE
       });
@@ -173,7 +173,7 @@ describe('<%= name %>Reducer', () => {
   describe('upon Update<%= classify(name) %>Success', () => {
     it('should add the given <%= classify(name) %>, set loading to false, and clear any error', () => {
       const <%= name %> = generate<%= classify(name) %>();
-      const initialStateWith<%= classify(name) %> = {
+      const initial<%= classify(name)%>StateWith<%= classify(name) %> = {
         ...INITIAL_STATE_WITH_ERROR,
         ...generate<%= classify(name) %>Map([<%= name %>])
       };
@@ -188,8 +188,8 @@ describe('<%= name %>Reducer', () => {
       } as Update<<%= classify(name) %>>;
       const action = new actions.Update<%= classify(name) %>Success({ update });
 
-      expect(<%= name %>Reducer(initialStateWith<%= classify(name) %>, action)).toEqual({
-        ...initialStateWith<%= classify(name) %>,
+      expect(<%= name %>Reducer(initial<%= classify(name)%>StateWith<%= classify(name) %>, action)).toEqual({
+        ...initial<%= classify(name)%>StateWith<%= classify(name) %>,
         ...generate<%= classify(name) %>Map([updated<%= classify(name) %>]),
         loading: false,
         error: BLANK_ERROR_MESSAGE
@@ -202,8 +202,8 @@ describe('<%= name %>Reducer', () => {
       const error = 'test update error';
       const action = new actions.Update<%= classify(name) %>Fail({ error });
 
-      expect(<%= name %>Reducer(initialState, action)).toEqual({
-        ...initialState,
+      expect(<%= name %>Reducer(initial<%= classify(name)%>State, action)).toEqual({
+        ...initial<%= classify(name)%>State,
         loading: false,
         error: `<%= classify(name) %> update failed: ${error}`
       });
@@ -216,7 +216,7 @@ describe('<%= name %>Reducer', () => {
       const action = new actions.Delete<%= classify(name) %>ById({ id });
 
       expect(<%= name %>Reducer(INITIAL_STATE_WITH_ERROR, action)).toEqual({
-        ...initialState,
+        ...initial<%= classify(name)%>State,
         selectedId: id,
         loading: true,
         error: BLANK_ERROR_MESSAGE
@@ -233,16 +233,16 @@ describe('<%= name %>Reducer', () => {
         ...expected<%= classify(name) %>Entities,
         <%= name %>ToBeRemoved
       ];
-      const initialStateWithAll<%= classify(name) %>Entities = {
+      const initial<%= classify(name)%>StateWithAll<%= classify(name) %>Entities = {
         ...INITIAL_STATE_WITH_ERROR,
         ...generate<%= classify(name) %>Map(<%= name %>EntitiesWith<%= classify(name) %>ToBeRemoved)
       };
       const action = new actions.Delete<%= classify(name) %>ByIdSuccess({ id });
 
       expect(
-        <%= name %>Reducer(initialStateWithAll<%= classify(name) %>Entities, action)
+        <%= name %>Reducer(initial<%= classify(name)%>StateWithAll<%= classify(name) %>Entities, action)
       ).toEqual({
-        ...initialStateWithAll<%= classify(name) %>Entities,
+        ...initial<%= classify(name)%>StateWithAll<%= classify(name) %>Entities,
         ...generate<%= classify(name) %>Map(expected<%= classify(name) %>Entities),
         loading: false,
         error: BLANK_ERROR_MESSAGE
@@ -255,8 +255,8 @@ describe('<%= name %>Reducer', () => {
       const error = 'test delete error';
       const action = new actions.Delete<%= classify(name) %>ByIdFail({ error });
 
-      expect(<%= name %>Reducer(initialState, action)).toEqual({
-        ...initialState,
+      expect(<%= name %>Reducer(initial<%= classify(name)%>State, action)).toEqual({
+        ...initial<%= classify(name)%>State,
         loading: false,
         error: `<%= classify(name) %> delete failed: ${error}`
       });
@@ -273,8 +273,8 @@ describe('<%= name %>Reducer', () => {
       };
       const action = new actions.SetSearchQuery(query);
 
-      expect(<%= name %>Reducer(initialState, action)).toEqual({
-        ...initialState,
+      expect(<%= name %>Reducer(initial<%= classify(name)%>State, action)).toEqual({
+        ...initial<%= classify(name)%>State,
         query
       });
     });
@@ -286,7 +286,7 @@ describe('<%= name %>Reducer', () => {
       const action = new actions.Select<%= classify(name) %>ById({ id });
 
       expect(<%= name %>Reducer(INITIAL_STATE_WITH_ERROR, action)).toEqual({
-        ...initialState,
+        ...initial<%= classify(name)%>State,
         selectedId: id,
         error: BLANK_ERROR_MESSAGE
       });
@@ -297,12 +297,12 @@ describe('<%= name %>Reducer', () => {
 describe('getters', () => {
   describe('getSelectedId', () => {
     it('should return the selected id', () => {
-      expect(getSelectedId(initialState)).toEqual(initialState.selectedId);
+      expect(getSelectedId(initial<%= classify(name)%>State)).toEqual(initial<%= classify(name)%>State.selectedId);
     });
   });
   describe('getLoading', () => {
     it('should return the selected id', () => {
-      expect(getLoading(initialState)).toEqual(initialState.loading);
+      expect(getLoading(initial<%= classify(name)%>State)).toEqual(initial<%= classify(name)%>State.loading);
     });
   });
   describe('getError', () => {
@@ -313,8 +313,8 @@ describe('getters', () => {
   });
   describe('getQuery', () => {
     it('should return the selected id', () => {
-      expect(getQuery(initialState))
-        .toEqual(initialState.query);
+      expect(getQuery(initial<%= classify(name)%>State))
+        .toEqual(initial<%= classify(name)%>State.query);
     });
   });
 });

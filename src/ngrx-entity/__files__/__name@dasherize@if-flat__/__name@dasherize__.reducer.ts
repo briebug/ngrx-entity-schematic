@@ -19,7 +19,7 @@ export interface <%= classify(name) %>State extends EntityState<<%= classify(nam
 
 export const <%= name %>Adapter: EntityAdapter<<%= classify(name) %>> = createEntityAdapter<<%= classify(name) %>>();
 
-export const initial<%= classify(name)%>State: <%= classify(name) %>State = adapter.getInitialState({
+export const initial<%= classify(name)%>State: <%= classify(name) %>State = <%= name %>Adapter.getInitialState({
   // additional <%= name %> state properties
   selectedId: null,
   loading: false,
@@ -43,7 +43,7 @@ export function <%= name %>Reducer(state = initial<%= classify(name)%>State, act
 
     case <%= classify(name) %>ActionTypes.Create<%= classify(name) %>Success:
       return {
-        ...adapter.addOne(action.payload.result, state),
+        ...<%= name %>Adapter.addOne(action.payload.result, state),
         loading: false,
         error: ''
       };
@@ -57,14 +57,14 @@ export function <%= name %>Reducer(state = initial<%= classify(name)%>State, act
 
     case <%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>Entities:
       return {
-        ...adapter.removeAll(state),
+        ...<%= name %>Adapter.removeAll(state),
         loading: true,
         error: ''
       };
 
     case <%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>EntitiesSuccess:
       return {
-        ...adapter.addAll(action.payload.result, state),
+        ...<%= name %>Adapter.addAll(action.payload.result, state),
         loading: false,
         error: ''
       };
@@ -78,7 +78,7 @@ export function <%= name %>Reducer(state = initial<%= classify(name)%>State, act
 
     case <%= classify(name) %>ActionTypes.Load<%= classify(name) %>ById:
       return {
-        ...adapter.removeAll(state),
+        ...<%= name %>Adapter.removeAll(state),
         selectedId: action.payload.id,
         loading: true,
         error: ''
@@ -86,7 +86,7 @@ export function <%= name %>Reducer(state = initial<%= classify(name)%>State, act
 
     case <%= classify(name) %>ActionTypes.Load<%= classify(name) %>ByIdSuccess:
       return {
-        ...adapter.addOne(action.payload.result, state),
+        ...<%= name %>Adapter.addOne(action.payload.result, state),
         loading: false,
         error: ''
       };
@@ -107,7 +107,7 @@ export function <%= name %>Reducer(state = initial<%= classify(name)%>State, act
 
     case <%= classify(name) %>ActionTypes.Update<%= classify(name) %>Success:
       return {
-        ...adapter.updateOne(action.payload.update, state),
+        ...<%= name %>Adapter.updateOne(action.payload.update, state),
         loading: false,
         error: ''
       };
@@ -129,7 +129,7 @@ export function <%= name %>Reducer(state = initial<%= classify(name)%>State, act
 
     case <%= classify(name) %>ActionTypes.Delete<%= classify(name) %>ByIdSuccess:
       return {
-        ...adapter.removeOne(action.payload.id, state),
+        ...<%= name %>Adapter.removeOne(action.payload.id, state),
         loading: false,
         error: ''
       };
