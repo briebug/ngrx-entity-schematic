@@ -4,7 +4,7 @@ import { <%= classify(name) %> } from './<%= dasherize(name) %>.model';
 import { <%= classify(name) %>SearchQuery } from './<%= dasherize(name) %>.reducer';
 
 export enum <%= classify(name) %>ActionTypes {
-  Create<%= classify(name) %> = '[<%= classify(name) %>] Insert',
+  Create<%= classify(name) %> = '[<%= classify(name) %>] Create',
   Create<%= classify(name) %>Success = '[<%= classify(name) %>] Insert Success',
   Create<%= classify(name) %>Fail = '[<%= classify(name) %>] Insert Fail',
 
