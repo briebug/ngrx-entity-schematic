@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
 import {
-  getAllBriebugEntitiesAsArray,
-  getLoading,
-  getError
+  briebug,
+  briebugLoading,
+  briebugError
 } from '@state/briebug';
 import { BriebugState } from '@state/briebug/briebug.reducer';
 import {
@@ -22,10 +22,10 @@ import { Briebug } from '@state/briebug/briebug.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BriebugListComponent implements OnInit {
-  briebugEntities$ = this.store.pipe(select(getAllBriebugEntitiesAsArray));
-  isLoading$ = this.store.pipe(select(getLoading));
+  briebugEntities$ = this.store.pipe(select(briebug));
+  isLoading$ = this.store.pipe(select(briebugLoading));
   errorMessage$ = this.store.pipe(
-    select(getError),
+    select(briebugError),
     // This allows us to use the async pipe twice without creating two subscriptions:
     shareReplay()
   );

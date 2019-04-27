@@ -12,14 +12,14 @@ import {
   combineLatest
 } from 'rxjs/operators';
 
-import { getLoading, getSelectedBriebug, getError } from '@state/briebug';
+import { briebugLoading, currentBriebug, briebugError } from "@state/briebug";
 import { Briebug } from '@state/briebug/briebug.model';
 import {
   LoadBriebugById,
-  InsertBriebug,
+  CreateBriebug,
   UpdateBriebug,
   SelectBriebugById
-} from '@state/briebug/briebug.actions';
+} from "@state/briebug/briebug.actions";
 import { BriebugState } from '@state/briebug/briebug.reducer';
 
 @Component({
@@ -39,21 +39,21 @@ export class BriebugComponent implements OnInit {
       const BriebugAction = id ? LoadBriebugById : SelectBriebugById;
       this.store.dispatch(new BriebugAction({ id: +id || null }));
     }),
-    switchMap(() => this.store.pipe(select(getSelectedBriebug))),
+    switchMap(() => this.store.pipe(select(currentBriebug))),
     map((briebug) => ({ ...briebug }))
   );
   // The following shareReplay calls allow us to use the async pipe multiple
   // times without creating multiple subscriptions:
   errorMessage$ = this.store.pipe(
-    select(getError),
+    select(briebugError),
     shareReplay()
   );
   isLoading$ = this.store.pipe(
-    select(getLoading),
+    select(briebugLoading),
     shareReplay()
   );
 
-  briebugEdits: Briebug;
+  briebugEdits: Briebug
   showFormErrors: boolean;
   valid: boolean;
 
@@ -78,7 +78,9 @@ export class BriebugComponent implements OnInit {
       return;
     }
 
-    const BriebugAction = this.briebugEdits.id ? UpdateBriebug : InsertBriebug;
+    const BriebugAction = this.briebugEdits.id
+      ? UpdateBriebug
+      : CreateBriebug;
     this.store.dispatch(new BriebugAction({ briebug: this.briebugEdits }));
   }
 }

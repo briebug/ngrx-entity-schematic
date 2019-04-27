@@ -17,7 +17,7 @@ import {
   SelectBriebugById,
   LoadBriebugByIdFail,
   UpdateBriebug,
-  InsertBriebug
+  CreateBriebug
 } from '@state/briebug/briebug.actions';
 import { skip } from 'rxjs/operators';
 
@@ -164,7 +164,7 @@ describe('BriebugComponent', () => {
       );
     });
 
-    it('should dispatch InsertBriebug if an ID is not present', () => {
+    it("should dispatch CreateBriebug if an ID is not present", () => {
       component.valid = true;
       component.briebugEdits = generateBriebug();
       delete component.briebugEdits.id;
@@ -172,7 +172,7 @@ describe('BriebugComponent', () => {
       component.onSubmit();
 
       expect(store.dispatch).toHaveBeenCalledWith(
-        new InsertBriebug({ briebug: component.briebugEdits })
+        new CreateBriebug({ briebug: component.briebugEdits })
       );
     });
   });
