@@ -11,7 +11,8 @@ import {
   template,
   filter,
   noop,
-  SchematicsException
+  SchematicsException,
+  mergeWith
 } from "@angular-devkit/schematics";
 import {
   NgRxOptions,
@@ -29,7 +30,7 @@ import {
 
 export default function(options: NgRxOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    return chain([updateDependencies(), addNgRxFiles(options)])(tree, context);
+    return chain([addNgRxFiles(options), updateDependencies()])(tree, context);
   };
 }
 
@@ -126,6 +127,9 @@ function addNgRxFiles(options: NgRxOptions): Rule {
       move(options.path)
     ]);
 
-    return templateSource(context);
+    return chain([mergeWith(templateSource)])(
+      tree,
+      context
+    );
   };
 }

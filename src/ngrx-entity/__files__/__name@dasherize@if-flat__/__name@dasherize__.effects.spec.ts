@@ -66,7 +66,7 @@ describe('<%= classify(name) %>Effects', () => {
       service.create.and.returnValue(cold('-e|', { e: entity }));
       const expected = cold('-s', { s: successAction });
 
-      expect(effects.insert).toBeObservable(expected);
+      expect(effects.create).toBeObservable(expected);
     });
 
     it('should return Create<%= classify(name) %>Fail with error object on failure', () => {
@@ -78,7 +78,7 @@ describe('<%= classify(name) %>Effects', () => {
       service.create.and.returnValue(cold('-#|', {}, { message: 'fail'}));
       const expected = cold('-f', { f: failAction });
 
-      expect(effects.insert).toBeObservable(expected);
+      expect(effects.create).toBeObservable(expected);
     });
   });
 

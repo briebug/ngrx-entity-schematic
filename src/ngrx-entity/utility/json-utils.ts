@@ -102,16 +102,6 @@ export function insertPropertyInAstObjectInOrder(
       )}` +
       ","
   );
-
-  console.log(
-    insertIndex,
-    `${indentStr}` +
-      `"${propertyName}": ${JSON.stringify(value, null, 2).replace(
-        /\n/g,
-        indentStr
-      )}` +
-      ","
-  );
 }
 
 export function appendValueInAstArray(

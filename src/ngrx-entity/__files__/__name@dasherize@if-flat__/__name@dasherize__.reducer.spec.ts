@@ -58,13 +58,13 @@ describe('<%= name %>Reducer', () => {
 
   describe('upon Create<%= classify(name) %>Fail', () => {
     it('should set loading to true and echo the error', () => {
-      const error = 'test insert error';
+      const error = 'test create error';
       const action = new actions.Create<%= classify(name) %>Fail({ error });
 
       expect(<%= name %>Reducer(initial<%= classify(name)%>State, action)).toEqual({
         ...initial<%= classify(name)%>State,
         loading: false,
-        error: `<%= classify(name) %> insert failed: ${error}`
+        error: `<%= classify(name) %> create failed: ${error}`
       });
     });
   });

@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 
@@ -14,6 +15,7 @@ import { <%= classify(name) %>Effects } from './<%= dasherize(name) %>/<%= dashe
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     StoreRouterConnectingModule,
     StoreModule.forRoot(appReducer, { metaReducers: appMetaReducers }),
     EffectsModule.forRoot([<%= classify(name) %>Effects]),
