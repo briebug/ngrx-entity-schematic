@@ -17,9 +17,9 @@ export interface <%= classify(name) %>State extends EntityState<<%= classify(nam
   query: <%= classify(name) %>SearchQuery;
 }
 
-export const adapter: EntityAdapter<<%= classify(name) %>> = createEntityAdapter<<%= classify(name) %>>();
+export const <%= name %>Adapter: EntityAdapter<<%= classify(name) %>> = createEntityAdapter<<%= classify(name) %>>();
 
-export const initialState: <%= classify(name) %>State = adapter.getInitialState({
+export const initial<%= classify(name)%>State: <%= classify(name) %>State = adapter.getInitialState({
   // additional <%= name %> state properties
   selectedId: null,
   loading: false,
@@ -32,27 +32,27 @@ export const initialState: <%= classify(name) %>State = adapter.getInitialState(
   }
 });
 
-export function <%= name %>Reducer(state = initialState, action: <%= classify(name) %>Actions): <%= classify(name) %>State {
+export function <%= name %>Reducer(state = initial<%= classify(name)%>State, action: <%= classify(name) %>Actions): <%= classify(name) %>State {
   switch (action.type) {
-    case <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>:
+    case <%= classify(name) %>ActionTypes.Create<%= classify(name) %>:
       return {
         ...state,
         loading: true,
         error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>Success:
+    case <%= classify(name) %>ActionTypes.Create<%= classify(name) %>Success:
       return {
         ...adapter.addOne(action.payload.result, state),
         loading: false,
         error: ''
       };
 
-    case <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>Fail:
+    case <%= classify(name) %>ActionTypes.Create<%= classify(name) %>Fail:
       return {
         ...state,
         loading: false,
-        error: '<%= classify(name) %> insert failed: ' + action.payload.error
+        error: '<%= classify(name) %> create failed: ' + action.payload.error
       };
 
     case <%= classify(name) %>ActionTypes.SearchAll<%= classify(name) %>Entities:

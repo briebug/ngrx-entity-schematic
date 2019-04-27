@@ -4,9 +4,9 @@ import { cold, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 
 import {
-  Insert<%= classify(name) %>,
-  Insert<%= classify(name) %>Success,
-  Insert<%= classify(name) %>Fail,
+  Create<%= classify(name) %>,
+  Create<%= classify(name) %>Success,
+  Create<%= classify(name) %>Fail,
   SearchAll<%= classify(name) %>Entities,
   SearchAll<%= classify(name) %>EntitiesSuccess,
   SearchAll<%= classify(name) %>EntitiesFail,
@@ -52,15 +52,15 @@ describe('<%= classify(name) %>Effects', () => {
     service = TestBed.get(<%= classify(name) %>Service);
   });
 
-  it('should be created', () => {
+  it('should be constructed', () => {
     expect(effects).toBeTruthy();
   });
 
-  describe('insert', () => {
-    it('should return Insert<%= classify(name) %>Success action with entity on success', () => {
+  describe('create', () => {
+    it('should return Create<%= classify(name) %>Success action with entity on success', () => {
       const entity = generate<%= classify(name) %>();
-      const insertAction = new Insert<%= classify(name) %>({ <%= name %>: entity });
-      const successAction = new Insert<%= classify(name) %>Success({ result: entity });
+      const insertAction = new Create<%= classify(name) %>({ <%= name %>: entity });
+      const successAction = new Create<%= classify(name) %>Success({ result: entity });
 
       actions = hot('a-', { a: insertAction });
       service.create.and.returnValue(cold('-e|', { e: entity }));
@@ -69,10 +69,10 @@ describe('<%= classify(name) %>Effects', () => {
       expect(effects.insert).toBeObservable(expected);
     });
 
-    it('should return Insert<%= classify(name) %>Fail with error object on failure', () => {
+    it('should return Create<%= classify(name) %>Fail with error object on failure', () => {
       const entity = generate<%= classify(name) %>();
-      const insertAction = new Insert<%= classify(name) %>({ <%= name %>: entity });
-      const failAction = new Insert<%= classify(name) %>Fail({ error: 'fail' });
+      const insertAction = new Create<%= classify(name) %>({ <%= name %>: entity });
+      const failAction = new Create<%= classify(name) %>Fail({ error: 'fail' });
 
       actions = hot('i-', { i: insertAction });
       service.create.and.returnValue(cold('-#|', {}, { message: 'fail'}));

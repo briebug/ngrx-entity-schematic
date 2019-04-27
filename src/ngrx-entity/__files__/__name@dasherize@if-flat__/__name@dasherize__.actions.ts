@@ -4,9 +4,9 @@ import { <%= classify(name) %> } from './<%= dasherize(name) %>.model';
 import { <%= classify(name) %>SearchQuery } from './<%= dasherize(name) %>.reducer';
 
 export enum <%= classify(name) %>ActionTypes {
-  Insert<%= classify(name) %> = '[<%= classify(name) %>] Insert',
-  Insert<%= classify(name) %>Success = '[<%= classify(name) %>] Insert Success',
-  Insert<%= classify(name) %>Fail = '[<%= classify(name) %>] Insert Fail',
+  Create<%= classify(name) %> = '[<%= classify(name) %>] Create',
+  Create<%= classify(name) %>Success = '[<%= classify(name) %>] Insert Success',
+  Create<%= classify(name) %>Fail = '[<%= classify(name) %>] Insert Fail',
 
   SearchAll<%= classify(name) %>Entities = '[<%= classify(name) %>] Search',
   SearchAll<%= classify(name) %>EntitiesSuccess = '[<%= classify(name) %>] Search Success',
@@ -28,20 +28,20 @@ export enum <%= classify(name) %>ActionTypes {
   Select<%= classify(name) %>ById = '[<%= classify(name) %>] Select By ID'
 }
 
-// ========================================= INSERT
+// ========================================= CREATE
 
-export class Insert<%= classify(name) %> implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>;
+export class Create<%= classify(name) %> implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Create<%= classify(name) %>;
   constructor(public payload: { <%= name %>: <%= classify(name) %> }) {}
 }
 
-export class Insert<%= classify(name) %>Success implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>Success;
+export class Create<%= classify(name) %>Success implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Create<%= classify(name) %>Success;
   constructor(public payload: { result: <%= classify(name) %> }) {}
 }
 
-export class Insert<%= classify(name) %>Fail implements Action {
-  readonly type = <%= classify(name) %>ActionTypes.Insert<%= classify(name) %>Fail;
+export class Create<%= classify(name) %>Fail implements Action {
+  readonly type = <%= classify(name) %>ActionTypes.Create<%= classify(name) %>Fail;
   constructor(public payload: { error: string }) {}
 }
 
@@ -127,9 +127,9 @@ export class Select<%= classify(name) %>ById implements Action {
 }
 
 export type <%= classify(name) %>Actions =
-  | Insert<%= classify(name) %>
-  | Insert<%= classify(name) %>Success
-  | Insert<%= classify(name) %>Fail
+  | Create<%= classify(name) %>
+  | Create<%= classify(name) %>Success
+  | Create<%= classify(name) %>Fail
   | SearchAll<%= classify(name) %>Entities
   | SearchAll<%= classify(name) %>EntitiesSuccess
   | SearchAll<%= classify(name) %>EntitiesFail

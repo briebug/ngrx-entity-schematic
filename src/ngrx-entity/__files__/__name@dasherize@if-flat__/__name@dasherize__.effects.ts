@@ -14,9 +14,9 @@ import { Update } from '@ngrx/entity';
 
 import {
   <%= classify(name) %>ActionTypes,
-  Insert<%= classify(name) %>,
-  Insert<%= classify(name) %>Success,
-  Insert<%= classify(name) %>Fail,
+  Create<%= classify(name) %>,
+  Create<%= classify(name) %>Success,
+  Create<%= classify(name) %>Fail,
   SearchAll<%= classify(name) %>Entities,
   SearchAll<%= classify(name) %>EntitiesSuccess,
   SearchAll<%= classify(name) %>EntitiesFail,
@@ -38,16 +38,16 @@ import { <%= classify(name) %>Service } from './<%= dasherize(name) %>.service';
 @Injectable()
 export class <%= classify(name) %>Effects {
 
-  // ========================================= INSERT
+  // ========================================= CREATE
   @Effect()
-  insert: Observable<Action> = this.actions$
+  create: Observable<Action> = this.actions$
     .pipe(
-      ofType<Insert<%= classify(name) %>>(<%= classify(name) %>ActionTypes.Insert<%= classify(name) %>),
+      ofType<Create<%= classify(name) %>>(<%= classify(name) %>ActionTypes.Create<%= classify(name) %>),
       exhaustMap((action) =>
         this.service.create(action.payload.<%= name %>).pipe(
-          map((<%= name %>: <%= classify(name) %>) => new Insert<%= classify(name) %>Success({ result: <%= name %> })),
+          map((<%= name %>: <%= classify(name) %>) => new Create<%= classify(name) %>Success({ result: <%= name %> })),
           catchError(({ message }) =>
-            of(new Insert<%= classify(name) %>Fail({ error: message }))
+            of(new Create<%= classify(name) %>Fail({ error: message }))
           )
         )
       )
