@@ -26,8 +26,8 @@ export const current<%= classify(name) %>Id = createSelector(
 export const current<%= classify(name) %> = createSelector(
   current<%= classify(name) %>Id,
   <%= name %>Entities,
-  (selected<%= classify(name) %>Id, <%= name %>Entities) =>
-    selected<%= classify(name) %>Id && <%= name %>Entities[selected<%= classify(name) %>Id]
+  (selected<%= classify(name) %>Id, entities) =>
+    selected<%= classify(name) %>Id && entities[selected<%= classify(name) %>Id]
 );
 
 export const <%= name %>Loading = createSelector( // TODO: Need to pluraliae  name
