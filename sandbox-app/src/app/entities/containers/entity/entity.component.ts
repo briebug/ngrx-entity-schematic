@@ -12,14 +12,14 @@ import {
   combineLatest
 } from 'rxjs/operators';
 
-import { briebugLoading, currentBriebug, briebugError } from "@state/briebug";
+import { briebugLoading, currentBriebug, briebugError } from '@state/briebug';
 import { Briebug } from '@state/briebug/briebug.model';
 import {
   LoadBriebugById,
   CreateBriebug,
   UpdateBriebug,
   SelectBriebugById
-} from "@state/briebug/briebug.actions";
+} from '@state/briebug/briebug.actions';
 import { BriebugState } from '@state/briebug/briebug.reducer';
 
 @Component({

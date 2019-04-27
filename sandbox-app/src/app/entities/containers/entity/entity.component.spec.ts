@@ -164,7 +164,7 @@ describe('BriebugComponent', () => {
       );
     });
 
-    it("should dispatch CreateBriebug if an ID is not present", () => {
+    it('should dispatch CreateBriebug if an ID is not present', () => {
       component.valid = true;
       component.briebugEdits = generateBriebug();
       delete component.briebugEdits.id;
