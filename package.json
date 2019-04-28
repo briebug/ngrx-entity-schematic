@@ -11,7 +11,7 @@
   "schematics": "./src/collection.json",
   "license": "MIT",
   "scripts": {
-    "build:schematic": "tsc -p tsconfig.schematic.json",
+    "build:schematic": "tsc -p tsconfig.json",
     "build:schematic:watch": "tsc -p tsconfig.schematic.json -watch",
     "clean": "git checkout HEAD -- sandbox-app && git clean -fd sandbox-app",
     "clean:launch": "yarn clean && yarn launch",

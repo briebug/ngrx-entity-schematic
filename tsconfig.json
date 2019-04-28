@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
     "lib": ["es2017", "dom"],
     "declaration": true,
     "module": "commonjs",
@@ -11,7 +11,7 @@
     "noImplicitThis": true,
     "noUnusedParameters": false,
     "noUnusedLocals": false,
-    "rootDir": "./",
+    "rootDir": "src/",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "inlineSourceMap": true,
@@ -19,5 +19,6 @@
     "target": "es6",
     "types": ["node", "jasmine"]
   },
-  "exclude": ["**/node_modules", "src/*/__files__/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "src/*/__files__/**/*"]
 }

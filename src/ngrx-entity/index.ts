@@ -16,7 +16,6 @@ import {
 } from "@angular-devkit/schematics";
 import {
   NgRxOptions,
-  removePackageJsonDependency,
   getLatestNodeVersion,
   NodePackage
 } from "./utility/util";
