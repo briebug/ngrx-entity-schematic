@@ -17,7 +17,7 @@
     "inlineSourceMap": true,
     "strictNullChecks": true,
     "target": "es6",
-    "types": ["node"]
+    "types": ["node", "jasmine"]
   },
   "exclude": ["**/node_modules", "src/*/__files__/**/*"]
 }
