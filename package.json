@@ -1,6 +1,6 @@
 {
   "name": "@briebug/ngrx-entity-schematic",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "An Angular schematic for quickly scaffolding NgRx Entities with actions, effects, reducer, model, service, and passing specs.",
   "author": "Kevin Schuchard <schuchard.kevin@gmail.com>",
   "contributors": [
