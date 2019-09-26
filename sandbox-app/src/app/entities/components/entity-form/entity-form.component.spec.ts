@@ -43,7 +43,7 @@ describe('BreibugFormComponent', () => {
     it('should emit briebugChanged when the form changes', (done) => {
       const briebug = generateBriebug();
 
-      component.briebugChanged.subscribe((value) => {
+      component.validate.subscribe((value) => {
         expect(value).toEqual({
           briebug,
           valid: component.formGroup.valid

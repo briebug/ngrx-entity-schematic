@@ -1,7 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import {
   tap,
@@ -9,7 +8,7 @@ import {
   map,
   switchMap,
   shareReplay,
-  combineLatest
+  withLatestFrom
 } from 'rxjs/operators';
 
 import { briebugLoading, currentBriebug, briebugError } from '@state/briebug';
@@ -29,7 +28,7 @@ import { BriebugState } from '@state/briebug/briebug.reducer';
 })
 export class BriebugComponent implements OnInit {
   briebug$ = this.activatedRoute.paramMap.pipe(
-    combineLatest(this.activatedRoute.url),
+    withLatestFrom(this.activatedRoute.url),
     filter(([params, url]) =>
       params.has('id') || url[0].path === 'add'
     ),
