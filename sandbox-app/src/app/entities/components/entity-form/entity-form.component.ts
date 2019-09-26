@@ -26,8 +26,9 @@ export class BriebugFormComponent implements OnChanges, OnDestroy {
   @Input() briebug: Briebug;
   @Input() disableFields: boolean;
   @Input() showErrors: boolean;
-  @Output() submit = new EventEmitter<Briebug>();
-  @Output() briebugChanged = new EventEmitter<{ briebug: Briebug; valid: boolean }>();
+
+  @Output() save = new EventEmitter<Briebug>();
+  @Output() validate = new EventEmitter<{ briebug: Briebug; valid: boolean }>();
 
   private destroyed$ = new Subject<void>();
 
@@ -61,7 +62,7 @@ export class BriebugFormComponent implements OnChanges, OnDestroy {
         debounceTime(500)
       )
       .subscribe((value) => {
-        this.briebugChanged.emit({
+        this.validate.emit({
           briebug: value,
           valid: this.formGroup.valid
         });

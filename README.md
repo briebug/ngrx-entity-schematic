@@ -75,10 +75,12 @@ app/
 │       ├── customer.reducer.ts
 │       ├── customer.service.ts
 │       ├── index.ts
-│   ├── app.interfaces.ts          *
-│   ├── app.reducer.ts             *
-│   ├── state-utils.ts             *
-│   ├── state.module.ts            *
+│   ├── app.interfaces.ts                  *
+│   ├── app.reducer.ts                     *
+│   ├── state-utils.ts                     *
+│   ├── app-state.module.ts                *
+│   ├── custom-router-state.module.ts      *
+│   ├── custom-router-state.serializer.ts  *
 ```
 
 Continuing the example of `customer`, the following are included:
@@ -131,7 +133,7 @@ The following example assumes that an entity named `briebug` was first added wit
 
 ```ts
 export interface AppState {
-  router: RouterReducerState<RouterStateUrl>;
+  router: RouterReducerState<CustomRouterState>;
   briebug: BriebugState;
   order: OrderState;
 }
